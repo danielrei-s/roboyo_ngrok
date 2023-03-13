@@ -22,7 +22,7 @@ class SessionsController extends Controller
 
         if (auth()->attempt($attributes)){
 
-            return redirect('/')->with('success', 'Welcome Back!');
+            return redirect('/')->with('success', 'Welcome back ' . auth()->user()->firstName . ". ");
         }
 
         return back()

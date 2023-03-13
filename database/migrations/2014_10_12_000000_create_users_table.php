@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->boolean('admin');
+            $table->boolean('manager');
+            $table->string('picture');
         });
     }
 
