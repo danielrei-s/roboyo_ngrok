@@ -13,7 +13,16 @@ class AppServiceProvider extends ServiceProvider
    */
   public function register()
   {
-    //
+    $this->app->singleton('App\Role', function ($app) {
+      if (auth()->user()->manager) {
+          return 'Manager';
+      } elseif (auth()->user()->admin) {
+          return 'Admin';
+      } else {
+          return 'Pentester';
+      }
+  });
+  
   }
 
   /**
@@ -25,4 +34,9 @@ class AppServiceProvider extends ServiceProvider
   {
     //
   }
+
+  
 }
+
+
+

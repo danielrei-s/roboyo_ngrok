@@ -23,10 +23,12 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->boolean('admin');
-            $table->boolean('manager');
-            $table->string('picture');
+            $table->boolean('admin')->default(0);
+            $table->boolean('manager')->default(0);
+            $table->string('picture')->default('img/avatars/5.png');
+            $table->string('contact')->default('911222333');
         });
+        
     }
 
     /**

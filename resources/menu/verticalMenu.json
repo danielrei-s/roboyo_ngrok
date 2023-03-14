@@ -1,11 +1,45 @@
 {
   "menu": [
     {
-      "url": "/",
+      "url": "/dashboard",
       "name": "Dashboard",
+      "icon": "menu-icon tf-icons bx bxs-dashboard",
+      "slug": "dashboard-main",
+      "auth_required": true
+    },
+   
+    {
+      "url": "/",
+      "name": "User Management",
+      "icon": "menu-icon tf-icons bx bxs-user-badge",
+      "slug": "user-management"
+    },
+
+    {
+      "url": "/",
+      "name": "Client Management",
+      "icon": "menu-icon tf-icons bx bxs-business",
+      "slug": "client-management"
+    },
+
+    {
+      "url": "/",
+      "name": "Assessments",
+      "icon": "menu-icon tf-icons bx bxs-bookmark-alt", 
+      "slug": "assessments"
+    },
+
+    {
+      "menuHeader": "Extras"
+    },
+
+    {
+      "url": "/",
+      "name": "Dashboard Analytics",
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "dashboard-analytics"
     },
+
     {
       "name": "Layouts",
       "icon": "menu-icon tf-icons bx bx-layout",
