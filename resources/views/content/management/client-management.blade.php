@@ -25,7 +25,7 @@
       </thead>
       <tbody class="table-border-bottom-0">
         <tr>
-          <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
+          <td><img src="{{asset('assets/img/avatars/5.png')}}" alt="Avatar" class="rounded-circle" style="width: 100px; height: 100px;"></td>
           <td>Albert Cook</td>
           <td>
             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">

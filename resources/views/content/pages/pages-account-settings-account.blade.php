@@ -14,7 +14,7 @@
 <div class="row">
   <div class="col-md-12">
     <ul class="nav nav-pills flex-column flex-md-row mb-3">
-      <li class="nav-item"><a class="nav-link " href="{{url('profile')}}"><i class="bx bx-user me-1"></i> Account</a></li>
+      <li class="nav-item"><a class="nav-link " href="{{url('dashboard')}}"><i class="bx bx-user me-1"></i> Account</a></li>
       <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-bell me-1"></i> Settings</a></li>
     </ul>
     <div class="card mb-4">
