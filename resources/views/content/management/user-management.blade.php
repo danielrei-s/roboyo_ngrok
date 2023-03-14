@@ -18,8 +18,10 @@
         <tr>
           <th>Picture</th>
           <th>Name</th>
+          <th>Email</th>
           <th>Initials</th>
           <th>S. Role</th>
+          <th>Privileges</th>
           <th>Actions</th>
         </tr>
       </thead>
