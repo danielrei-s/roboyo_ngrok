@@ -86,3 +86,8 @@ Route::get('/form/layouts-horizontal', $controller_path . '\form_layouts\Horizon
 
 // tables
 Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tables-basic');
+
+// management
+Route::get('/user-management', $controller_path . '\management\UserManagement@index')->name('user-management')->middleware('auth');
+Route::get('/client-management', $controller_path . '\management\ClientManagement@index')->name('client-management')->middleware('auth');
+

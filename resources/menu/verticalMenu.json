@@ -9,14 +9,14 @@
     },
    
     {
-      "url": "/",
+      "url": "/user-management",
       "name": "User Management",
       "icon": "menu-icon tf-icons bx bxs-user-badge",
       "slug": "user-management"
     },
 
     {
-      "url": "/",
+      "url": "/client-management",
       "name": "Client Management",
       "icon": "menu-icon tf-icons bx bxs-business",
       "slug": "client-management"
