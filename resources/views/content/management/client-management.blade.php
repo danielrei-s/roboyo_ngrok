@@ -7,7 +7,7 @@
   <span class="text-muted fw-light">User Management /</span> Users Table
 </h4>
 
-
+{{-- Direct copy of tables page --}}
 
 <!-- Bootstrap Dark Table -->
 <div class="card">
