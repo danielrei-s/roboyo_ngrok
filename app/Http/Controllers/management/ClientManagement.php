@@ -11,7 +11,7 @@ class ClientManagement extends Controller
 {
   public function index()
   {
-    return view('content.management.client-management');
+    return view('content.management.client-management');  //new controler for new pages, check route in web.php
   }
 
   
