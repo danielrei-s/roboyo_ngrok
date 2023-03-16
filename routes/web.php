@@ -88,7 +88,8 @@ Route::get('/form/layouts-horizontal', $controller_path . '\form_layouts\Horizon
 Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tables-basic');
 
 // management
-Route::get('/user-management', $controller_path . '\management\UserManagement@index')->name('user-management')->middleware('auth');
-Route::get('/client-management', $controller_path . '\management\ClientManagement@index')->name('client-management')->middleware('auth');
-Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')->name('user-management.destroy')->middleware('auth');  //delete from database
+Route::get('/user-management', $controller_path . '\management\UserManagement@index')->name('user-management')->middleware(['auth', 'admin']);
+Route::get('/client-management', $controller_path . '\management\ClientManagement@index')->name('client-management')->middleware(['auth', 'manager']);
+            //delete from database
+Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')->name('user-management.destroy')->middleware(['auth', 'admin']); 
 
