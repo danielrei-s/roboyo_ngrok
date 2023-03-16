@@ -22,7 +22,7 @@
       <!-- Account -->
       <div class="card-body">
           <div class="d-flex align-items-start align-items-sm-center gap-4" >
-            <img src="{{ asset('assets/' . auth()->user()->picture) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+            <img src="{{ asset(auth()->user()->picture) }}" alt="{{auth()->user()->firstName}} {{auth()->user()->lastName}}" class="d-block rounded" height="120" width="120" id="uploadedAvatar" />
             <div class="button-wrapper">
               <p class="far fa-users-class fa-lg fa-fw" style="margin-right: 90px;">{{auth()->user()->sigla}} | {{auth()->user()->firstName}} {{auth()->user()->lastName}} </p>
               <p>{{auth()->user()->email}}</p>

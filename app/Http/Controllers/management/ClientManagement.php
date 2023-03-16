@@ -17,6 +17,7 @@ class ClientManagement extends Controller
 
     foreach ($users as $user) {
         $userObjects[] = (object)[
+            'id' => $user->id,
             'picture' => $user->picture,
             'firstName' => $user->firstName,
             'lastName' => $user->lastName,
@@ -24,6 +25,7 @@ class ClientManagement extends Controller
             'sigla' => $user->sigla,
             'admin' => $user->admin,
             'manager' => $user->manager,
+            'role' => $user->role
         ];
     }
 

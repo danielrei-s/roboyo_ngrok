@@ -29,7 +29,8 @@ class UserFactory extends Factory
             'manager' => 0,
             'picture' => 'assets/img/avatars/5.png',
             'contact' => '911222333',
-            'ativo' => '1'
+            'ativo' => '1',
+            'role' => 'Pentester'
         ];
     }
 

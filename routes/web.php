@@ -90,4 +90,5 @@ Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tab
 // management
 Route::get('/user-management', $controller_path . '\management\UserManagement@index')->name('user-management')->middleware('auth');
 Route::get('/client-management', $controller_path . '\management\ClientManagement@index')->name('client-management')->middleware('auth');
+Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')->name('user-management.destroy')->middleware('auth');  //delete from database
 

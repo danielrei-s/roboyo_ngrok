@@ -28,7 +28,7 @@ class RegisterBasic extends Controller
     // Set default values for admin and manager attributes
     $attributes['admin'] = 0;
     $attributes['manager'] = 0;
-    $attributes['picture'] = 'img/avatars/5.png';
+    $attributes['picture'] = 'assets/img/avatars/5.png';
 
    $user = User::create($attributes);
    

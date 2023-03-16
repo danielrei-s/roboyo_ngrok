@@ -24,3 +24,18 @@
 
 <!-- Chamada de Alphine.js -->
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
+
+
+<!-- chamar DELETE -->
+<script src="{{ asset('js/delete-confirmation.js') }}"></script>
+
+<script>
+  const deleteButtons = document.querySelectorAll('.delete-user');
+  deleteButtons.forEach(button => {
+    button.addEventListener('click', (event) => {
+      if (!confirmDelete()) {
+        event.preventDefault();
+      }
+    });
+  });
+</script>

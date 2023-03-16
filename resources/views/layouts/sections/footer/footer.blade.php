@@ -6,16 +6,16 @@
         @if (session()->has('success'))   {{--Puxar msg de registerbasic.php para manter utilizador informado --}}
           <div x-data="{show: true}"
           x-init="setTimeout(() => show = false, 5000)"  
-          x-show="show">          {{--   Usa alpine.js para apanhar a mensagem anterior em 5segs. --}}
+          x-show="show">          {{-- Usa alpine.js para apanhar a mensagem anterior em 5segs.--}} 
             <p>{{ session('success') }}</p>
           </div>
         @endif
       </div>
+    </div>
         Roboyo
           <script>
             document.write(new Date().getFullYear())
           </script>
-    </div>
   </div>
 </footer>
 <!--/ Footer-->
