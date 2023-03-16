@@ -60,7 +60,7 @@
                 <input class="form-control" type="password" id="newPassword" name="newPassword" />
               </div>
               <div class="mb-3 col-8 mx-auto">
-                <label for="confirmPassword" class="form-label">Confirm password:</label>
+                <label for="confirmPassword" class="form-label">Confirm new password:</label>
                 <input class="form-control" type="password" id="confirmPassword" name="confirmPassword" />
               </div>
             </div>

@@ -28,7 +28,8 @@ class UserFactory extends Factory
             'admin' => 0,
             'manager' => 0,
             'picture' => 'assets/img/5.png',
-            'contact' => '911222333'
+            'contact' => '911222333',
+            'ativo' => '1'
         ];
     }
 
