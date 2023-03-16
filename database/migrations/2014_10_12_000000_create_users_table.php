@@ -25,7 +25,7 @@ return new class extends Migration
             $table->timestamps();
             $table->boolean('admin')->default(0);
             $table->boolean('manager')->default(0);
-            $table->string('picture')->default('img/avatars/5.png');
+            $table->string('picture')->default('assets/img/avatars/5.png');
             $table->string('contact')->default('911222333');
             $table->boolean('ativo')->default(1);
         });

@@ -27,7 +27,7 @@ class UserFactory extends Factory
             'remember_token' => Str::random(10),
             'admin' => 0,
             'manager' => 0,
-            'picture' => 'assets/img/5.png',
+            'picture' => 'assets/img/avatars/5.png',
             'contact' => '911222333',
             'ativo' => '1'
         ];

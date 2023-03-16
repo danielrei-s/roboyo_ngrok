@@ -11,7 +11,23 @@ class ClientManagement extends Controller
 {
   public function index()
   {
-    return view('content.management.client-management');  //new controler for new pages, check route in web.php
+    $users = User::all();
+
+    $userObjects = [];
+
+    foreach ($users as $user) {
+        $userObjects[] = (object)[
+            'picture' => $user->picture,
+            'firstName' => $user->firstName,
+            'lastName' => $user->lastName,
+            'email' => $user->email,
+            'sigla' => $user->sigla,
+            'admin' => $user->admin,
+            'manager' => $user->manager,
+        ];
+    }
+
+    return view('content.management.client-management')->with('userObjects', $userObjects);  //new controler for new pages, check route in web.php
   }
 
   

@@ -11,7 +11,23 @@ class UserManagement extends Controller
 {
   public function index()
   {
-    return view('content.management.user-management');
+    $users = User::all();
+
+    $userObjects = [];
+
+    foreach ($users as $user) {
+        $userObjects[] = (object)[
+            'picture' => $user->picture,
+            'firstName' => $user->firstName,
+            'lastName' => $user->lastName,
+            'email' => $user->email,
+            'sigla' => $user->sigla,
+            'admin' => $user->admin,
+            'manager' => $user->manager,
+        ];
+    }
+    
+    return view('content.management.user-management')->with('userObjects', $userObjects);
   }
 
   

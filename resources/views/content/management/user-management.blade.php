@@ -27,6 +27,17 @@
         </tr>
       </thead>
       <tbody class="table-border-bottom-0">
+        @foreach ($userObjects as $user)
+          <tr>
+            <td><img src="{{ asset($user->picture) }}" alt="{{ $user->firstName }} {{ $user->lastName }}" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+            <td>{{ $user->firstName }} {{ $user->lastName }}</td>
+            <td>{{ $user->email }}</td>
+            <td>{{ $user->sigla }}</td>
+            <td>{{ $user->admin ? 'admin' : ($user->manager ? 'manager' : 'pentester') }}</td>
+            <td>TODO</td>
+            <td><a href="#">Action</a></td>
+          </tr>
+        @endforeach
         <tr>
           <td><i class="fab fa-angular fa-lg text-danger me-3"></i> <strong>Angular Project</strong></td>
           <td>Albert Cook</td>
