@@ -26,6 +26,10 @@
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
 
 
+<!-- Chamada de notifications.js -->
+<script src="{{ asset('js/page-notifications.js') }}"></script>
+
+
 <!-- chamar DELETE -->
 <script src="{{ asset('js/delete-confirmation.js') }}"></script>
 
@@ -38,4 +42,6 @@
       }
     });
   });
+
+  
 </script>

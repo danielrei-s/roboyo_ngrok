@@ -58,7 +58,7 @@
                   }">
                   <i class="bx bx-trash me-1"></i>Delete
                 </a>
-                <form id="delete-user-{{ $user->id }}" action="{{ route('user-management.destroy', $user->id) }}" method="POST" style="display: none;">
+                <form id="delete-user-{{ $user->id }}" action="{{ route('user-management.destroy', $user->id) }}" method="POST" style="display: none; ">
                   @csrf
                   @method('DELETE')
                 </form>
