@@ -27,22 +27,23 @@
           <!-- /Logo -->
           <h4 class="mb-2">Change Password here!</h4>
           <p class="mb-4">Enter you new password in the fields below</p>
-          <form id="formAuthentication" class="mb-3" action="javascript:void(0)" method="GET">
+          <!-- form --> 
+          <form id="formAuthentication" class="mb-3" action="javascript:void(0)" method="POST">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" autofocus>
             </div>
             <div class="mb-3">
-              <label for="" class="form-label">Password</label>
-              <input type="password" class="form-control" name="" id="" placeholder="">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" name="password" id="password" placeholder="">
             </div>
             <div class="mb-3">
-              <label for="">Confirm Password</label>
-              <input type="password" class="form-control" name="" id="" placeholder="">
+              <label for="passwordc">Confirm Password</label>
+              <input type="password" class="form-control" name="passwordc" id="passwordc" placeholder="">
             </div>
             <div class="mb-3">
-              <label class="visually-hidden" for="inputName">token</label>
-              <input type="text" class="form-control" name="inputName" id="inputName" placeholder="">
+              <label class="visually-hidden" for="token">token</label>
+              <input type="hidden" class="form-control" name="token" id="token" value="{{$token}}">
             </div>
             <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
           </form>

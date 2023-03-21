@@ -67,7 +67,7 @@ Route::post('/forgot-password-basic', function (Request $request) {
 
 //2
 Route::get('/reset-password/{token}', function (string $token) {
-    return view('auth.reset-password', ['token' => $token]);
+    return view('content.authentications.auth-change-password-basic', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
 
 // 3
