@@ -57,11 +57,11 @@ Route::post('/logout', $controller_path . '\SessionsController@destroy')->name('
 // 2
 Route::post('/forgot-password-basic', function (Request $request) {
     $request->validate(['email' => 'required|email']);
- 
+
     $status = Password::sendResetLink(
         $request->only('email')
     );
- 
+
     return $status === Password::RESET_LINK_SENT
                 ? back()->with(['status' => __($status)])
                 : back()->withErrors(['email' => __($status)]);
@@ -79,22 +79,24 @@ Route::post('/change-password-basic', function (Request $request) {
         'email' => 'required|email',
         'password' => 'required|min:8|confirmed',
     ]);
- 
+
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function (User $user, string $password) {
             $user->forceFill([
-                'password' => Hash::make($password)
+                'password' => bcrypt($password)
             ])->setRememberToken(Str::random(60));
- 
+
             $user->save();
- 
+
             event(new PasswordReset($user));
         }
     );
- 
+
+    // dump($request->only('email', 'password', 'password_confirmation', 'token'));
+
     return $status === Password::PASSWORD_RESET
-                ? redirect()->route('login')->with('status', __($status))
+                ? redirect()->route('auth-login-basic')->with('status', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
@@ -108,7 +110,7 @@ Route::post('/auth/register-basic', $controller_path . '\authentications\Registe
 //Route::post('login', $controller_path . '\SessionsController@login')->name('login')->middleware('guest');
 Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 
-// cards 
+// cards
 Route::get('/cards/basic', $controller_path . '\cards\CardBasic@index')->name('cards-basic');
 
 // User Interface
@@ -154,5 +156,5 @@ Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tab
 Route::get('/user-management', $controller_path . '\management\UserManagement@index')->name('user-management')->middleware(['auth', 'admin']);
 Route::get('/client-management', $controller_path . '\management\ClientManagement@index')->name('client-management')->middleware(['auth', 'manager']);
             //delete from database
-Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')->name('user-management.destroy')->middleware(['auth', 'admin']); 
+Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')->name('user-management.destroy')->middleware(['auth', 'admin']);
 

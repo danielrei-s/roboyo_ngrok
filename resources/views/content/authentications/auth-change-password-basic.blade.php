@@ -27,13 +27,14 @@
           <!-- /Logo -->
           <h4 class="mb-2">Change Password here!</h4>
           <p class="mb-4">Enter you new password in the fields below</p>
-          <!-- form   --> 
-          
-          <form id="formAuthentication" class="mb-3" action="{{route ('password.update')}}" method="POST">
+          <!-- form   -->
+
+          <form id="formAuthentication" class="mb-3" action="{{route('password.update')}}" method="POST">
             @csrf
+            <input type="hidden" name="token" value="{{$token}}">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" name="email" value="{{ $email ?? old('email')}}">
+              <input type="text" class="form-control" id="email" name="email" value="{{old('email')}}">
               @error('email')
                  <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
                @enderror
@@ -46,13 +47,13 @@
                @enderror
             </div>
             <div class="mb-3">
-              <label for="passwordc">Confirm New Password</label>
-              <input type="password" class="form-control" name="passwordc" id="passwordc" placeholder="">
-              @error('passwordc')
+              <label for="password_confirmation" class="form-label">Confirm New Password</label>
+              <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="">
+              @error('password_confirmation')
                  <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
                @enderror
             </div>
-            
+
             <button class="btn btn-primary d-grid w-100">Confirm New Password</button>
           </form>
           <div class="text-center">
