@@ -29,17 +29,27 @@
           <p class="mb-4">Enter you new password in the fields below</p>
           <!-- form --> 
           <form id="formAuthentication" class="mb-3" action="javascript:void(0)" method="POST">
+            @csrf
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
-              <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" autofocus>
+              <input type="text" class="form-control" id="email" name="email" value="{{ $email ?? old('email')}}">
+              @error('email')
+                 <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
+               @enderror
             </div>
             <div class="mb-3">
-              <label for="password" class="form-label">Password</label>
+              <label for="password" class="form-label">New Password</label>
               <input type="password" class="form-control" name="password" id="password" placeholder="">
+              @error('password')
+                 <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
+               @enderror
             </div>
             <div class="mb-3">
-              <label for="passwordc">Confirm Password</label>
+              <label for="passwordc">Confirm New Password</label>
               <input type="password" class="form-control" name="passwordc" id="passwordc" placeholder="">
+              @error('passwordc')
+                 <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
+               @enderror
             </div>
             <div class="mb-3">
               <label class="visually-hidden" for="token">token</label>

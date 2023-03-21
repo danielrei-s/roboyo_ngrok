@@ -24,13 +24,11 @@
           <div class="d-flex align-items-start align-items-sm-center gap-4" >
             <img src="{{ asset(auth()->user()->picture) }}" alt="{{auth()->user()->firstName}} {{auth()->user()->lastName}}" class="d-block rounded" height="120" width="120" id="uploadedAvatar" />
             <div class="button-wrapper">
-              <p class="far fa-users-class fa-lg fa-fw" style="margin-right: 90px;">{{auth()->user()->sigla}} | {{auth()->user()->firstName}} {{auth()->user()->lastName}} </p>
+              <p class="far fa-users-class fa-lg fa-fw" style="margin-right: 120px;">{{auth()->user()->sigla}} | {{auth()->user()->firstName}} {{auth()->user()->lastName}} </p>
               <p>{{auth()->user()->email}}</p>
               <p>+351 {{auth()->user()->contact}}</p>
             </div>
-
-          <div style="border-left: 2px dashed #ccc; padding-left: 90px;"> <!-- Doted line a seprar -->
-        
+          <div style="border-left: 2px dashed #ccc; padding-left: 120px;"> <!-- Doted line a seprar -->
             <div class="button-wrapper">
               <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
                 <div class="d-flex flex-column align-items-start">
@@ -40,11 +38,6 @@
                 <img src="{{ asset('assets/img/roles/' . $role . '.png') }}" alt="role-avatar" class="d-block rounded" height="100" width="100" id="roleAvatar" style="margin-right: 75px;" />
               </div>  
             </div>
-
-          </div>
-
-          <div style="border-left: 2px dashed #ccc; padding-left: 45px;"> <!-- Doted line a seprar -->
-            <img src="{{ asset('assets/img/icons/unicons/chart.png')}}" alt="tbd" class="d-block rounded" height="100" width="100" id="tbd" />          
           </div>
         </div>
         <hr class="my-1">

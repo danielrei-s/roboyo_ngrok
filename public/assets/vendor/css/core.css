@@ -12454,9 +12454,16 @@ button.list-group-item-gray.active {
   left: 0 !important;
 }
 
+.start-20 {
+  left: 20% !important;
+}
+
+
 .start-50 {
   left: 50% !important;
 }
+
+
 
 .start-100 {
   left: 100% !important;

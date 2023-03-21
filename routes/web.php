@@ -28,7 +28,7 @@ use Illuminate\Support\Str;
 $controller_path = 'App\Http\Controllers';
 
 // Main Page Route
-Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics');
+Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
 Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
 
 // layout
@@ -47,9 +47,9 @@ Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnder
 
 // authentication
 Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic')->middleware('guest');
-Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('guest');
+Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('auth');
 Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic')->middleware('guest');
-Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
+Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('auth');
 Route::post('/logout', $controller_path . '\SessionsController@destroy')->name('logout')->middleware('auth');
 // forgot password handler
 // 1
@@ -102,7 +102,7 @@ Route::post('/reset-password', function (Request $request) {
 
 
 // auth POSTs
-Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')->name('auth-register-basic')->middleware('guest');
+Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')->name('auth-register-basic')->middleware('auth');
 //Route::post('login', $controller_path . '\SessionsController@login')->name('login')->middleware('guest');
 Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
 
