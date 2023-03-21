@@ -27,10 +27,18 @@
           <!-- /Logo -->
           <h4 class="mb-2">Forgot Password? 🔒</h4>
           <p class="mb-4">Enter your email and we'll send you instructions to reset your password</p>
-          <form id="formAuthentication" class="mb-3" action="javascript:void(0)" method="GET">
+          <form id="formAuthentication" class="mb-3" action="javascript:void(0)" method="POST">
+            @csrf
+            @if (session('status'))
+                <div class="alert alert-success"> {{session('status')}}
+                </div>
+            @endif
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
               <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" autofocus>
+              @error('email')
+                 <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
+               @enderror
             </div>
             <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
           </form>
