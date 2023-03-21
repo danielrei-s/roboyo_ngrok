@@ -48,11 +48,13 @@ Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnder
 // authentication
 Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic')->middleware('guest');
 Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('auth');
-Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('auth-reset-password-basic')->middleware('guest');
-Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('auth');
+//1
+Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('password.request')->middleware('guest');
+
+Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
 Route::post('/logout', $controller_path . '\SessionsController@destroy')->name('logout')->middleware('auth');
 // forgot password handler
-// 1
+// 2
 Route::post('/forgot-password-basic', function (Request $request) {
     $request->validate(['email' => 'required|email']);
  
@@ -65,13 +67,13 @@ Route::post('/forgot-password-basic', function (Request $request) {
                 : back()->withErrors(['email' => __($status)]);
 })->middleware('guest')->name('password.email');
 
-//2
-Route::get('/reset-password/{token}', function (string $token) {
+//3
+Route::get('/change-password-basic/{token}', function (string $token) {
     return view('content.authentications.auth-change-password-basic', ['token' => $token]);
 })->middleware('guest')->name('password.reset');
 
-// 3
-Route::post('/reset-password', function (Request $request) {
+//4
+Route::post('/change-password-basic', function (Request $request) {
     $request->validate([
         'token' => 'required',
         'email' => 'required|email',

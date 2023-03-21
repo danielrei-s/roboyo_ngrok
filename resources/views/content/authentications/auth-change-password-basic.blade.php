@@ -27,8 +27,9 @@
           <!-- /Logo -->
           <h4 class="mb-2">Change Password here!</h4>
           <p class="mb-4">Enter you new password in the fields below</p>
-          <!-- form --> 
-          <form id="formAuthentication" class="mb-3" action="javascript:void(0)" method="POST">
+          <!-- form   --> 
+          
+          <form id="formAuthentication" class="mb-3" action="{{route ('password.update')}}" method="POST">
             @csrf
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
@@ -51,11 +52,8 @@
                  <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
                @enderror
             </div>
-            <div class="mb-3">
-              <label class="visually-hidden" for="token">token</label>
-              <input type="hidden" class="form-control" name="token" id="token" value="{{$token}}">
-            </div>
-            <button class="btn btn-primary d-grid w-100">Send Reset Link</button>
+            
+            <button class="btn btn-primary d-grid w-100">Confirm New Password</button>
           </form>
           <div class="text-center">
             <a href="{{url('auth/login-basic')}}" class="d-flex align-items-center justify-content-center">
