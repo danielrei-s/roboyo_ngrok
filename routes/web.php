@@ -86,10 +86,10 @@ Route::post('/change-password-basic', function (Request $request) {
             $user->forceFill([
                 'password' => bcrypt($password)
             ])->setRememberToken(Str::random(60));
-
+               //dd($password); //check pw
             $user->save();
 
-            event(new PasswordReset($user));
+          event(new PasswordReset($user));
         }
     );
 
