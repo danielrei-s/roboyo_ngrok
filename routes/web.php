@@ -13,6 +13,7 @@ use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Facades\Hash;
 
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -83,8 +84,12 @@ Route::post('/change-password-basic', function (Request $request) {
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function (User $user, string $password) {
+          $hashedPassword = bcrypt($password);
+          Log::info("New password: $password"); //logging for debug purp.
+          Log::info("Hashedpassword: $hashedPassword");
+
             $user->forceFill([
-                'password' => bcrypt($password)
+                'password' => $hashedPassword
             ])->setRememberToken(Str::random(60));
                //dd($password); //check pw
             $user->save();
