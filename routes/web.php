@@ -93,8 +93,18 @@ Route::post('/change-password-basic', function (Request $request) {
             ])->setRememberToken(Str::random(60));
                //dd($password); //check pw
             $user->save();
+            // Get the attributes, including the hashed password
+            $attributes = $user->getAttributes();
+
+            // Get the hashed password value from the attributes
+            $hashedPassword = '0';
+            $hashedPassword = $attributes['password'];
+
+
+            Log::info("HashedpasswordAFter: $hashedPassword");
 
           event(new PasswordReset($user));
+          Log::info("Hashedpassword4: $hashedPassword");
         }
     );
 
