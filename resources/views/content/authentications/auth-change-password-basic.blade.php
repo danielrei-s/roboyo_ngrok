@@ -31,6 +31,10 @@
 
           <form id="formAuthentication" class="mb-3" action="{{route('password.update')}}" method="POST">
             @csrf
+            {{-- @if (session('status'))
+                <div class="alert alert-success"> {{session('status')}}
+                </div>
+            @endif --}}
             <input type="hidden" name="token" value="{{$token}}">
             <div class="mb-3">
               <label for="email" class="form-label">Email</label>
