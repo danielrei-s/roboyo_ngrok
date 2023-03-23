@@ -48,7 +48,7 @@ Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnder
 
 // authentication
 Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic')->middleware('guest');
-Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('auth');
+Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('admin');
 
 Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
 Route::post('/logout', $controller_path . '\SessionsController@destroy')->name('logout')->middleware('auth');
