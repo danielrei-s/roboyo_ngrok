@@ -31,6 +31,8 @@ $controller_path = 'App\Http\Controllers';
 // Main Page Route
 Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
 Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
+Route::post('/change-password', $controller_path . '\SessionsController@changePassword')->name('change-password')->middleware('auth');
+//Route::match(['get', 'post'], '/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
 
 // layout
 Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
@@ -101,7 +103,7 @@ Route::post('/change-password-basic', function (Request $request) {
     );
     // dump($request->only('email', 'password', 'password_confirmation', 'token'));
     return $status === Password::PASSWORD_RESET
-                ? redirect()->route('auth-login-basic')->with('status', __($status))
+                ? redirect()->route('auth-login-basic')->with('success', 'Your password has been updated.')
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
 
@@ -109,7 +111,6 @@ Route::post('/change-password-basic', function (Request $request) {
 Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')->name('auth-register-basic')->middleware('auth');
 //Route::post('login', $controller_path . '\SessionsController@login')->name('login')->middleware('guest');
 Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
-
 // cards
 Route::get('/cards/basic', $controller_path . '\cards\CardBasic@index')->name('cards-basic');
 
@@ -155,6 +156,9 @@ Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tab
 // management
 Route::get('/user-management', $controller_path . '\management\UserManagement@index')->name('user-management')->middleware(['auth', 'admin']);
 Route::get('/client-management', $controller_path . '\management\ClientManagement@index')->name('client-management')->middleware(['auth', 'manager']);
-            //delete from database
+
+//delete from database
 Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')->name('user-management.destroy')->middleware(['auth', 'admin']);
 
+// Change Password route
+Route::post('/changepassword', [SessionsController::class, 'changePassword'])->name('change-password')->middleware('auth');

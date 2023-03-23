@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SessionsController extends Controller
 {
@@ -10,7 +11,7 @@ class SessionsController extends Controller
     {
         auth()->logout();
 
-        return redirect('/')->with('success', 'Logged out!'); #apagar login
+        return redirect('/')->with('success', 'Logged out!'); #Loggout
     }
 
     public function store()
@@ -28,7 +29,27 @@ class SessionsController extends Controller
         return back()
         ->withInput()
         ->withErrors(['email' => 'Provided credentials could not be verified.']);
-        
+
         # Validar request, autenticar utilizador e dar login (com base no request) e flashar messagem de sucesso.
+    }
+
+    public function changePassword(Request $request)
+    {
+      $user = Auth::user();
+
+      $validatedData = $request->validate([
+        'currentPassword' => 'required',
+        'newPassword' => 'required|min:8|confirmed',
+      ]);
+      dd($request);
+
+      if (!\Hash::check($validatedData['currentPassword'], $user->password)) {
+        return back()->withErrors(['currentPassword' => 'The current password you entered is incorrect.'])->withInput();
+      }
+
+      $user->password = bcrypt($validatedData['newPassword']);
+      $user->save();
+
+      return redirect()->route('dashboard-main')->with('success', 'Your password has been updated.');
     }
 }
