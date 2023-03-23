@@ -41,8 +41,6 @@ class SessionsController extends Controller
         'currentPassword' => 'required',
         'newPassword' => 'required|min:8|confirmed',
       ]);
-      dd($request);
-
       if (!\Hash::check($validatedData['currentPassword'], $user->password)) {
         return back()->withErrors(['currentPassword' => 'The current password you entered is incorrect.'])->withInput();
       }
