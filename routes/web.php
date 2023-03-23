@@ -49,12 +49,15 @@ Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnder
 // authentication
 Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic')->middleware('guest');
 Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('auth');
-//1
-Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('password.request')->middleware('guest');
 
 Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
 Route::post('/logout', $controller_path . '\SessionsController@destroy')->name('logout')->middleware('auth');
+
+
 // forgot password handler
+//1
+Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('password.request')->middleware('guest');
+
 // 2
 Route::post('/forgot-password-basic', function (Request $request) {
     $request->validate(['email' => 'required|email']);
@@ -84,41 +87,23 @@ Route::post('/change-password-basic', function (Request $request) {
     $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function (User $user, string $password) {
-          $hashedPassword = bcrypt($password);
-          Log::info("New password: $password"); //logging for debug purp.
-          Log::info("Hashedpassword: $hashedPassword");
-
+          // Log::info("New password: $password"); logging for debug purp.
             $user->forceFill([
-                'password' => $hashedPassword
+                'password' => $password
             ])->setRememberToken(Str::random(60));
-               //dd($password); //check pw
+          //dd($password); //check pw
             $user->save();
+          // Log::info("Hashedpassword3: $password");
             // Get the attributes, including the hashed password
-            $attributes = $user->getAttributes();
-
-            // Get the hashed password value from the attributes
-            $hashedPassword = '0';
-            $hashedPassword = $attributes['password'];
-
-
-            Log::info("HashedpasswordAFter: $hashedPassword");
-
           event(new PasswordReset($user));
-          Log::info("Hashedpassword4: $hashedPassword");
+        //  Log::info("Hashedpassword4: $hashedPassword");
         }
     );
-
     // dump($request->only('email', 'password', 'password_confirmation', 'token'));
-
     return $status === Password::PASSWORD_RESET
                 ? redirect()->route('auth-login-basic')->with('status', __($status))
                 : back()->withErrors(['email' => [__($status)]]);
 })->middleware('guest')->name('password.update');
-
-
-
-
-
 
 // auth POSTs
 Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')->name('auth-register-basic')->middleware('auth');
