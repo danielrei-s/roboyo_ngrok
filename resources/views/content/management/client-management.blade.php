@@ -4,7 +4,7 @@
 
 @section('content')
 <h4 class="fw-bold py-3 mb-4">
-  <span class="text-muted fw-light">User Management /</span> Users Table
+  <span class="text-muted fw-light">User Management /</span> Client Management
 </h4>
 
 {{-- Direct copy of tables page --}}

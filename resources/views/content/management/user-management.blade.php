@@ -45,18 +45,18 @@
             </td>
             <td>{{ $user->role }}</td>
             <td><div class="dropdown">
-              <button type="button" class="btn p-0 dropdown-toggle hide-arrow" 
+              <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
               data-bs-toggle="dropdown"data-user-id="{{ $user->id }}">
                 <i class="bx bx-dots-vertical-rounded"></i></button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-show-alt me-1"></i> View</a>
-                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-lock me-1"></i> Password</a>
-                <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-block me-1"></i> Block</a>
-                <a class="dropdown-item" href="#" onclick="event.preventDefault();
+                <a class="dropdown-item" href="javascript:void(0);" title="View Profile"><i class="bx bx-show-alt me-1" title="View Profile"></i> View</a>
+                <a class="dropdown-item" href="javascript:void(0);" title="Force Password Change"><i class="bx bx-lock me-1"title="Force Password Change"></i> Password</a>
+                <a class="dropdown-item" href="javascript:void(0);" title="Block User"><i class="bx bx-block me-1"title="Block User"></i> Block</a>
+                <a class="dropdown-item" href="#" title="Delete User"onclick="event.preventDefault();
                   if (confirm('Are you sure you want to delete {{$user->firstName}} {{$user->lastName}} ?'  )) {
                     document.getElementById('delete-user-{{ $user->id }}').submit();
                   }">
-                  <i class="bx bx-trash me-1"></i>Delete
+                  <i class="bx bx-trash me-1"title="Delete User"></i>Delete
                 </a>
                 <form id="delete-user-{{ $user->id }}" action="{{ route('user-management.destroy', $user->id) }}" method="POST" style="display: none; ">
                   @csrf
