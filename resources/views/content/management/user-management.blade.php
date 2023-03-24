@@ -12,7 +12,10 @@
 
 <!-- Bootstrap Dark Table -->
 <div class="card">
-  <h5 class="card-header">All Users</h5>
+  <h5 class="card-header col-md-6">All Users</h5>
+  @component('content.management.create-user')
+
+  @endcomponent
   <div class="table-responsive text-nowrap">
     <table class="table table-dark">
       <thead>
