@@ -117,8 +117,8 @@
                               </h2>
                               <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
+                                  <!-- Account -->
                                     <h5 class="card-header">Profile Details</h5>
-                                    <!-- Account -->
                                     <div class="card-body">
                                       <div class="d-flex align-items-start align-items-sm-center gap-4">
                                         <img src="{{ asset(auth()->user()->picture) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
