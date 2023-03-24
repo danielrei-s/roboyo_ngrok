@@ -57,15 +57,15 @@
                     <div class="col-md mb-4 mb-md-0">
                         <div class="accordion mt-3" id="accordionExample">
                           <!-- Accordion Item 1 -->
-                          <div class="card accordion-item">
+                          <div class="card accordion-item active">
                               <h2 class="accordion-header" id="headingOne">
-                                  <button type="button" class="accordion-button collapsed"
+                                  <button type="button" class="accordion-button"
                                       data-bs-toggle="collapse" data-bs-target="#accordionOne"
-                                      aria-expanded="false" aria-controls="accordionOne">
+                                      aria-expanded="true" aria-controls="accordionOne">
                                       Change Password
                                   </button>
                               </h2>
-                              <div id="accordionOne" class="accordion-collapse collapsed"
+                              <div id="accordionOne" class="accordion-collapse collapsed show"
                                   aria-labelledby="headingOne" data-bs-parent="#accordionExample">
                                   <div class="accordion-body">
                                       <!-- Form -->
