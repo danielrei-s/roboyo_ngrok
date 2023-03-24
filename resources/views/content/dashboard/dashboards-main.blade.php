@@ -65,8 +65,9 @@
                                       Change Password
                                   </button>
                               </h2>
-                              <div id="accordionOne" class="accordion-collapse collapsed show"
-                                  aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+
+                              <div id="accordionOne" class="accordion-collapse collapse show"
+                                 data-bs-parent="#accordionExample">
                                   <div class="accordion-body">
                                       <!-- Form -->
                                       <form id="formAccountSettings" method="POST" action="{{ route('change-password') }}">
