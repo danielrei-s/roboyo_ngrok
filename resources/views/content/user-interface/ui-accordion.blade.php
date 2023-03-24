@@ -22,7 +22,8 @@
           </button>
         </h2>
 
-        <div id="accordionOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+        <div id="accordionOne" class="accordion-collapse collapse show"
+        data-bs-parent="#accordionExample">
           <div class="accordion-body">
             Lemon drops chocolate cake gummies carrot cake chupa chups muffin topping. Sesame snaps icing marzipan gummi
             bears macaroon dragée danish caramels powder. Bear claw dragée pastry topping soufflé. Wafer gummi bears
