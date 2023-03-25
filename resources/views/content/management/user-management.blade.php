@@ -12,10 +12,15 @@
 
 <!-- Bootstrap Dark Table -->
 <div class="card">
-  <h5 class="card-header col-md-6">All Users</h5>
-  @component('content.management.create-user')
+  <h5 class="card-header d-flex justify-content-between align-items-center">
+    <span>All Users</span>
+    <div class="align-items-left">
+      @component('content.management.create-user')
+      @endcomponent
+    </div>
+  </h5>
+  <!-- /Add user modal -->
 
-  @endcomponent
   <div class="table-responsive text-nowrap">
     <table class="table table-dark">
       <thead>
