@@ -1,6 +1,6 @@
 @extends('layouts/blankLayout')
 
-@section('title', 'Login Basic - Pages')
+@section('title', 'Login')
 
 @section('page-style')
 <!-- Page -->
@@ -38,7 +38,7 @@
                  <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
               @enderror
             </div>
-            
+
             <div class="mb-3 form-password-toggle">
               <div class="d-flex justify-content-between">
                 <label class="form-label" for="password">Password</label>
@@ -47,14 +47,14 @@
                 </a>
               </div>
               <div class="input-group input-group-merge">
-                <input type="password" id="password" class="form-control" 
+                <input type="password" id="password" class="form-control"
                 name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                  aria-describedby="password" />
                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
               </div>
               @error('password')
                 <p style="color:red">{{ $message }}</p> {{--feedback ao user sobre erros de input --}}
-              @enderror 
+              @enderror
             </div>
 
             <div class="mb-3">
