@@ -59,7 +59,12 @@
               <div class="dropdown-menu">
                 <a class="dropdown-item" href="javascript:void(0);" title="View Profile"><i class="bx bx-show-alt me-1" title="View Profile"></i> View</a>
                 <a class="dropdown-item" href="javascript:void(0);" title="Force Password Change"><i class="bx bx-lock me-1"title="Force Password Change"></i> Password</a>
-                <a class="dropdown-item" href="javascript:void(0);" title="Block User"><i class="bx bx-block me-1"title="Block User"></i> Block</a>
+                <a class="dropdown-item" href="#" title="Block User"><i class="bx bx-block me-1"title="Block User"></i> Block</a>
+                <form id="block-user-{{ $user->id }}" action="{{ route('user-management.blockUser', $user->id) }}" method="PUT" style="display: none; ">
+                  @csrf
+                  @method('PUT')
+                </form>
+
                 <a class="dropdown-item" href="#" title="Delete User"onclick="event.preventDefault();
                   if (confirm('Are you sure you want to delete {{$user->firstName}} {{$user->lastName}} ?'  )) {
                     document.getElementById('delete-user-{{ $user->id }}').submit();

@@ -160,5 +160,8 @@ Route::get('/client-management', $controller_path . '\management\ClientManagemen
 //delete from database
 Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')->name('user-management.destroy')->middleware(['auth', 'admin']);
 
+//block user
+Route::put('/user-management/{id}', $controller_path . '\management\UserManagement@blockUser')->name('user-management.blockUser')->middleware(['auth', 'admin']);
+
 // Change Password route
 Route::post('/changepassword', [SessionsController::class, 'changePassword'])->name('change-password')->middleware('auth');

@@ -23,7 +23,6 @@
                             <div style="width: 150px; height: 150px; border-radius: 50%; overflow: hidden; margin-bottom: 10px;">
                               <label for="photo" style="cursor: pointer;">
                                 <img src="assets/img/avatars/5.png" style="width: 100%; height: 100%; object-fit: cover;" alt="Profile picture">
-                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-weight: bold;">Upload picture!</div>
                               </label>
                               <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" accept="image/*" style="display: none;">
                             </div>
@@ -42,7 +41,8 @@
 
 
                           <div class="col-md-8">
-                              <div class="row"><div class="col-md-6 mb-3">
+                          <div class="row">
+                            <div class="col-md-6 mb-3">
                                 <label for="firstname" class="form-label">First Name</label>
                                 <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder="User's First Name" value="{{ old('firstname') }}" autofocus>
                                 @error('firstname')
@@ -63,6 +63,14 @@
                                 <label for="sigla" class="form-label">Sigla</label>
                                 <input type="text" class="form-control @error('sigla') is-invalid @enderror" id="sigla" name="sigla" placeholder="User's Sigla (3 letters)" value="{{ old('sigla') }}" autofocus>
                                 @error('sigla')
+                                    <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
+                                    @enderror
+                                  </div>
+
+                              <div class="col-md-6 mb-3">
+                                <label for="role" class="form-label">Role</label>
+                                <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder="User's Role" value="{{ old('role') }}" autofocus>
+                                @error('role')
                                     <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                     @enderror
                                   </div>

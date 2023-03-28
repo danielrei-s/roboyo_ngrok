@@ -28,7 +28,7 @@ class UserManagement extends Controller
             'role' => $user->role
         ];
     }
-    
+
     return view('content.management.user-management')->with('userObjects', $userObjects);
   }
 
@@ -36,9 +36,19 @@ class UserManagement extends Controller
   {
       $user = User::findOrFail($id);
       $user->delete();
-  
+
       return redirect()->route('user-management')->with('success', 'User has been deleted successfully!');
   }
-  
-  
+
+  public function blockUser(Request $request, $id)
+{
+    $user = User::find($id);
+    $user->ativo = $request->input('ativo');
+    $user->save();
+
+    // Redirect the user back to the view with a success message
+    return redirect()->back()->with('success', 'User has been blocked.');
+}
+
+
 }
