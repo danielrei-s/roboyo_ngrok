@@ -37,6 +37,7 @@
                               <option value="2">Manager</option>
                               <option value="3">Admin</option>
                             </select>
+                            </select>
                           </div>
 
 
