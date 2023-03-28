@@ -25,7 +25,8 @@ class UserManagement extends Controller
             'sigla' => $user->sigla,
             'admin' => $user->admin,
             'manager' => $user->manager,
-            'role' => $user->role
+            'role' => $user->role,
+            'ativo' => $user->ativo
         ];
     }
 
@@ -40,15 +41,20 @@ class UserManagement extends Controller
       return redirect()->route('user-management')->with('success', 'User has been deleted successfully!');
   }
 
-  public function blockUser(Request $request, $id)
-{
-    $user = User::find($id);
-    $user->ativo = $request->input('ativo');
+  public function blockUser(Request $request, $user)
+  {
+    $userId = intval($user);
+
+    if ($userId <= 0) {
+      abort(404); // or handle the error in some other way
+    }
+
+    $user = User::findOrFail($userId);
+    $user->ativo = $user->ativo == 1 ? 0 : 1;
     $user->save();
 
     // Redirect the user back to the view with a success message
-    return redirect()->back()->with('success', 'User has been blocked.');
-}
-
-
+    $successMessage = $user->ativo == 1 ? 'User has been unblocked.' : 'User has been blocked.';
+    return redirect()->back()->with('success', $successMessage);
+  }
 }

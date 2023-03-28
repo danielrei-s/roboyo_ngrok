@@ -25,12 +25,13 @@ class ClientManagement extends Controller
             'sigla' => $user->sigla,
             'admin' => $user->admin,
             'manager' => $user->manager,
-            'role' => $user->role
+            'role' => $user->role,
+            'ativo' => $user->ativo
         ];
     }
 
     return view('content.management.client-management')->with('userObjects', $userObjects);  //new controler for new pages, check route in web.php
   }
 
-  
+
 }
