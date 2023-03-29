@@ -23,7 +23,7 @@
     {{-- menu headers --}}
 
     @if (isset($menu->menuHeader))
-    
+
     <li class="menu-header small text-uppercase">
       <span class="menu-header-text">{{ $menu->menuHeader }}</span>
     </li>
@@ -33,18 +33,18 @@
         @continue {{-- hide first four menus if user is not authenticated --}}
       @endif
       @if (Auth::check())
-        @if (auth()->user()->manager && in_array($loop->iteration, [2]))
+        @if (auth()->user()->admin == 1 && in_array($loop->iteration, [2]))
           @continue {{-- skip User Management if user is manager --}}
-        @elseif (!auth()->user()->admin && !auth()->user()->manager && in_array($loop->iteration, [2, 3]))
+        @elseif (!(auth()->user()->admin == 2) && !(auth()->user()->admin == 1) && in_array($loop->iteration, [2, 3]))
           @continue {{-- skip User and Client Managment if user is neither admin nor manager (can only be pentester) --}}
         @endif
       @endif
 
-    {{-- active menu method --}}  
+    {{-- active menu method --}}
     @php
     $activeClass = null;
     $currentRouteName = Route::currentRouteName();
- 
+
     if ($currentRouteName === $menu->slug) {
       $activeClass = 'active';
     }

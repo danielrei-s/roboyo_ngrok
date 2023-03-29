@@ -24,7 +24,6 @@ class UserManagement extends Controller
             'email' => $user->email,
             'sigla' => $user->sigla,
             'admin' => $user->admin,
-            'manager' => $user->manager,
             'role' => $user->role,
             'ativo' => $user->ativo
         ];

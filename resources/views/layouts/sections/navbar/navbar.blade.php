@@ -37,13 +37,13 @@ $navbarDetached = ($navbarDetached ?? '');
       <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <ul class="navbar-nav flex-row align-items-center ms-auto">
 
-        
+
 
           <!-- User -->
           @auth
-            @if (auth()->user()->manager)
+            @if (auth()->user()->admin == 1)
              @php $role = 'Manager'; @endphp            <!-- Verificar que tipo de utilizador -->
-            @elseif (auth()->user()->admin)                   <!-- Colocar tipo em $role -->
+            @elseif (auth()->user()->admin == 2)                   <!-- Colocar tipo em $role -->
              @php $role = 'Admin'; @endphp
             @else
              @php $role = 'Pentester'; @endphp
@@ -77,7 +77,7 @@ $navbarDetached = ($navbarDetached ?? '');
               <li>
                 <a href="{{url('/dashboard')}}" class="dropdown-item">
                   <i class="bx bx-user me-2"></i>
-                  <span class="align-middle">My Profile</span> 
+                  <span class="align-middle">My Profile</span>
                 </a>
               </li>
               <li>

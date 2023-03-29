@@ -59,8 +59,7 @@ class UserFactory extends Factory
               'email_verified_at' => now(),
               'password' => bcrypt('admin'), // password
               'remember_token' => Str::random(10),
-              'admin' => 1,
-              'manager' => 0,
+              'admin' => '2',
               'picture' => 'assets/img/avatars/5.png',
               'contact' => '911222333',
               'ativo' => '1',
@@ -82,8 +81,7 @@ class UserFactory extends Factory
               'email_verified_at' => now(),
               'password' => bcrypt('manager'), // password
               'remember_token' => Str::random(10),
-              'admin' => 0,
-              'manager' => 1,
+              'admin' => '1',
               'picture' => 'assets/img/avatars/5.png',
               'contact' => '911222333',
               'ativo' => '1',

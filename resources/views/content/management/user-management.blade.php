@@ -43,9 +43,9 @@
             <td>{{ $user->email }}</td>
             <td>{{ $user->sigla }}</td>
             <td>
-              @if($user->admin)
+              @if($user->admin == 2)
                   <span class="badge bg-label-warning me-1">Admin</span>
-              @elseif($user->manager)
+              @elseif($user->admin == 1)
                   <span class="badge bg-label-info me-1">Manager</span>
               @elseif(!$user->ativo)
                   <span class="badge bg-label-dark me-1">Blocked 🚫</span>
@@ -72,7 +72,7 @@
                     @else
                         <i class="bx bx-lock-open-alt me-1" title="Unblock User"></i> Unblock
                     @endif
-                </button>
+                  </button>
                   <input type="hidden" name="ativo" value="0">
                 </form>
 

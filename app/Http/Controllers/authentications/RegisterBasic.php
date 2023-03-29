@@ -35,7 +35,6 @@ class RegisterBasic extends Controller
   // create the user
   $attributes = $request->all();
   $attributes['admin'] = 0;
-  $attributes['manager'] = 0;
   $attributes['picture'] = 'assets/img/avatars/5.png';
 
   $user = User::create($attributes);

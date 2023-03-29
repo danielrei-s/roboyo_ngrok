@@ -16,9 +16,12 @@ class ManagerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()->manager && !auth()->user()->admin) {
-            abort(403, 'Unauthorized action.');
-        }
-        return $next($request);
+      $admin = auth()->user()->admin;
+
+      if ($admin !== '1' && $admin !== '2') {  //admins have the same access as managers but
+          abort(403, 'Unauthorized action.');       //not the other way around
+      }
+
+      return $next($request);
     }
 }

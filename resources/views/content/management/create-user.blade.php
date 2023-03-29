@@ -32,9 +32,9 @@
 
                             <select class="form-select text-center" id="exampleFormControlSelect1" aria-label="Default select example" style="width: 100%;">
                               <option selected disabled>Privileges</option>
-                              <option value="1">Pentester</option>
-                              <option value="2">Manager</option>
-                              <option value="3">Admin</option>
+                              <option value="0">Pentester</option>
+                              <option value="1">Manager</option>
+                              <option value="2">Admin</option>
                             </select>
                             </select>
                           </div>

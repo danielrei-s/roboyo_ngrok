@@ -108,7 +108,9 @@ Route::post('/change-password-basic', function (Request $request) {
 })->middleware('guest')->name('password.update');
 
 // auth POSTs
-Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')->name('auth-register-basic')->middleware('auth');
+Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')
+        ->name('auth-register-basic')
+        ->middleware('admin');
 //Route::post('login', $controller_path . '\SessionsController@login')->name('login')->middleware('guest');
 Route::post('login', [SessionsController::class, 'login'])->middleware('guest');
 // cards
@@ -154,14 +156,24 @@ Route::get('/form/layouts-horizontal', $controller_path . '\form_layouts\Horizon
 Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tables-basic');
 
 // management
-Route::get('/user-management', $controller_path . '\management\UserManagement@index')->name('user-management')->middleware(['auth', 'admin']);
-Route::get('/client-management', $controller_path . '\management\ClientManagement@index')->name('client-management')->middleware(['auth', 'manager']);
+Route::get('/user-management', $controller_path . '\management\UserManagement@index')
+        ->name('user-management')
+        ->middleware('admin');
+Route::get('/client-management', $controller_path . '\management\ClientManagement@index')
+        ->name('client-management')
+        ->middleware('manager');
 
 //delete from database
-Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')->name('user-management.destroy')->middleware(['auth', 'admin']);
+Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')
+        ->name('user-management.destroy')
+        ->middleware('admin');
 
 //block user
-Route::put('/users/{user}/block', $controller_path . '\management\UserManagement@blockUser')->name('users.block')->middleware(['auth', 'admin']);
+Route::put('/users/{user}/block', $controller_path . '\management\UserManagement@blockUser')
+        ->name('users.block')
+        ->middleware('admin');
 
 // Change Password route
-Route::post('/changepassword', [SessionsController::class, 'changePassword'])->name('change-password')->middleware('auth');
+Route::post('/changepassword', [SessionsController::class, 'changePassword'])
+        ->name('change-password')
+        ->middleware('auth');
