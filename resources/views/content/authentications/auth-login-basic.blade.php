@@ -37,6 +37,9 @@
               @error('email')
                  <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
               @enderror
+              @error('failed')
+                 <p style="color:red">{{ $message }}</p>   {{--feedback ao user sobre erros de input --}}
+              @enderror
             </div>
 
             <div class="mb-3 form-password-toggle">
