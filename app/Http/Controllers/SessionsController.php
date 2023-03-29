@@ -14,7 +14,7 @@ class SessionsController extends Controller
         return redirect('/')->with('success', 'Logged out!'); #Loggout
     }
 
-    public function store()
+    public function login()
     {
         $attributes = request()->validate([
         'email' => 'required|email|exists:users,email',

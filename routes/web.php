@@ -110,7 +110,7 @@ Route::post('/change-password-basic', function (Request $request) {
 // auth POSTs
 Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')->name('auth-register-basic')->middleware('auth');
 //Route::post('login', $controller_path . '\SessionsController@login')->name('login')->middleware('guest');
-Route::post('login', [SessionsController::class, 'store'])->middleware('guest');
+Route::post('login', [SessionsController::class, 'login'])->middleware('guest');
 // cards
 Route::get('/cards/basic', $controller_path . '\cards\CardBasic@index')->name('cards-basic');
 
