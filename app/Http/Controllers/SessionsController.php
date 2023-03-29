@@ -28,7 +28,7 @@ class SessionsController extends Controller
 
         return back()
         ->withInput()
-        ->withErrors(['email' => 'Provided credentials could not be verified.']);
+        ->withErrors('failed','Provided credentials could not be verified.');
 
         # Validar request, autenticar utilizador e dar login (com base no request) e flashar messagem de sucesso.
     }
@@ -45,7 +45,8 @@ class SessionsController extends Controller
         return back()->withErrors(['currentPassword' => 'The current password you entered is incorrect.'])->withInput();
       }
 
-      $user->password = bcrypt($validatedData['newPassword']);
+      // $user->password = bcrypt($validatedData['newPassword']);  //double hash....
+      $user->password = $validatedData['newPassword'];
       $user->save();
 
       return redirect()->route('dashboard-main')->with('success', 'Your password has been updated.');
