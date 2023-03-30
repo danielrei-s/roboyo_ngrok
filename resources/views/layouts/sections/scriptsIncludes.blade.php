@@ -43,5 +43,15 @@
     });
   });
 
-  
+
+</script>
+
+<!-- Block Confirmation -->
+<script>
+  function confirmBlock() {
+      if (confirm("Are you sure you want to block/unblock this user?")) {
+          document.getElementById("block-form").submit();
+      }
+      return false;
+  }
 </script>

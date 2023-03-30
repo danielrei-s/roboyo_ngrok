@@ -63,15 +63,15 @@
                 <a class="dropdown-item" href="javascript:void(0);" title="Force Password Change"><i class="bx bx-lock me-1"title="Force Password Change"></i> Password</a>
 
                 {{-- form to handle the blocking --}}
-                <form method="POST" action="{{ route('users.block', ['user' => $user->id]) }}">
+                <form method="POST" action="{{ route('users.block', ['user' => $user->id]) }}" id="block-form">
                   @csrf
                   @method('PUT')
-                  <button type="submit" class="dropdown-item" title="Block User">
-                    @if ($user->ativo == 1)
-                        <i class="bx bx-block me-1" title="Block User"></i> Block
-                    @else
-                        <i class="bx bx-lock-open-alt me-1" title="Unblock User"></i> Unblock
-                    @endif
+                  <button type="submit" class="dropdown-item" title="Block User" onclick="return confirmBlock()">
+                      @if ($user->ativo == 1)
+                          <i class="bx bx-block me-1" title="Block User"></i> Block
+                      @else
+                          <i class="bx bx-lock-open-alt me-1" title="Unblock User"></i> Unblock
+                      @endif
                   </button>
                   <input type="hidden" name="ativo" value="0">
                 </form>
