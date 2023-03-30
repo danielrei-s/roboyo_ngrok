@@ -47,6 +47,10 @@ Route::get('/pages/account-settings-notifications', $controller_path . '\pages\A
 Route::get('/pages/account-settings-connections', $controller_path . '\pages\AccountSettingsConnections@index')->name('pages-account-settings-connections');
 Route::get('/pages/misc-error', $controller_path . '\pages\MiscError@index')->name('pages-misc-error');
 Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnderMaintenance@index')->name('pages-misc-under-maintenance');
+Route::get('/pages/pages-user-profile', $controller_path . '\pages\PagesUserProfile@index')->name('pages-user-profile');
+// page with user ID
+Route::get('/users/{id}',  $controller_path . '\pages\PagesUserProfile@showUserProfile')->name('user.profile');
+
 
 // authentication
 Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic')->middleware('guest');
