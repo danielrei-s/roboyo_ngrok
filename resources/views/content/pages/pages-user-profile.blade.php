@@ -46,9 +46,32 @@
                                     </li>
                                 </ul>
                             </div>
-                            <a href="javascript:void(0)" class="btn btn-primary text-nowrap">
-                                <i class='bx bx-user-check me-1'></i>Connected
-                            </a>
+
+                            <div class="col-md-6">
+                              <div class="mt-3">
+                                <div class="btn-group" role="group" aria-label="Basic example">
+                                  <button type="button" class="btn btn-secondary">Password</button>
+                                  <button type="button" class="btn btn-secondary">Block</button>
+                                  <button type="button" class="btn btn-secondary">
+                                    <a class="dropdown-item" href="#" data-bs-toggle="tooltip"
+                                    aria-label="Delete user" data-bs-original-title="Delete user"
+                                    aria-describedby="tooltip674202"
+                                    onclick="event.preventDefault();
+                                      if (confirm('Are you sure you want to delete {{ $user->firstName }} {{ $user->lastName }} ?'  )) {
+                                        document.getElementById('delete-user-{{ $user->id }}').submit();
+                                      }">
+                                    <i class="bx bx-trash me-1"title="Delete User"></i>Delete
+                                </a>
+                                <form id="delete-user-{{ $user->id }}"
+                                    action="{{ route('user-management.destroy', $user->id) }}" method="POST"
+                                    style="display: none; ">
+                                    @csrf
+                                    @method('DELETE')
+                                </form></button>
+                                </div>
+                              </div>
+                            </div>
+
                             <td>
                                 <div class="dropdown">
                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
@@ -165,7 +188,7 @@
                             <div class="d-flex flex-wrap"><span class="fw-semibold me-2">Pentesting Red
                                     Team</span><span>(6 Members)</span></div>
                         </li>
-                        <li class="d-flex align-items-center"><i class="bx bxl-react text-info me-2"></i>
+                        <li class="d-flex align-items-center"><i class="bx bxl-php text-danger me-2"></i>
                             <div class="d-flex flex-wrap"><span class="fw-semibold me-2">Laravel Developer</span><span>(18
                                     Members)</span></div>
                         </li>
@@ -272,15 +295,10 @@
                 <div class="card-datatable table-responsive">
                     <table class="datatables-projects border-top table">
                         <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper dt-bootstrap5 no-footer">
-                            <div class="card-header pb-0 pt-sm-0">
-                                <div class="head-label text-center">
-                                <div class="mt-4">
-                                    <h5 class="card-title mb-0">Projects</h5>
-                                </div>
-                                <div class="d-flex justify-content-center justify-content-md-end mb-2">
-                                    <div id="DataTables_Table_0_filter" class="dataTables_filter">
-                                        <label>Search:<input type="search" class="form-control" placeholder=""
-                                                aria-controls="DataTables_Table_0"></label>
+                          <div class="card-header pb-0 pt-sm-0 d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Projects</h5>
+                            <div id="DataTables_Table_0_filter" class="dataTables_filter mb-1">
+                              <label class="mb-1">Search:<input type="search" class="form-control" placeholder="" aria-controls="DataTables_Table_0"></label>
                                     </div>
                                 </div>
                             </div>

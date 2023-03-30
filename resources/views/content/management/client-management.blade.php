@@ -4,29 +4,29 @@
 
 @section('content')
 <h4 class="fw-bold py-3 mb-4">
-  <span class="text-muted fw-light">User Management /</span> Client Management
+  <span class="text-muted fw-light"> Client Management /</span> Client Table
 </h4>
 
 {{-- Direct copy of tables page --}}
 
 <!-- Bootstrap Dark Table -->
 <div class="card">
-  <h5 class="card-header">All Users</h5>
+  <h5 class="card-header">All Clients</h5>
   <div class="table-responsive text-nowrap">
     <table class="table table-dark">
       <thead>
         <tr>
-          <th>Picture</th>
-          <th>Name</th>
-          <th>Initials</th>
-          <th>S. Role</th>
+          <th>Company</th>
+          <th>Project Name</th>
+          <th>Team</th>
+          <th>Status</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody class="table-border-bottom-0">
         <tr>
-          <td><img src="{{asset('assets/img/avatars/5.png')}}" alt="Avatar" class="rounded-circle" style="width: 100px; height: 100px;"></td>
-          <td>Albert Cook</td>
+          <td><img src="{{asset('assets/img/icons/brands/asana.png')}}" alt="Avatar" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+          <td>Asana Audit</td>
           <td>
             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
               <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Lilian Fuller">
@@ -40,7 +40,7 @@
               </li>
             </ul>
           </td>
-          <td><span class="badge bg-label-success me-1">Pentester</span></td>
+          <td><span class="badge bg-label-success me-1">Finished</span></td>
           <td>
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
@@ -52,12 +52,12 @@
           </td>
         </tr>
         <tr>
-          <td><i class="fab fa-react fa-lg text-info me-3"></i> <strong>React Project</strong></td>
-          <td>Barry Hunter</td>
+          <td><img src="{{asset('assets/img/icons/brands/behance.png')}}" alt="Avatar" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+          <td>BëHance Audit</td>
           <td>
             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
               <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Lilian Fuller">
-                <img src="{{asset('assets/img/avatars/5.png')}}" alt="Avatar" class="rounded-circle">
+                <img src="{{asset('assets/img/avatars/9.png')}}" alt="Avatar" class="rounded-circle">
               </li>
               <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Sophia Wilkerson">
                 <img src="{{asset('assets/img/avatars/6.png')}}" alt="Avatar" class="rounded-circle">
@@ -67,7 +67,7 @@
               </li>
             </ul>
           </td>
-          <td><span class="badge bg-label-success me-1">Pentester</span></td>
+          <td><span class="badge bg-label-success me-1">FInished</span></td>
           <td>
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
@@ -79,8 +79,8 @@
           </td>
         </tr>
         <tr>
-          <td><i class="fab fa-vuejs fa-lg text-success me-3"></i> <strong>VueJs Project</strong></td>
-          <td>Trevor Baker</td>
+          <td><img src="{{asset('assets/img/icons/brands/slack.png')}}" alt="Avatar" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+          <td>Slack Audit</td>
           <td>
             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
               <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Lilian Fuller">
@@ -94,7 +94,7 @@
               </li>
             </ul>
           </td>
-          <td><span class="badge bg-label-info me-1">Management</span></td>
+          <td><span class="badge bg-label-info me-1">In progress</span></td>
           <td>
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
@@ -106,8 +106,8 @@
           </td>
         </tr>
         <tr>
-          <td><i class="fab fa-bootstrap fa-lg text-primary me-3"></i> <strong>Bootstrap Project</strong></td>
-          <td>Jerry Milton</td>
+          <td><img src="{{asset('assets/img/icons/brands/dribbble.png')}}" alt="Avatar" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+          <td>Dribbble Audit</td>
           <td>
             <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
               <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Lilian Fuller">
@@ -121,7 +121,7 @@
               </li>
             </ul>
           </td>
-          <td><span class="badge bg-label-warning me-1">Admin</span></td>
+          <td><span class="badge bg-label-warning me-1">Not Started</span></td>
           <td>
             <div class="dropdown">
               <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded"></i></button>
