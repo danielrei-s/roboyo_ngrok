@@ -77,6 +77,8 @@
                                     @csrf
                                     @method('DELETE')
                                   </form>
+
+                                     {{-- form to handle the BLOCK --}}
                                   <form method="POST" action="{{ route('users.block', ['user' => $user->id]) }}" id="block-form-{{ $user->id }}">
                                       @csrf
                                       @method('PUT')
