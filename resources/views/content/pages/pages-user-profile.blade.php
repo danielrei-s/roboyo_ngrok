@@ -67,6 +67,7 @@
                                       <i class="bx bx-lock me-1" title="Force Password Change"></i> Password
                                     </a>
 
+                                    {{-- form to handle the DELETE --}}
                                     <a class="btn btn-danger btn-action" href="#" data-bs-toggle="tooltip" aria-label="Delete user" data-bs-original-title="Delete user" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$user->firstName}} {{$user->lastName}} ?')) { document.getElementById('delete-user-{{ $user->id }}').submit(); }">
                                       <i class="bx bx-trash me-1" title="Delete User"></i> Delete
                                     </a>
