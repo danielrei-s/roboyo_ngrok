@@ -11,9 +11,9 @@ class UserManagement extends Controller
 {
   public function index()
   {
-    $users = User::all();
+    $users = User::paginate(10);  //loaded with users => $users
 
-    $userObjects = [];
+    $userObjects = [];  //empty array to carry all user info
 
     foreach ($users as $user) {
         $userObjects[] = (object)[
@@ -29,7 +29,7 @@ class UserManagement extends Controller
         ];
     }
 
-    return view('content.management.user-management')->with('userObjects', $userObjects);
+    return view('content.management.user-management', ['users' => $users])->with('userObjects', $userObjects);
   }
 
   public function destroy($id)

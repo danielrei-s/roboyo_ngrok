@@ -7,9 +7,13 @@
 @endsection
 
 @section('content')
-<h4 class="fw-bold py-3 mb-4">
-    <span class="text-muted fw-light"> Dashboard /</span> Profile-Information
-</h4>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb breadcrumb-style2 mb-2">
+    <li class="breadcrumb-item active">
+      <a href="{{ url('/') }}">Dashboard</a>
+    </li>
+  </ol>
+</nav>
 
 <div class="row">
   <div class="col-md-12">
@@ -73,7 +77,7 @@
                                     <h5 class="card-header">Profile Details</h5>
                                     <div class="card-body">
                                       <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        <img src="{{ asset(auth()->user()->picture) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                                        <img src="{{ asset('assets/img/avatars/5.png') }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                                         <div class="button-wrapper">
                                           <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                                             <span class="d-none d-sm-block">Upload new photo</span>
@@ -85,7 +89,7 @@
                                             <span class="d-none d-sm-block">Reset</span>
                                           </button>
 
-                                          <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
+                                          <p class="text-muted mb-0">Allowed JPG or PNG. Max size of 10Mb</p>
                                         </div>
                                       </div>
                                     </div>

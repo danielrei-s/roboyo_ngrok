@@ -15,6 +15,13 @@
 @endsection
 
 @section('content')
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb breadcrumb-style2 mb-2">
+    <li class="breadcrumb-item active">
+      <a href="{{ url('/') }}">Dashboard</a>
+    </li>
+  </ol>
+</nav>
 {{-- <div class="row">
   <div class="col-lg-8 mb-4 order-0">
     <div class="card">
