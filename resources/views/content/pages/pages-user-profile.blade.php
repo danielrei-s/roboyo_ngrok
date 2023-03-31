@@ -8,11 +8,18 @@
 @endsection
 
 @section('content')
-    <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">
-            <a href="{{ route('user-management') }}">User Management /</a>
-        </span> User Profile
-    </h4>
+
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb breadcrumb-style2 mb-2">
+        <li class="breadcrumb-item">
+          <a href="{{ url('/') }}">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item">
+          <a href="{{ route('user-management') }}">User Management</a>
+        </li>
+        <li class="breadcrumb-item active">User Profile</li>
+      </ol>
+    </nav>
 
 
     <!-- Header -->
@@ -46,86 +53,44 @@
                                     </li>
                                 </ul>
                             </div>
-
-                            <div class="col-md-6">
-                              <div class="mt-3">
+                  <!-- Admin action buttons -->
+                          {{-- Handle view profile request --}}
+                          <div class="col-md-6">
+                            <div class="mt-3">
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                  <button type="button" class="btn btn-secondary">Password</button>
-                                  <button type="button" class="btn btn-secondary">Block</button>
-                                  <button type="button" class="btn btn-secondary">
-                                    <a class="dropdown-item" href="#" data-bs-toggle="tooltip"
-                                    aria-label="Delete user" data-bs-original-title="Delete user"
-                                    aria-describedby="tooltip674202"
-                                    onclick="event.preventDefault();
-                                      if (confirm('Are you sure you want to delete {{ $user->firstName }} {{ $user->lastName }} ?'  )) {
-                                        document.getElementById('delete-user-{{ $user->id }}').submit();
-                                      }">
-                                    <i class="bx bx-trash me-1"title="Delete User"></i>Delete
-                                </a>
-                                <form id="delete-user-{{ $user->id }}"
-                                    action="{{ route('user-management.destroy', $user->id) }}" method="POST"
-                                    style="display: none; ">
+                                    <a class="btn btn-secondary btn-action" href="{{ route('user.profile', ['id' => $user->id]) }}" data-bs-toggle="tooltip" aria-label="View User Profile" data-bs-original-title="View User Profile">
+                                        <i class="bx bx-show-alt me-1" title="View Profile"></i> View
+                                    </a>
+
+                                    {{-- form to handle the FORCED PASSWORD CHANGE --}}
+                                    <a class="btn btn-secondary btn-action" href="javascript:void(0);" data-bs-toggle="tooltip" aria-label="Force Password Change" data-bs-original-title="Force Password Change" aria-describedby="tooltip674202">
+                                      <i class="bx bx-lock me-1" title="Force Password Change"></i> Password
+                                    </a>
+
+                                    <a class="btn btn-danger btn-action" href="#" data-bs-toggle="tooltip" aria-label="Delete user" data-bs-original-title="Delete user" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$user->firstName}} {{$user->lastName}} ?')) { document.getElementById('delete-user-{{ $user->id }}').submit(); }">
+                                      <i class="bx bx-trash me-1" title="Delete User"></i> Delete
+                                    </a>
+
+                                  </div>
+                                  <form id="delete-user-{{ $user->id }}" action="{{ route('user-management.destroy', $user->id) }}" method="POST" style="display: none;">
                                     @csrf
                                     @method('DELETE')
-                                </form></button>
-                                </div>
-                              </div>
+                                  </form>
+                                  <form method="POST" action="{{ route('users.block', ['user' => $user->id]) }}" id="block-form-{{ $user->id }}">
+                                      @csrf
+                                      @method('PUT')
+                                      <button type="submit" class="btn @if($user->ativo == 1) btn-warning @else btn-success @endif" data-bs-toggle="tooltip" data-bs-original-title="@if($user->ativo == 1) Block user @else Unblock User @endif" aria-describedby="tooltip674202" onclick="return confirmBlock()">
+                                          @if ($user->ativo == 1)
+                                              <i class="bx bx-block me-1"></i> Block
+                                          @else
+                                              <i class="bx bx-lock-open-alt me-1"></i> Unblock
+                                          @endif
+                                      </button>
+                                      <input type="hidden" name="ativo" value="0">
+                                  </form>
                             </div>
-
-                            <td>
-                                <div class="dropdown">
-                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-                                        data-bs-toggle="dropdown"data-user-id="{{ $user->id }}">
-                                        <i class="bx bx-dots-vertical-rounded"></i></button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="{{ route('user.profile', ['id' => $user->id]) }}"
-                                            data-bs-toggle="tooltip" aria-label="View User Profile"
-                                            data-bs-original-title="View User Profile" aria-describedby="tooltip674202">
-                                            <i class="bx bx-show-alt me-1" title="View Profile"></i> View</a>
-
-                                        <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="tooltip"
-                                            aria-label="Force Password Change"
-                                            data-bs-original-title="Force Password Change"
-                                            aria-describedby="tooltip674202"><i
-                                                class="bx bx-lock me-1"title="Force Password Change"></i> Password</a>
-
-                                        {{-- form to handle the blocking --}}
-                                        <form method="POST" action="{{ route('users.block', ['user' => $user->id]) }}"
-                                            id="block-form">
-                                            @csrf
-                                            @method('PUT')
-                                            <button type="submit" class="dropdown-item" data-bs-toggle="tooltip"
-                                                aria-label="Block User" data-bs-original-title="Block User"
-                                                aria-describedby="tooltip674202" onclick="return confirmBlock()">
-                                                @if ($user->ativo == 1)
-                                                    <i class="bx bx-block me-1" title="Block User"></i> Block
-                                                @else
-                                                    <i class="bx bx-lock-open-alt me-1" title="Unblock User"></i> Unblock
-                                                @endif
-                                            </button>
-                                            <input type="hidden" name="ativo" value="0">
-                                        </form>
-
-
-                                        <a class="dropdown-item" href="#" data-bs-toggle="tooltip"
-                                            aria-label="Delete user" data-bs-original-title="Delete user"
-                                            aria-describedby="tooltip674202"
-                                            onclick="event.preventDefault();
-                  if (confirm('Are you sure you want to delete {{ $user->firstName }} {{ $user->lastName }} ?'  )) {
-                    document.getElementById('delete-user-{{ $user->id }}').submit();
-                  }">
-                                            <i class="bx bx-trash me-1"title="Delete User"></i>Delete
-                                        </a>
-                                        <form id="delete-user-{{ $user->id }}"
-                                            action="{{ route('user-management.destroy', $user->id) }}" method="POST"
-                                            style="display: none; ">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
-                                    </div>
-                            </td>
                         </div>
-                    </div>
+                    <!-- /Admin action buttons -->
                 </div>
             </div>
         </div>
