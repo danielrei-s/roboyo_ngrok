@@ -17,20 +17,27 @@ class UserFactory extends Factory
      */
     public function definition()
     {
-        return [
-            'firstName' => fake()->firstName(),
-            'lastName' => fake()->lastName(),
-            'sigla' => fake()->word(),
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
-            'admin' => '0',
-            'picture' => 'assets/img/avatars/5.png',
-            'contact' => '911222333',
-            'ativo' => '1',
-            'role' => 'Pentester'
-        ];
+
+      $rand = null;
+      do {
+          $rand = random_int(1, 12);
+      } while ($rand == 4 || $rand == 5);
+
+      return [
+          'firstName' => $this->faker->firstName(),
+          'lastName' => $this->faker->lastName(),
+          'sigla' => $this->faker->word(),
+          'email' => $this->faker->unique()->safeEmail(),
+          'email_verified_at' => now(),
+          'password' => bcrypt('password'),
+          'remember_token' => Str::random(10),
+          'admin' => '0',
+          'picture' => 'assets/img/avatars/' . $rand . '.png',
+          'contact' => '911222333',
+          'ativo' => '1',
+          'role' => 'Pentester'
+      ];
+
     }
 
     /**
@@ -50,7 +57,10 @@ class UserFactory extends Factory
 
     public function admin()
     {
-        return $this->state(function (array $attributes) {
+      do {
+        $rand = random_int(1, 12);
+     } while ($rand == 4 || $rand == 5);
+        return $this->state(function (array $attributes) use ($rand){
             return [
               'firstName' => 'Daniel',
               'lastName' => 'Reis',
@@ -60,7 +70,7 @@ class UserFactory extends Factory
               'password' => bcrypt('admin'), // password
               'remember_token' => Str::random(10),
               'admin' => '2',
-              'picture' => 'assets/img/avatars/5.png',
+              'picture' => 'assets/img/avatars/' . $rand . '.png',
               'contact' => '911222333',
               'ativo' => '1',
               'role' => 'Head of IT'
