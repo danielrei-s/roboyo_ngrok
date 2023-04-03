@@ -27,8 +27,7 @@
         <div class="col-12">
             <div class="card mb-4">
                 <div class="user-profile-header-banner">
-                    <img src="../../assets/img/backgrounds/profile-banner.png" alt="Banner image" class="rounded-top"
-                        width="1037" height="250">
+                    <img src="../../assets/img/backgrounds/profile-banner.png" alt="Banner image" class="rounded-top">
                 </div>
                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
@@ -54,45 +53,49 @@
                                 </ul>
                             </div>
                   <!-- Admin action buttons -->
+                  <div class="col-md-6">
+                    <div class="mt-3">
+                      <div class="btn-group" role="group" aria-label="Basic example">
                           {{-- Handle view profile request --}}
-                          <div class="col-md-6">
-                            <div class="mt-3">
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a class="btn btn-secondary btn-action" href="{{ route('user.profile', ['id' => $user->id]) }}" data-bs-toggle="tooltip" aria-label="View User Profile" data-bs-original-title="View User Profile">
-                                        <i class="bx bx-show-alt me-1" title="View Profile"></i> View
-                                    </a>
+                          <a class="btn btn-secondary btn-action" href="{{ route('user.profile', ['id' => $user->id]) }}" data-bs-toggle="tooltip" aria-label="View User Profile" data-bs-original-title="View User Profile">
+                            <i class="bx bx-show-alt me-1" title="View Profile"></i> View
+                          </a>
 
-                                    {{-- form to handle the FORCED PASSWORD CHANGE --}}
-                                    <a class="btn btn-secondary btn-action" href="javascript:void(0);" data-bs-toggle="tooltip" aria-label="Force Password Change" data-bs-original-title="Force Password Change" aria-describedby="tooltip674202">
-                                      <i class="bx bx-lock me-1" title="Force Password Change"></i> Password
-                                    </a>
+                          {{-- anchor to link the FORCED PASSWORD CHANGE --}}
+                          <a class="btn btn-secondary btn-action" href="javascript:void(0);" data-bs-toggle="tooltip" aria-label="Force Password Change" data-bs-original-title="Force Password Change" aria-describedby="tooltip674202">
+                            <i class="bx bx-lock me-1" title="Force Password Change"></i> Password
+                          </a>
 
-                                    {{-- form to handle the DELETE --}}
-                                    <a class="btn btn-danger btn-action" href="#" data-bs-toggle="tooltip" aria-label="Delete user" data-bs-original-title="Delete user" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$user->firstName}} {{$user->lastName}} ?')) { document.getElementById('delete-user-{{ $user->id }}').submit(); }">
-                                      <i class="bx bx-trash me-1" title="Delete User"></i> Delete
-                                    </a>
-
-                                  </div>
-                                  <form id="delete-user-{{ $user->id }}" action="{{ route('user-management.destroy', $user->id) }}" method="POST" style="display: none;">
-                                    @csrf
-                                    @method('DELETE')
-                                  </form>
-
-                                     {{-- form to handle the BLOCK --}}
-                                  <form method="POST" action="{{ route('users.block', ['user' => $user->id]) }}" id="block-form-{{ $user->id }}">
-                                      @csrf
-                                      @method('PUT')
-                                      <button type="submit" class="btn @if($user->ativo == 1) btn-warning @else btn-success @endif" data-bs-toggle="tooltip" data-bs-original-title="@if($user->ativo == 1) Block user @else Unblock User @endif" aria-describedby="tooltip674202" onclick="return confirmBlock()">
-                                          @if ($user->ativo == 1)
-                                              <i class="bx bx-block me-1"></i> Block
-                                          @else
-                                              <i class="bx bx-lock-open-alt me-1"></i> Unblock
-                                          @endif
-                                      </button>
-                                      <input type="hidden" name="ativo" value="0">
-                                  </form>
-                            </div>
+                          {{-- anchor to link the BLOCK --}}
+                          <a href="#" onclick="event.preventDefault(); document.getElementById('block-form-{{ $user->id }}').submit();" class="btn @if($user->ativo == 1) btn-warning @else btn-success @endif" data-bs-toggle="tooltip" data-bs-original-title="@if($user->ativo == 1) Block user @else Unblock User @endif" aria-describedby="tooltip674202" onclick="return confirmBlock()">
+                            @if ($user->ativo == 1)
+                              <i class="bx bx-block me-1"></i> Block
+                            @else
+                              <i class="bx bx-lock-open-alt me-1"></i> Unblock
+                            @endif
+                          </a>
                         </div>
+
+                        {{-- anchor to link the DELETE --}}
+                        <a class="btn btn-danger btn-action" href="#" data-bs-toggle="tooltip" aria-label="Delete user" data-bs-original-title="Delete user" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$user->firstName}} {{$user->lastName}} ?')) { document.getElementById('delete-user-{{ $user->id }}').submit(); }">
+                          <i class="bx bx-trash me-1" title="Delete User"></i> Delete
+                        </a>
+
+                        {{-- form to handle the DELETE --}}
+                        <form id="delete-user-{{ $user->id }}" action="{{ route('user-management.destroy', $user->id) }}" method="POST" style="display: none;">
+                          @csrf
+                          @method('DELETE')
+                        </form>
+
+
+                        {{-- form to handle the block --}}
+                        <form method="POST" action="{{ route('users.block', ['user' => $user->id]) }}" id="block-form-{{ $user->id }}">
+                            @csrf
+                            @method('PUT')
+                            <input type="hidden" name="ativo" value="0">
+                        </form>
+                        </div>
+                      </div>
                     <!-- /Admin action buttons -->
                 </div>
             </div>
