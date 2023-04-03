@@ -21,16 +21,16 @@
                         <div class="row">
                           <div class="col-md-4 mb-3 d-flex justify-content-center align-items-center flex-column">
                             <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin-bottom: 10px;">
-                              <label for="photo" style="cursor: pointer;">
+                              <label for="picture" style="cursor: pointer;">
                                 <img src="assets/img/avatars/5.png" style="width: 100%; height: 100%; object-fit: cover;" alt="Profile picture">
                               </label>
-                              <input type="file" class="form-control @error('photo') is-invalid @enderror" id="photo" name="photo" accept="image/*" style="display: none;">
+                              <input type="file" class="form-control @error('picture') is-invalid @enderror" id="picture" name="picture" accept="image/*" style="display: none;">
                             </div>
-                            @error('photo')
+                            @error('picture')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-
-                            <select class="form-select text-center" id="exampleFormControlSelect1" aria-label="Default select example" style="width: 100%;">
+                            <label for="admin">---</label>
+                            <select class="form-select text-center" name="admin" id="admin" aria-label="Selec privilege" style="width: 100%;">
                               <option selected disabled>Privileges</option>
                               <option value="0">Pentester</option>
                               <option value="1">Manager</option>

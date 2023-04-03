@@ -17,28 +17,41 @@ class RegisterBasic extends Controller
   //função de criar user
   public function store(Request $request)
   {
-    $validator = Validator::make($request->all(), [
-      'firstname' => ['required', 'max:25'],
-      'lastname' => ['required', 'max:25'],
-      'sigla' => ['required', 'unique:users,sigla', 'max:3'],
-      'email' => ['required', 'email', 'unique:users,email'],
-      'password' => ['required', 'min: 7', 'max:255'],
-  ]);
+      $validator = Validator::make($request->all(), [
+          'firstname' => ['required', 'max:25'],
+          'lastname' => ['required', 'max:25'],
+          'sigla' => ['required', 'unique:users,sigla', 'max:3'],
+          'email' => ['required', 'email', 'unique:users,email'],
+          'role' => ['required', 'max:25'],
+          'admin' => ['required', 'in:0,1,2'],
+          'picture' => ['nullable', 'image', 'max:2048'],
+      ]);
 
-  if ($validator->fails()) {
-      return redirect()->back()
-          ->withInput()
-          ->withErrors($validator)
-          ->with('failed', 'Validation failed: ' . $validator->errors()->first());
-  }
+      if ($validator->fails()) {
+          return redirect()->back()
+              ->withInput()
+              ->withErrors($validator)
+              ->with('failed', 'Validation failed: ' . $validator->errors()->first());
+      }
 
-  // create the user
-  $attributes = $request->all();
-  $attributes['admin'] = 0;
-  $attributes['picture'] = 'assets/img/avatars/5.png';
+      // handle picture upload
+      if ($request->hasFile('picture')) {
+          $picture = $request->file('picture');
+          $filename = time() . '_' . $picture->getClientOriginalName();
+          $path = 'assets/img/avatars/';
+          $picture->move($path, $filename);
+          $attributes['picture'] = $path . $filename;
+      } else {
+          $attributes['picture'] = 'assets/img/avatars/4.png';
+      }
 
-  $user = User::create($attributes);
+      // create the user
+      $attributes['password'] = '12345';
+      $admin = $request->input('admin', 0);
+      $attributes['admin'] = in_array($admin, [0, 1, 2]) ? $admin : 0;
 
-  return redirect('user-management')->with('success', 'Account created for ' . $attributes['email']);
+      $user = User::create($attributes);
+
+      return redirect('user-management')->with('success', 'Account created for ' . $attributes['email']);
   }
 }
