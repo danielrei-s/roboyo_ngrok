@@ -280,18 +280,18 @@
                                         <th class="control sorting_disabled" rowspan="1" colspan="1"
                                             style="width: 0px;" aria-label="">
                                         </th>
-                                        <th class="sorting sorting_desc" tabindex="0"
-                                            aria-controls="DataTables_Table_0" rowspan="1" colspan="1"
+                                        <th class="sorting" tabindex="0"
+                                            aria-controls="DataTables_Table_1" rowspan="1" colspan="1"
                                             style="width: 174px;" aria-label="Name: activate to sort column ascending"
                                             aria-sort="descending">Name</th>
-                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                        <th class="sorting" tabindex="0" aria-controls="DataTables_Table_1"
                                             rowspan="1" colspan="1" style="width: 62px;"
                                             aria-label="Leader: activate to sort column ascending">
                                             Leader</th>
-                                        <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 58px;"
+                                        <th class="sorting" rowspan="1" colspan="1" style="width: 58px;"
                                             aria-label="Team">Team
                                         </th>
-                                        <th class="w-px-200 sorting" tabindex="0" aria-controls="DataTables_Table_0"
+                                        <th class="w-px-200 sorting" tabindex="0" aria-controls="DataTables_Table_1"
                                             rowspan="1" colspan="1" style="width: 107px;"
                                             aria-label="Status: activate to sort column ascending">Status</th>
                                         <th class="sorting_disabled dtr-hidden" rowspan="1" colspan="1"
