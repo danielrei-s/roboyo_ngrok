@@ -14,33 +14,33 @@
                         <h5 class="modal-title" id="modalCenterTitle">Create new user</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formAuthentication" class="mb-3" action="{{ url('/auth/register-basic') }}"
-                        method="POST" style="padding: 20px;">
-                        @csrf {{--  Evitar ataques csrf --}}
+                    <form id="formAuthentication" class="mb-3" action="{{ url('/auth/register-basic') }}" method="POST" style="padding: 20px;">
+                      @csrf {{-- Evitar ataques csrf --}}
 
-                        <div class="row">
-                          <div class="col-md-4 mb-3 d-flex justify-content-center align-items-center flex-column">
-                            <div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; margin-bottom: 10px;">
-                              <label for="picture" style="cursor: pointer;">
-                                <img src="assets/img/avatars/5.png" style="width: 100%; height: 100%; object-fit: cover;" alt="Profile picture">
-                              </label>
-                              <input type="file" class="form-control @error('picture') is-invalid @enderror" id="picture" name="picture" accept="image/*" style="display: none;">
-                            </div>
-                            @error('picture')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                            <label for="admin">---</label>
-                            <select class="form-select text-center" name="admin" id="admin" aria-label="Selec privilege" style="width: 100%;">
-                              <option selected disabled>Privileges</option>
-                              <option value="0">Pentester</option>
-                              <option value="1">Manager</option>
-                              <option value="2">Admin</option>
-                            </select>
-                            </select>
+                      <div class="row">
+                        <div class="col-md-4 mb-3">
+                          <div class="d-flex justify-content-center align-items-center">
+                            <label for="picture" style="cursor: pointer;">
+                              <div class="rounded-circle overflow-hidden" style="width: 150px; height: 150px;">
+                                <img src="assets/img/avatars/5.png" alt="Profile picture" id="picturePreview" class="w-100 h-100">
+                              </div>
+                            </label>
                           </div>
+                          <input type="file" class="form-control @error('picture') is-invalid @enderror mt-2" id="picture" name="picture" accept="image/*">
+                          @error('picture')
+                          <div class="invalid-feedback">{{ $message }}</div>
+                          @enderror
+                          <div class="text-center mt-1">
+                          <label for="admin" class="mt-2 mb-1">Privileges</label>
+                          </div>
+                          <select class="form-select text-center mt-2 mb-1" name="admin" id="admin" aria-label="Selec privilege" style="width: 100%;">
+                            <option value="0">Pentester</option>
+                            <option value="1">Manager</option>
+                            <option value="2">Admin</option>
+                          </select>
+                        </div>
 
-
-                          <div class="col-md-8">
+                        <div class="col-md-8">
                           <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="firstname" class="form-label">First Name</label>
@@ -88,9 +88,28 @@
                               </div>
                           </div>
                         </div>
+                      </div>
                     </form>
                 </div>
             </div>
         </div>
       </div>
     </div>
+
+    <script>
+      const inputPicture = document.querySelector('#picture');
+      const picturePreview = document.querySelector('#picturePreview');
+
+      inputPicture.addEventListener('change', () => {
+          const file = inputPicture.files[0];
+          const reader = new FileReader();
+
+          reader.addEventListener('load', () => {
+              picturePreview.setAttribute('src', reader.result);
+          });
+
+          if (file) {
+              reader.readAsDataURL(file);
+          }
+      });
+  </script>

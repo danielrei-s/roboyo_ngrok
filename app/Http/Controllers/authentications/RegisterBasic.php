@@ -24,7 +24,7 @@ class RegisterBasic extends Controller
           'email' => ['required', 'email', 'unique:users,email'],
           'role' => ['required', 'max:25'],
           'admin' => ['required', 'in:0,1,2'],
-          'picture' => ['nullable', 'image', 'max:2048'],
+          'picture' => ['required','file','mimes:jpeg,png,jpg,gif,svg','max:2048']
       ]);
 
       if ($validator->fails()) {
@@ -46,10 +46,14 @@ class RegisterBasic extends Controller
       }
 
       // create the user
+      $attributes['firstname'] = $request->input('firstname');
+      $attributes['lastname'] = $request->input('lastname');
       $attributes['password'] = '12345';
       $admin = $request->input('admin', 0);
       $attributes['admin'] = in_array($admin, [0, 1, 2]) ? $admin : 0;
-
+      $attributes['sigla'] = $request->input('sigla');
+      $attributes['role'] = $request->input('role');
+      $attributes['email'] = $request->input('email');
       $user = User::create($attributes);
 
       return redirect('user-management')->with('success', 'Account created for ' . $attributes['email']);
