@@ -33,7 +33,7 @@
   <!-- /Add user modal -->
 
   <div class="table-responsive text-nowrap">
-    <table class="table table-dark">
+    <table class="table table-dark" style="min-height: 240px;">  <!-- min height prevent overlaps when there are < 2 entries -->
       <thead>
         <tr>
           <th>Picture</th>

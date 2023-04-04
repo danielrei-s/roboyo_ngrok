@@ -4020,6 +4020,7 @@ textarea.form-control-lg {
   display: flex;
   flex-direction: column;
   min-width: 0;
+  min-height: 350px;
   height: var(--bs-card-height);
   word-wrap: break-word;
   background-color: var(--bs-card-bg);
