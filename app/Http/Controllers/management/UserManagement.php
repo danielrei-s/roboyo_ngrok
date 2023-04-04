@@ -37,7 +37,7 @@ class UserManagement extends Controller
       $user = User::findOrFail($id);
       $user->delete();
 
-      return redirect()->route('user-management')->with('success', 'User has been deleted successfully!');
+      return back()->with('success', 'User has been deleted successfully!');
   }
 
   public function blockUser(Request $request, $user)
