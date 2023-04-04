@@ -96,7 +96,7 @@
       </div>
     </div>
 
-    <script>
+    <script>  //show a preview of the photo about to be uploaded
       const inputPicture = document.querySelector('#picture');
       const picturePreview = document.querySelector('#picturePreview');
 
