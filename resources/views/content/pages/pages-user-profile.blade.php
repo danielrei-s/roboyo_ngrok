@@ -42,7 +42,7 @@
                                 <ul
                                     class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
                                     <li class="list-inline-item fw-semibold">
-                                        <i class='bx bx-pen'></i> {{ $user->role }}
+                                      <i class='bx bxs-briefcase-alt-2'></i> {{ $user->role }}
                                     </li>
                                     <li class="list-inline-item fw-semibold">
                                         <i class='bx bx-map'></i> Vila Nova de Gaia
@@ -57,8 +57,8 @@
                     <div class="mt-3">
                       <div class="btn-group" role="group" aria-label="Basic example">
                           {{-- Handle view profile request --}}
-                          <a class="btn btn-secondary btn-action" href="{{ route('user.profile', ['id' => $user->id]) }}" data-bs-toggle="tooltip" aria-label="View User Profile" data-bs-original-title="View User Profile">
-                            <i class="bx bx-show-alt me-1" title="View Profile"></i> View
+                          <a class="btn btn-secondary btn-action" href="{{ route('user.profile', ['id' => $user->id]) }}" data-bs-toggle="tooltip" aria-label="Edit User Profile" data-bs-original-title="Edit User Profile">
+                            <i class="bx bx-pen me-1" title="Edit Profile"></i> Edit
                           </a>
 
                           {{-- anchor to link the FORCED PASSWORD CHANGE --}}
@@ -67,13 +67,17 @@
                           </a>
 
                           {{-- anchor to link the BLOCK --}}
-                          <a href="#" onclick="event.preventDefault(); document.getElementById('block-form-{{ $user->id }}').submit();" class="btn @if($user->ativo == 1) btn-warning @else btn-success @endif" data-bs-toggle="tooltip" data-bs-original-title="@if($user->ativo == 1) Block user @else Unblock User @endif" aria-describedby="tooltip674202" onclick="return confirmBlock()">
-                            @if ($user->ativo == 1)
-                              <i class="bx bx-block me-1"></i> Block
-                            @else
-                              <i class="bx bx-lock-open-alt me-1"></i> Unblock
-                            @endif
+                          <a href="#" onclick="event.preventDefault();
+                            if(confirm('Are you sure you want to @if($user->ativo == 1)block @else unblock @endif this user?')) {
+                              document.getElementById('block-form-{{ $user->id }}').submit();
+                            }" class="btn @if($user->ativo == 1) btn-warning @else btn-success @endif" data-bs-toggle="tooltip" data-bs-original-title="@if($user->ativo == 1) Block user @else Unblock User @endif" aria-describedby="tooltip674202">
+                              @if ($user->ativo == 1)
+                                <i class="bx bx-block me-1"></i> Block
+                              @else
+                                <i class="bx bx-lock-open-alt me-1"></i> Unblock
+                              @endif
                           </a>
+
                         </div>
 
                         {{-- anchor to link the DELETE --}}
