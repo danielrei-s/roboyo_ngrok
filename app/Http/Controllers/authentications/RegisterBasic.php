@@ -24,7 +24,7 @@ class RegisterBasic extends Controller
           'email' => ['required', 'email', 'unique:users,email'],
           'role' => ['required', 'max:25'],
           'admin' => ['required', 'in:0,1,2'],
-          'picture' => ['required','file','mimes:jpeg,png,jpg,gif,svg','max:2048']
+          'picture' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
       ]);
 
       if ($validator->fails()) {

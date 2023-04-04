@@ -14,7 +14,7 @@
                         <h5 class="modal-title" id="modalCenterTitle">Create new user</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formAuthentication" class="mb-3" action="{{ url('/auth/register-basic') }}" method="POST" style="padding: 20px;">
+                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-register-basic') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
                       @csrf {{-- Evitar ataques csrf --}}
 
                       <div class="row">
