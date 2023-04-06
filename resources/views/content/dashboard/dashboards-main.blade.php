@@ -189,7 +189,9 @@
                       <p class="mb-0">Once you delete your account, there is no going back. Please be certain.</p>
                   </div>
               </div>
-              <form id="formAccountDeactivation" onsubmit="return false">
+              <form id="delete-user-{{ auth()->user()->id }}" action="{{ route('user-management.destroy', auth()->user()->id) }}" method="POST" onsubmit="return validateForm()">
+                @csrf
+                @method('DELETE')
                   <div class="form-check mb-3">
                       <input class="form-check-input" type="checkbox" name="accountActivation"
                           id="accountActivation" />
@@ -202,4 +204,14 @@
       </div>
   </div>
 </div>
+<!-- Script to make sure user checked box to delete account, if not -> popup -->
+<script>
+  function validateForm() {
+      var checkBox = document.getElementById("accountActivation");
+      if (checkBox.checked == false) {
+          alert("Please confirm your account deactivation by checking the checkbox.");
+          return false;
+      }
+  }
+</script>
 @endsection
