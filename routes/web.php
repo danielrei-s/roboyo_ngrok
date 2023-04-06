@@ -28,98 +28,131 @@ use Illuminate\Support\Facades\Log;
 
 $controller_path = 'App\Http\Controllers';
 
-// Main Page Route
-Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
-Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
-Route::post('/change-password', $controller_path . '\SessionsController@changePassword')->name('change-password')->middleware('auth');
-//Route::match(['get', 'post'], '/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
-
-// layout
-Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
-Route::get('/layouts/without-navbar', $controller_path . '\layouts\WithoutNavbar@index')->name('layouts-without-navbar');
-Route::get('/layouts/fluid', $controller_path . '\layouts\Fluid@index')->name('layouts-fluid');
-Route::get('/layouts/container', $controller_path . '\layouts\Container@index')->name('layouts-container');
-Route::get('/layouts/blank', $controller_path . '\layouts\Blank@index')->name('layouts-blank');
-
-// pages
-Route::get('/pages/account-settings-account', $controller_path . '\pages\AccountSettingsAccount@index')->name('pages-account-settings-account');
-Route::get('/pages/account-settings-notifications', $controller_path . '\pages\AccountSettingsNotifications@index')->name('pages-account-settings-notifications');
-Route::get('/pages/account-settings-connections', $controller_path . '\pages\AccountSettingsConnections@index')->name('pages-account-settings-connections');
-Route::get('/pages/misc-error', $controller_path . '\pages\MiscError@index')->name('pages-misc-error');
-Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnderMaintenance@index')->name('pages-misc-under-maintenance');
-Route::get('/pages/pages-user-profile', $controller_path . '\pages\PagesUserProfile@index')->name('pages-user-profile');
-// page with user ID
-Route::get('/users/{id}',  $controller_path . '\pages\PagesUserProfile@showUserProfile')->name('user.profile');
-
-
-// authentication
+// authentication by guests
 Route::get('/auth/login-basic', $controller_path . '\authentications\LoginBasic@index')->name('auth-login-basic')->middleware('guest');
-Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('admin');
+// Force Reset Password
+  // Route::get('/auth/reset-password', [SessionsController::class, 'changePassword'])
+  // ->name('reset-password');
+  // ->middleware('auth');
+  Route::get('/auth/force-password-reset', $controller_path . '\authentications\ForcePasswordReset@index')->name('auth-force-password-reset');
+  Route::post('/auth/force-password-reset', $controller_path . '\authentications\ForcePasswordReset@passwordReset')->name('force-password-reset');
+  Route::post('/logout', $controller_path . '\SessionsController@destroy')->name('logout')->middleware('auth');
 
-Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
-Route::post('/logout', $controller_path . '\SessionsController@destroy')->name('logout')->middleware('auth');
+
+Route::middleware(['reset_password'])->group(function () {
+
+  $controller_path = 'App\Http\Controllers';
+
+  // Main Page Route
+  Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
+  Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
+  Route::post('/change-password', $controller_path . '\SessionsController@changePassword')->name('change-password')->middleware('auth');
+  //Route::match(['get', 'post'], '/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
 
 
-// forgot password handler
+  // page with user ID
+  Route::get('/users/{id}',  $controller_path . '\pages\PagesUserProfile@showUserProfile')->name('user.profile');
+
+  // authentication by autheds
+  Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('admin');
+  Route::post('login', [SessionsController::class, 'login'])->middleware('guest');
+
+  // Change Password with token
+  Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
+
+  // Change Password
+  Route::post('/changepassword', [SessionsController::class, 'changePassword'])
+    ->name('change-password')
+      ->middleware('auth');
+
+
+  // auth POSTs
+  Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')
+    ->name('auth-register-basic')
+      ->middleware('admin');
+
+
+  // management
+  Route::get('/user-management', $controller_path . '\management\UserManagement@index')
+    ->name('user-management')
+      ->middleware('admin');
+  Route::get('/client-management', $controller_path . '\management\ClientManagement@index')
+    ->name('client-management')
+      ->middleware('manager');
+
+
+  //delete from database
+  Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')
+    ->name('user-management.destroy')
+      ->middleware('admin');
+
+  //block user
+  Route::put('/users/{user}/block', $controller_path . '\management\UserManagement@blockUser')
+    ->name('users.block')
+      ->middleware('admin');
+
+
+});
+
+//---------------------------- forgot password handler ------------------------------------//
 //1
 Route::get('/auth/forgot-password-basic', $controller_path . '\authentications\ForgotPasswordBasic@index')->name('password.request')->middleware('guest');
 
 // 2
 Route::post('/forgot-password-basic', function (Request $request) {
-    $request->validate(['email' => 'required|email']);
+  $request->validate(['email' => 'required|email']);
 
-    $status = Password::sendResetLink(
-        $request->only('email')
-    );
+  $status = Password::sendResetLink(
+    $request->only('email')
+  );
 
-    return $status === Password::RESET_LINK_SENT
-                ? back()->with(['status' => __($status)])
-                : back()->withErrors(['email' => __($status)]);
+  return $status === Password::RESET_LINK_SENT
+  ? back()->with(['status' => __($status)])
+  : back()->withErrors(['email' => __($status)]);
 })->middleware('guest')->name('password.email');
 
 //3
 Route::get('/change-password-basic/{token}', function (string $token) {
     return view('content.authentications.auth-change-password-basic', ['token' => $token]);
-})->middleware('guest')->name('password.reset');
+  })->middleware('guest')->name('password.reset');
 
-//4
+  //4
 Route::post('/change-password-basic', function (Request $request) {
-    $request->validate([
+  $request->validate([
         'token' => 'required',
         'email' => 'required|email',
         'password' => 'required|min:8|confirmed',
-    ]);
+      ]);
 
-    $status = Password::reset(
+      $status = Password::reset(
         $request->only('email', 'password', 'password_confirmation', 'token'),
         function (User $user, string $password) {
           // Log::info("New password: $password"); logging for debug purp.
-            $user->forceFill([
-                'password' => $password
+          $user->forceFill([
+            'password' => $password
             ])->setRememberToken(Str::random(60));
-          //dd($password); //check pw
+            //dd($password); //check pw
             $user->save();
-          // Log::info("Hashedpassword3: $password");
+            // Log::info("Hashedpassword3: $password");
             // Get the attributes, including the hashed password
           event(new PasswordReset($user));
-        //  Log::info("Hashedpassword4: $hashedPassword");
+          //  Log::info("Hashedpassword4: $hashedPassword");
         }
-    );
-    // dump($request->only('email', 'password', 'password_confirmation', 'token'));
+      );
+      // dump($request->only('email', 'password', 'password_confirmation', 'token'));
     return $status === Password::PASSWORD_RESET
                 ? redirect()->route('auth-login-basic')->with('success', 'Your password has been updated.')
                 : back()->withErrors(['email' => [__($status)]]);
-})->middleware('guest')->name('password.update');
+              })->middleware('guest')->name('password.update');
 
-// auth POSTs
-Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')
-        ->name('auth-register-basic')
-        ->middleware('admin');
-//Route::post('login', $controller_path . '\SessionsController@login')->name('login')->middleware('guest');
-Route::post('login', [SessionsController::class, 'login'])->middleware('guest');
+              //---------------------------- !forgot password handler ------------------------------------//
+
+
+
+
+              //---------------------------------------- OLD ------------------------------
 // cards
 Route::get('/cards/basic', $controller_path . '\cards\CardBasic@index')->name('cards-basic');
-
 // User Interface
 Route::get('/ui/accordion', $controller_path . '\user_interface\Accordion@index')->name('ui-accordion');
 Route::get('/ui/alerts', $controller_path . '\user_interface\Alerts@index')->name('ui-alerts');
@@ -159,25 +192,17 @@ Route::get('/form/layouts-horizontal', $controller_path . '\form_layouts\Horizon
 // tables
 Route::get('/tables/basic', $controller_path . '\tables\Basic@index')->name('tables-basic');
 
-// management
-Route::get('/user-management', $controller_path . '\management\UserManagement@index')
-        ->name('user-management')
-        ->middleware('admin');
-Route::get('/client-management', $controller_path . '\management\ClientManagement@index')
-        ->name('client-management')
-        ->middleware('manager');
+// layout
+Route::get('/layouts/without-menu', $controller_path . '\layouts\WithoutMenu@index')->name('layouts-without-menu');
+Route::get('/layouts/without-navbar', $controller_path . '\layouts\WithoutNavbar@index')->name('layouts-without-navbar');
+Route::get('/layouts/fluid', $controller_path . '\layouts\Fluid@index')->name('layouts-fluid');
+Route::get('/layouts/container', $controller_path . '\layouts\Container@index')->name('layouts-container');
+Route::get('/layouts/blank', $controller_path . '\layouts\Blank@index')->name('layouts-blank');
 
-//delete from database
-Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')
-        ->name('user-management.destroy')
-        ->middleware('admin');
-
-//block user
-Route::put('/users/{user}/block', $controller_path . '\management\UserManagement@blockUser')
-        ->name('users.block')
-        ->middleware('admin');
-
-// Change Password route
-Route::post('/changepassword', [SessionsController::class, 'changePassword'])
-        ->name('change-password')
-        ->middleware('auth');
+// pages
+Route::get('/pages/account-settings-account', $controller_path . '\pages\AccountSettingsAccount@index')->name('pages-account-settings-account');
+Route::get('/pages/account-settings-notifications', $controller_path . '\pages\AccountSettingsNotifications@index')->name('pages-account-settings-notifications');
+Route::get('/pages/account-settings-connections', $controller_path . '\pages\AccountSettingsConnections@index')->name('pages-account-settings-connections');
+Route::get('/pages/misc-error', $controller_path . '\pages\MiscError@index')->name('pages-misc-error');
+Route::get('/pages/misc-under-maintenance', $controller_path . '\pages\MiscUnderMaintenance@index')->name('pages-misc-under-maintenance');
+Route::get('/pages/pages-user-profile', $controller_path . '\pages\PagesUserProfile@index')->name('pages-user-profile');

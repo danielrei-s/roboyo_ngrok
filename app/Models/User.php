@@ -20,7 +20,7 @@ class User extends Authenticatable
      */
     protected $guarded = [];  // alterado para efeitos de teste, idealmente deve ser ter proteçao
 
-   // protected $fillable = ['id','first_name', 'last_name', 'sigla', 'email', 'admin', 'manager', 'picture', 'contact', 'ativo', 'role',];
+   // protected $fillable = ['id','first_name', 'last_name', 'sigla', 'email', 'admin', 'manager', 'picture', 'contact', 'ativo', 'role', 'force_password_reset'];
 
     /**
      * The attributes that should be hidden for serialization.

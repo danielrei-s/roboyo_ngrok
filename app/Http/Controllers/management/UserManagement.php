@@ -11,7 +11,7 @@ class UserManagement extends Controller
 {
   public function index()
   {
-    $users = User::paginate(10);  //loaded with users => $users
+    $users = User::paginate(6);  //loaded with users => $users
 
     $userObjects = [];  //empty array to carry all user info
 
@@ -34,17 +34,18 @@ class UserManagement extends Controller
 
   public function destroy($id)
 {
-    $usersWithAdminTwo = User::where('admin', 2)->get();
+  $usersWithAdminTwo = User::where('admin', 2)->get();
+  $user = User::findOrFail($id);
 
-    // Check if there are 2 or more users with admin=2
-    if ($usersWithAdminTwo->count() >= 2) {
-        $user = User::findOrFail($id);
-        $user->delete();
-        return back()->with('success', 'User has been deleted successfully!');
-    }
+  // Check if there are less than 2 users with admin=2 AND the user being deleted is an admin=2
+  if ($usersWithAdminTwo->count() < 2 && $user->admin == 2) {
+      return back()->with('failed', 'Cannot delete this Admin, at least two users must be Admins.');
+  }
 
-    // Return back with error message
-    return back()->with('failed', 'Cannot delete the user. At least two users must be Admins.');
+  // Delete the user
+  $user->delete();
+  return back()->with('success', 'User has been deleted successfully!');
+
 }
 
   public function blockUser(Request $request, $user)

@@ -27,6 +27,7 @@ return new class extends Migration
             $table->string('picture')->default('assets/img/avatars/5.png');
             $table->string('contact')->default('911222333');
             $table->boolean('ativo')->default(1);
+            $table->boolean('force_password_reset')->default(1);
             $table->string('role')->default('Pentester');
         });
 

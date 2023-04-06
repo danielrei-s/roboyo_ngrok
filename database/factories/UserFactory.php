@@ -34,6 +34,7 @@ class UserFactory extends Factory
           'admin' => '0',
           'picture' => 'assets/img/avatars/' . $rand . '.png',
           'contact' => '911222333',
+          'force_password_reset' => '0',
           'ativo' => '1',
           'role' => 'Pentester'
       ];
@@ -72,6 +73,7 @@ class UserFactory extends Factory
               'admin' => '2',
               'picture' => 'assets/img/avatars/' . $rand . '.png',
               'contact' => '911222333',
+              'force_password_reset' => '0',
               'ativo' => '1',
               'role' => 'Head of IT'
             ];
@@ -94,6 +96,7 @@ class UserFactory extends Factory
               'admin' => '1',
               'picture' => 'assets/img/avatars/5.png',
               'contact' => '911222333',
+              'force_password_reset' => '0',
               'ativo' => '1',
               'role' => 'Team Lead'
             ];
