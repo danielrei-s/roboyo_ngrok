@@ -150,7 +150,7 @@
                     <small class="text-muted text-uppercase">Contacts</small>
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3"><i class="bx bx-phone"></i><span
-                                class="fw-semibold mx-2">Contact:</span> <span>(123) 456-7890</span></li>
+                                class="fw-semibold mx-2">Contact:</span> <span>{{$user->contact}}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="bx bx-chat"></i><span
                                 class="fw-semibold mx-2">Teams:</span>
                             <span>{{ $user->firstName }}&commat;roboyo.pt</span></li>

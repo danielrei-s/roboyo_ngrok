@@ -55,3 +55,13 @@
       return false;
   }
 </script>
+
+<!-- Force Password Confirmation -->
+<script>
+  function confirmpasswordReset() {
+      if (confirm("Are you sure you want to force this user to change password?")) {
+          document.getElementById("forcepasswordreset-form").submit();
+      }
+      return false;
+  }
+</script>

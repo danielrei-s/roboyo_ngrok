@@ -25,7 +25,9 @@ class UserManagement extends Controller
             'sigla' => $user->sigla,
             'admin' => $user->admin,
             'role' => $user->role,
-            'ativo' => $user->ativo
+            'ativo' => $user->ativo,
+            'contact' => $user->contact,
+            'force_password_reset' => $user->force_password_reset,
         ];
     }
 
@@ -63,5 +65,24 @@ class UserManagement extends Controller
     // Redirect the user back to the view with a success message
     $successMessage = $user->ativo == 1 ? 'User has been unblocked.' : 'User has been blocked.';
     return redirect()->back()->with('success', $successMessage);
+  }
+
+  public function forcePasswordReset(Request $request, $user)
+  {
+    $userId = intval($user);
+
+    if ($userId <= 0) {
+      abort(404); // or handle the error in some other way
+    }
+
+    $user = User::findOrFail($userId);
+
+    if ($user->force_password_reset = 1) {
+      return redirect()->back()->with('failed', 'User has already been forced to change password');
+    }else{
+      $user->force_password_reset = 1;
+      $user->save();
+      return redirect()->back()->with('success', 'Sent request for user to change password');
+    }
   }
 }

@@ -91,6 +91,11 @@ Route::middleware(['reset_password'])->group(function () {
     ->name('users.block')
       ->middleware('admin');
 
+  //force user to reset password
+  Route::put('/users/{user}/forcePasswordReset', $controller_path . '\management\UserManagement@forcePasswordReset')
+  ->name('users.forcePasswordReset')
+    ->middleware('admin');
+
 
 });
 

@@ -76,9 +76,21 @@
                 <i class="bx bx-show-alt me-1" title="View Profile"></i> View</a>
 
                 {{-- form to handle the FORCED PASSWORD CHANGE --}}
-                <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="tooltip"
-                data-bs-original-title="Force Password Change"
-                aria-describedby="tooltip674202"><i class="bx bx-lock me-1"title="Force Password Change"></i> Password</a>
+                <form method="POST" action="{{ route('users.forcePasswordReset', ['user' => $user->id]) }}" id="forcepasswordreset-form-{{ $user->id }}">
+                  @csrf
+                  @method('PUT')
+                  <button type="submit" class="dropdown-item" data-bs-toggle="tooltip"
+                           data-bs-original-title="@if($user->force_password_reset == 0) Force password reset @else Already forced! @endif"
+                          aria-describedby="tooltip674202"
+                          onclick="return confirmpasswordReset()">
+                      @if ($user->force_password_reset == 0)
+                          <i class="bx bx-lock me-1"></i>  Password
+                      @else
+                          <i class="bx bx-lock-open-alt me-1"></i> Already Forced!
+                      @endif
+                  </button>
+                  <input type="hidden" name="ativo" value="0">
+              </form>
 
                 {{-- form to handle the BLOCK --}}
                 <form method="POST" action="{{ route('users.block', ['user' => $user->id]) }}" id="block-form-{{ $user->id }}">
