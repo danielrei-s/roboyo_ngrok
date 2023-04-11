@@ -80,6 +80,11 @@ Route::middleware(['reset_password'])->group(function () {
     ->name('client-management')
       ->middleware('manager');
 
+  // edit user
+  Route::post('/auth/edit-basic', $controller_path . '\authentications\EditBasic@edit')
+  ->name('auth-edit-basic')
+    ->middleware('admin');
+
 
   //delete from database
   Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')

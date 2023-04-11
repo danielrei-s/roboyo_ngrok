@@ -36,12 +36,19 @@ class UserManagement extends Controller
 
   public function destroy($id)
 {
+  // get all users with admin set to 2
   $usersWithAdminTwo = User::where('admin', 2)->get();
+
+  // remove users with ativo set to 0
+  $usersWithAdminTwo = $usersWithAdminTwo->reject(function ($user) {
+      return $user->ativo == 0;
+  });
+
   $user = User::findOrFail($id);
 
   // Check if there are less than 2 users with admin=2 AND the user being deleted is an admin=2
   if ($usersWithAdminTwo->count() < 2 && $user->admin == 2) {
-      return back()->with('failed', 'Cannot delete this Admin, at least two users must be Admins.');
+      return back()->with('failed', 'Cannot delete this Admin, at least two users must be active Admins.');
   }
 
   // Delete the user
@@ -58,7 +65,22 @@ class UserManagement extends Controller
       abort(404); // or handle the error in some other way
     }
 
+    $usersWithAdminTwo = User::where('admin', 2)->get();
     $user = User::findOrFail($userId);
+    // remove users with ativo set to 0
+    $usersWithAdminTwo = $usersWithAdminTwo->reject(function ($user) {
+      return $user->ativo == 0;
+    });
+
+    if ($usersWithAdminTwo->count() < 2 && $user->admin == 2) {  //check if current selected user is admin and there are 2 or admins before proceeding.
+      if ($user->ativo == 0){  //this makes sure to always be allowed to unblocked no matter how many admins, but blocking remains with restrictions
+        $user->ativo = 1;
+        $user->save();
+        return redirect()->back()->with('success', 'User has been unblocked');
+      }
+      return back()->with('failed', 'Cannot block this Admin, at least two users must be Admins to proceed.');
+    }
+
     $user->ativo = $user->ativo == 1 ? 0 : 1;
     $user->save();
 

@@ -54,12 +54,12 @@
             <td>{{ $user->email }}</td>
             <td>{{ $user->sigla }}</td>
             <td>
-              @if($user->admin == 2)
+              @if(!$user->ativo)
+                  <span class="badge bg-label-dark me-1">Blocked 🚫</span>
+              @elseif($user->admin == 2)
                   <span class="badge bg-label-warning me-1">Admin</span>
               @elseif($user->admin == 1)
                   <span class="badge bg-label-info me-1">Manager</span>
-              @elseif(!$user->ativo)
-                  <span class="badge bg-label-dark me-1">Blocked 🚫</span>
               @else
                   <span class="badge bg-label-success me-1">Pentester</span>
               @endif

@@ -57,14 +57,27 @@
                     <div class="mt-3">
                       <div class="btn-group" role="group" aria-label="Basic example">
                           {{-- Handle view profile request --}}
-                          <a class="btn btn-secondary btn-action" href="{{ route('user.profile', ['id' => $user->id]) }}" data-bs-toggle="tooltip" aria-label="Edit User Profile" data-bs-original-title="Edit User Profile">
-                            <i class="bx bx-pen me-1" title="Edit Profile"></i> Edit
-                          </a>
-
+                          @component('content.management.edit-user', ['user' => $user])
+                          @endcomponent
                           {{-- anchor to link the FORCED PASSWORD CHANGE --}}
-                          <a class="btn btn-secondary btn-action" href="javascript:void(0);" data-bs-toggle="tooltip" aria-label="Force Password Change" data-bs-original-title="Force Password Change" aria-describedby="tooltip674202">
-                            <i class="bx bx-lock me-1" title="Force Password Change"></i> Password
-                          </a>
+                          <a class="btn btn-secondary btn-action" href="#" onclick="document.getElementById('forcepasswordreset-form-{{ $user->id }}').submit(); return false;">
+                            <!-- Your form code here -->
+                            <form method="POST" action="{{ route('users.forcePasswordReset', ['user' => $user->id]) }}" id="forcepasswordreset-form-{{ $user->id }}">
+                                @csrf
+                                @method('PUT')
+                                <button type="submit" class="dropdown-item" data-bs-toggle="tooltip"
+                                    data-bs-original-title="@if($user->force_password_reset == 0) Force password reset @else Forced! @endif"
+                                    aria-describedby="tooltip674202" onclick="return confirmpasswordReset()">
+                                    @if ($user->force_password_reset == 0)
+                                        <i class="bx bx-lock me-1"></i>  Password
+                                    @else
+                                        <i class="bx bxs-log-in-circle"></i> Already Forced!
+                                    @endif
+                                </button>
+                                <input type="hidden" name="ativo" value="0">
+                            </form>
+                            <!-- End of form code -->
+                        </a>
 
                           {{-- anchor to link the BLOCK --}}
                           <a href="#" onclick="event.preventDefault();
@@ -132,6 +145,9 @@
                         <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span
                                 class="fw-semibold mx-2">Full Name:</span> <span>{{ $user->firstName }}
                                 {{ $user->lastName }}</span></li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bx-ghost"></i><span
+                                class="fw-semibold mx-2">Sigla:</span> <span>{{ $user->sigla }}
+                                </span></li>
                         <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span
                                 class="fw-semibold mx-2">Status:</span>
                             @if (!$user->ativo)
@@ -151,7 +167,7 @@
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3"><i class="bx bx-phone"></i><span
                                 class="fw-semibold mx-2">Contact:</span> <span>{{$user->contact}}</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-chat"></i><span
+                        <li class="d-flex align-items-center mb-3"><i class='bx bxl-microsoft-teams' ></i><span
                                 class="fw-semibold mx-2">Teams:</span>
                             <span>{{ $user->firstName }}&commat;roboyo.pt</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="bx bx-envelope"></i><span
