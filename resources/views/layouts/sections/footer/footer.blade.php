@@ -45,6 +45,27 @@
                     </div>
                 </div>
             @endif
+
+            @if (session()->has('warning'))
+                <!-- Warning message section -->
+                <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 7500)" x-show="show">
+                    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+                        <div class="bs-toast toast fade show bg-warning" role="alert" aria-live="assertive"
+                            aria-atomic="true">
+                            <div class="toast-header">
+                                <i class="bx bx-bell me-2"></i>
+                                <div class="me-auto fw-semibold">Waning!</div>
+                                <small>{{ date('h:i A') }}</small>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                {{ session('failed') }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
         </div>
 </footer>
 <!--/ Footer-->

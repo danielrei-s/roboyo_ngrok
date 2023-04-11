@@ -35,7 +35,7 @@ use app\Models\User;
                 ->withErrors(['failed' => 'Your account has been blocked by an Admin.']);
           } elseif ($user->force_password_reset) {
             return redirect()->route('auth-force-password-reset')
-              ->with('failed', 'Force password reset - please reset your password.');
+              ->with('warning', 'Forced to change password by Admin.');
         } else {
             return redirect('/')
               ->with('success', 'Welcome back ' . $user->firstName . ". ");

@@ -77,7 +77,7 @@ class UserManagement extends Controller
 
     $user = User::findOrFail($userId);
 
-    if ($user->force_password_reset = 1) {
+    if ($user->force_password_reset == 1) {
       return redirect()->back()->with('failed', 'User has already been forced to change password');
     }else{
       $user->force_password_reset = 1;
