@@ -37,7 +37,7 @@ class EditBasic extends Controller
       $filename = time() . '_' . $picture->getClientOriginalName();
       $path = 'assets/img/avatars/';
       $picture->move($path, $filename);
-      $attributes['picture'] = $path . $filename;
+      $pic = $path . $filename;
     }
 
     if ($validator->fails()) {
@@ -52,9 +52,11 @@ class EditBasic extends Controller
     $user->firstname = $request->input('firstname');
     $user->lastname = $request->input('lastname');
     $user->sigla = $request->input('sigla');
-    $user->role = $request->input('role');
     $user->email = $request->input('email');
+    $user->role = $request->input('role');
+    $user->admin = $request->input('admin');
     $user->contact = $request->input('contact');
+    $user->picture = $pic;
     $user->save();
 
     return redirect()->back()->with('success', 'Account updated for ' . $user->email);

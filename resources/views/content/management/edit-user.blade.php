@@ -14,7 +14,7 @@
                         <h5 class="modal-title" id="modalCenterTitle">Edit {{$user->firstName}} {{$user->lastName}}'s profile</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-basic') }}" method="POST" style="padding: 20px;">
+                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-basic') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
                       @csrf {{-- Evitar ataques csrf --}}
                       <input type="hidden" name="user_id" value="{{ $user->id }}"> {{-- Send user ID --}}
                       <div class="row justify-content-center">
@@ -28,7 +28,7 @@
                                   </div>
                                 </label>
                               </div>
-                              <input type="file" class="form-control @error('picture') is-invalid @enderror mt-2" id="picture" name="picture" accept="image/*">
+                              <input type="file" class="form-control @error('picture') is-invalid @enderror mt-2" id="picture" name="picture" accept="image/*" >
                               @error('picture')
                               <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
