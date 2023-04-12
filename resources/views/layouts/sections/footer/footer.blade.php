@@ -60,7 +60,7 @@
                                     aria-label="Close"></button>
                             </div>
                             <div class="toast-body">
-                                {{ session('failed') }}
+                                {{ session('warning') }}
                             </div>
                         </div>
                     </div>

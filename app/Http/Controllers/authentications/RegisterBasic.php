@@ -54,6 +54,7 @@ class RegisterBasic extends Controller
       $attributes['sigla'] = $request->input('sigla');
       $attributes['role'] = $request->input('role');
       $attributes['email'] = $request->input('email');
+      $attributes['force_password_reset'] = 1;  // this makes the user change its password after first login
       $user = User::create($attributes);
 
       return redirect('user-management')->with('success', 'Account created for ' . $attributes['email']);
