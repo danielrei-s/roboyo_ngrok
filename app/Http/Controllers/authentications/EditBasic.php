@@ -31,14 +31,24 @@ class EditBasic extends Controller
         'picture' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
     ]);
 
+  // get all users with admin set to 2
+  $usersWithAdminTwo = User::where('admin', 2)->get();
+  // remove users with ativo set to 0
+  $usersWithAdminTwo = $usersWithAdminTwo->reject(function ($user) {
+      return $user->ativo == 0;
+  });
+  // Check if there are less than 2 users with admin=2 AND the user being deleted is an admin=2
+  if ($usersWithAdminTwo->count() < 2 && $user->admin == 2) {
+      return back()->with('warning', 'Cannot edit this Admin, at least two users must be active Admins to proceed.');
+  }
 
-    // validation
-    if ($validator->fails()) {
-      return redirect()->back()
-        ->withInput()
-        ->withErrors($validator)
-        ->with('failed', 'Validation failed: ' . $validator->errors()->first());
-    }
+  // validation
+  if ($validator->fails()) {
+    return redirect()->back()
+      ->withInput()
+      ->withErrors($validator)
+      ->with('failed', 'Validation failed: ' . $validator->errors()->first());
+  }
 
     //handle picture
     if ($request->hasFile('picture')) {

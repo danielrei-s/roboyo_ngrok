@@ -76,6 +76,7 @@
                                     <!-- Account -->
                                     <h5 class="card-header">Profile Details</h5>
                                     <div class="card-body">
+                                      <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-basic') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
                                       <div class="d-flex align-items-start align-items-sm-center gap-4">
                                         <img src="{{ asset('assets/img/avatars/5.png') }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                                         <div class="button-wrapper">
@@ -99,21 +100,41 @@
                                         @csrf
                                         <div class="row">
                                           <div class="mb-3 col-md-6">
-                                            <label for="firstName" class="form-label">First Name</label>
-                                            <input class="form-control" type="text" id="firstName" name="firstName" value="{{auth()->user()->firstName}}" autofocus />
+                                            <label for="firstname" class="form-label">First Name</label>
+                                            <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder=" First Name" value="{{ $user->firstName }}" autofocus>
+                                            @error('firstname')
+                                              <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
+                                            @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
-                                            <label for="lastName" class="form-label">Last Name</label>
-                                            <input class="form-control" type="text" name="lastName" id="lastName" value="{{auth()->user()->lastName}}" />
+                                            <label for="lastname" class="form-label">Last Name</label>
+                                            <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder=" Last Name" value="{{ $user->lastName }}" autofocus>
+                                            @error('lastname')
+                                                <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
+                                            @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
-                                            <label for="email" class="form-label">E-mail</label>
-                                            <input class="form-control" type="text" id="email" name="email" value="{{auth()->user()->email}}" placeholder="john.doe@example.com" />
+                                            <label for="sigla" class="form-label">Sigla</label>
+                                            <input type="text" class="form-control @error('sigla') is-invalid @enderror" id="sigla" name="sigla" placeholder="Sigla (3 letters)" value="{{ $user->sigla }}" autofocus>
+                                            @error('sigla')
+                                              <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
+                                            @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
-                                            <label for="organization" class="form-label">Role</label>
-                                            <input type="text" class="form-control" id="organization" name="organization" value="{{auth()->user()->role}}" />
+                                            <label for="role" class="form-label">Role</label>
+                                            <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder=" Role" value="{{ $user->role }}" autofocus>
+                                            @error('role')
+                                              <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
+                                            @enderror
                                           </div>
+                                          <div class="mb-3 col-md-6">
+                                            <label for="contact" class="form-label">Phone number</label>
+                                            <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="contact" value="{{$user->contact}}" autofocus>
+                                            @error('contact')
+                                                <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
+                                                @enderror
+                                          </div>
+
                                         </div>
                                         <div class="mt-2">
                                           <button type="submit" class="btn btn-primary me-2">Save changes</button>
@@ -213,5 +234,22 @@
           return false;
       }
   }
+</script>
+<script>  //show a preview of the photo about to be uploaded
+  const inputPicture = document.querySelector('#picture');
+  const picturePreview = document.querySelector('#picturePreview');
+
+  inputPicture.addEventListener('change', () => {
+      const file = inputPicture.files[0];
+      const reader = new FileReader();
+
+      reader.addEventListener('load', () => {
+          picturePreview.setAttribute('src', reader.result);
+      });
+
+      if (file) {
+          reader.readAsDataURL(file);
+      }
+  });
 </script>
 @endsection
