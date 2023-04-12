@@ -47,11 +47,14 @@ Route::middleware(['reset_password'])->group(function () {
   Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
   Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
   Route::post('/change-password', $controller_path . '\SessionsController@changePassword')->name('change-password')->middleware('auth');
-  //Route::match(['get', 'post'], '/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
+  Route::post('/dashboard', $controller_path . '\dashboard\main@edit')
+  ->name('auth-edit-main')
+    ->middleware('auth');
+
 
 
   // page with user ID
-  Route::get('/users/{id}',  $controller_path . '\pages\PagesUserProfile@showUserProfile')->name('user.profile');
+  Route::get('/users/{id}',  $controller_path . '\pages\PagesUserProfile@showUserProfile')->name('user.profile')->middleware('auth');
 
   // authentication by autheds
   Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('admin');
