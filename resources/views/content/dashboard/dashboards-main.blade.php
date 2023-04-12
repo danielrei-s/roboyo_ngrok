@@ -76,7 +76,7 @@
                                     <!-- Account -->
                                     <h5 class="card-header">Profile Details</h5>
                                     <div class="card-body">
-                                      <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-basic') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
+                                      <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-main') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
                                       <div class="d-flex align-items-start align-items-sm-center gap-4">
                                         <img src="{{ asset('assets/img/avatars/5.png') }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
                                         <div class="button-wrapper">
@@ -101,35 +101,35 @@
                                         <div class="row">
                                           <div class="mb-3 col-md-6">
                                             <label for="firstname" class="form-label">First Name</label>
-                                            <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder=" First Name" value="{{ $user->firstName }}" autofocus>
+                                            <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder=" First Name" value="{{ auth()->user()->firstName }}" autofocus>
                                             @error('firstname')
                                               <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                             @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
                                             <label for="lastname" class="form-label">Last Name</label>
-                                            <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder=" Last Name" value="{{ $user->lastName }}" autofocus>
+                                            <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder=" Last Name" value="{{ auth()->user()->lastName }}" autofocus>
                                             @error('lastname')
                                                 <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                             @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
                                             <label for="sigla" class="form-label">Sigla</label>
-                                            <input type="text" class="form-control @error('sigla') is-invalid @enderror" id="sigla" name="sigla" placeholder="Sigla (3 letters)" value="{{ $user->sigla }}" autofocus>
+                                            <input type="text" class="form-control @error('sigla') is-invalid @enderror" id="sigla" name="sigla" placeholder="Sigla (3 letters)" value="{{ auth()->user()->sigla }}" autofocus>
                                             @error('sigla')
                                               <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                             @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
                                             <label for="role" class="form-label">Role</label>
-                                            <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder=" Role" value="{{ $user->role }}" autofocus>
+                                            <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder=" Role" value="{{ auth()->user()->role }}" autofocus>
                                             @error('role')
                                               <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                             @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
                                             <label for="contact" class="form-label">Phone number</label>
-                                            <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="contact" value="{{$user->contact}}" autofocus>
+                                            <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="contact" value="{{auth()->user()->contact}}" autofocus>
                                             @error('contact')
                                                 <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                                 @enderror
