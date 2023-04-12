@@ -19,6 +19,7 @@ class EditBasic extends Controller
   public function edit(Request $request)
 {
   $user = User::findOrFail($request->input('user_id'));
+
     $validator = Validator::make($request->all(), [
         'firstname' => ['required', 'max:25'],
         'lastname' => ['required', 'max:25'],
@@ -30,25 +31,26 @@ class EditBasic extends Controller
         'picture' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
     ]);
 
-    //handle picture
 
+    // validation
+    if ($validator->fails()) {
+      return redirect()->back()
+        ->withInput()
+        ->withErrors($validator)
+        ->with('failed', 'Validation failed: ' . $validator->errors()->first());
+    }
+
+    //handle picture
     if ($request->hasFile('picture')) {
       $picture = $request->file('picture');
       $filename = time() . '_' . $picture->getClientOriginalName();
       $path = 'assets/img/avatars/';
       $picture->move($path, $filename);
       $pic = $path . $filename;
-    }
-
-    if ($validator->fails()) {
-        return redirect()->back()
-            ->withInput()
-            ->withErrors($validator)
-            ->with('failed', 'Validation failed: ' . $validator->errors()->first());
+      $user->picture = $pic;
     }
 
     // Update the user's information
-    $user = User::findOrFail($request->input('user_id'));
     $user->firstname = $request->input('firstname');
     $user->lastname = $request->input('lastname');
     $user->sigla = $request->input('sigla');
@@ -56,7 +58,6 @@ class EditBasic extends Controller
     $user->role = $request->input('role');
     $user->admin = $request->input('admin');
     $user->contact = $request->input('contact');
-    $user->picture = $pic;
     $user->save();
 
     return redirect()->back()->with('success', 'Account updated for ' . $user->email);
