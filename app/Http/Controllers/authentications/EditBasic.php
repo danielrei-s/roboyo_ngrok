@@ -12,7 +12,7 @@ class EditBasic extends Controller
 {
   public function index()
   {
-    return view('content.authentications.auth-register-basic'); //Route for this in web.php ->auth->@index
+    return view('content.authentications.auth-register-basic'); //Not used, copied
   }
 
   //função de criar user

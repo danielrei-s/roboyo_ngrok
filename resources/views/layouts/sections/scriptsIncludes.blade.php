@@ -25,6 +25,10 @@
 <!-- Chamada de Alphine.js -->
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
 
+<!-- jQuery -->
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
 <!-- Chamada de notifications.js -->
 <script src="{{ asset('js/page-notifications.js') }}"></script>
@@ -58,10 +62,10 @@
 
 <!-- Force Password Confirmation -->
 <script>
-  function confirmpasswordReset() {
-      if (confirm("Are you sure you want to force this user to change password?")) {
-          document.getElementById("forcepasswordreset-form").submit();
-      }
-      return false;
-  }
+  function confirmpasswordReset(event) {
+    if (!confirm('Are you sure you want to force a password reset for this user?')) {
+        event.preventDefault(); // Prevent form submission if user cancels
+    }
+}
+
 </script>

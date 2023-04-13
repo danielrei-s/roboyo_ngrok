@@ -61,7 +61,7 @@
               @elseif($user->admin == 1)
                   <span class="badge bg-label-info me-1">Manager</span>
               @else
-                  <span class="badge bg-label-success me-1">Pentester</span>
+                  <span class="badge bg-label-primary">Pentester</span>
               @endif
             </td>
             <td>{{ $user->role }}</td>
@@ -135,4 +135,13 @@
   </div>
 </div>
 <!--/ Bootstrap Dark Table -->
+<!-- Script to open modal if there are any validation errors on submitting new user -->
+  @if ($errors->any())
+    <script>
+        $(document).ready(function(){
+            $('#modalCenter').modal('show');
+        });
+    </script>
+  @endif
+
 @endsection

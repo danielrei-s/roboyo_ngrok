@@ -35,11 +35,12 @@
                               <div class="text-center mt-1">
                               <label for="admin" class="mt-2 mb-1">Privileges</label>
                               </div>
-                              <select class="form-select text-center mt-2 mb-1" name="admin" id="admin" aria-label="Selec privilege" style="width: 100%;">
-                                <option value="0">Pentester</option>
-                                <option value="1">Manager</option>
-                                <option value="2">Admin</option>
-                              </select>
+                              <select class="form-select text-center mt-2 mb-1" name="admin" id="admin" aria-label="Select privilege" style="width: 100%;">
+                                <option value="0" @if($user->admin == 0) selected @endif>Pentester</option>
+                                <option value="1" @if($user->admin == 1) selected @endif>Manager</option>
+                                <option value="2" @if($user->admin == 2) selected @endif>Admin</option>
+                            </select>
+
                             </div>
                             <div class="col-md-9 mb-3">
                                 <label for="firstname" class="form-label">First Name</label>

@@ -56,28 +56,31 @@
                   <div class="col-md-6">
                     <div class="mt-3">
                       <div class="btn-group" role="group" aria-label="Basic example">
-                          {{-- Handle view profile request --}}
+
+                          {{-- Component that handles view profile request --}}
                           @component('content.management.edit-user', ['user' => $user])
                           @endcomponent
+
+
                           {{-- anchor to link the FORCED PASSWORD CHANGE --}}
-                          <a class="btn btn-secondary btn-action" href="#" onclick="document.getElementById('forcepasswordreset-form-{{ $user->id }}').submit(); return false;">
-                            <!-- Your form code here -->
+                          <a class="btn btn-secondary btn-action" href="#" onclick="document.getElementById('forcepasswordreset-form-{{ $user->id }}');">
+                            <!-- Form code -->
                             <form method="POST" action="{{ route('users.forcePasswordReset', ['user' => $user->id]) }}" id="forcepasswordreset-form-{{ $user->id }}">
                                 @csrf
                                 @method('PUT')
                                 <button type="submit" class="dropdown-item" data-bs-toggle="tooltip"
                                     data-bs-original-title="@if($user->force_password_reset == 0) Force password reset @else Already forced! @endif"
-                                    aria-describedby="tooltip674202" onclick="return confirmpasswordReset()">
+                                    aria-describedby="tooltip674202" onclick="confirmpasswordReset(event)">
                                     @if ($user->force_password_reset == 0)
                                         <i class="bx bx-lock me-1"></i>  Password reset
                                     @else
-                                        <i class="bx bxs-log-in-circle"></i>Reset forced!
+                                        <i class="bx bxs-log-in-circle"></i> Reset forced!
                                     @endif
                                 </button>
                                 <input type="hidden" name="ativo" value="0">
                             </form>
                             <!-- End of form code -->
-                        </a>
+                          </a>
 
                           {{-- anchor to link the BLOCK --}}
                           <a href="#" onclick="event.preventDefault();
@@ -142,10 +145,10 @@
                 <div class="card-body">
                     <small class="text-muted text-uppercase">About</small>
                     <ul class="list-unstyled mb-4 mt-3">
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-user"></i><span
+                        <li class="d-flex align-items-center mb-3"><i class="bx bxs-user"></i><span
                                 class="fw-semibold mx-2">Full Name:</span> <span>{{ $user->firstName }}
                                 {{ $user->lastName }}</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-ghost"></i><span
+                        <li class="d-flex align-items-center mb-3"><i class="bx bxs-ghost"></i><span
                                 class="fw-semibold mx-2">Sigla:</span> <span>{{ $user->sigla }}
                                 </span></li>
                         <li class="d-flex align-items-center mb-3"><i class="bx bx-check"></i><span
@@ -156,21 +159,31 @@
                                 <span class="badge bg-label-success me-1">Active</span>
                             @endif
                         </li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-star"></i><span
+                        <li class="d-flex align-items-center mb-3"><i class="bx bxs-id-card"></i><span
+                                class="fw-semibold mx-2">Permissions:</span>
+                                 <span> @if($user->admin == 2)
+                                  <span class="badge bg-label-warning me-1">Admin</span>
+                                        @elseif($user->admin == 1)
+                                  <span class="badge bg-label-info me-1">Manager</span>
+                                        @else
+                                  <span class="badge bg-label-primary">Pentester</span>
+                                        @endif</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-3"><i class="bx bxs-briefcase-alt-2"></i><span
                                 class="fw-semibold mx-2">Role:</span> <span>{{ $user->role }}</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-flag"></i><span
+                        <li class="d-flex align-items-center mb-3"><i class="bx bxs-flag"></i><span
                                 class="fw-semibold mx-2">Country:</span> <span>Portugal</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-detail"></i><span
+                        <li class="d-flex align-items-center mb-3"><i class="bx bxs-detail"></i><span
                                 class="fw-semibold mx-2">Languages:</span> <span>English</span></li>
                     </ul>
                     <small class="text-muted text-uppercase">Contacts</small>
                     <ul class="list-unstyled mb-4 mt-3">
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-phone"></i><span
+                        <li class="d-flex align-items-center mb-3"><i class="bx bxs-phone"></i><span
                                 class="fw-semibold mx-2">Contact:</span> <span>{{$user->contact}}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class='bx bxl-microsoft-teams' ></i><span
                                 class="fw-semibold mx-2">Teams:</span>
                             <span>{{ $user->firstName }}&commat;roboyo.pt</span></li>
-                        <li class="d-flex align-items-center mb-3"><i class="bx bx-envelope"></i><span
+                        <li class="d-flex align-items-center mb-3"><i class="bx bxs-envelope"></i><span
                                 class="fw-semibold mx-2">Email:</span> <span>{{ $user->email }}</span></li>
                     </ul>
                     <small class="text-muted text-uppercase">Teams</small>
@@ -696,4 +709,14 @@
             <!--/ User Profile Content -->
         </div>
         <!-- / Content -->
+        @if ($errors->any())
+          <script>
+              $(document).ready(function(){
+                  $('#modalCenter').modal('show');
+              });
+          </script>
+        @endif
+
+
+
     @endsection
