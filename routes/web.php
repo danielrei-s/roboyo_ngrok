@@ -47,7 +47,7 @@ Route::middleware(['reset_password'])->group(function () {
   Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
   Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
   Route::post('/change-password', $controller_path . '\SessionsController@changePassword')->name('change-password')->middleware('auth');
-  Route::post('/dashboard', $controller_path . '\dashboard\main@edit')
+  Route::post('/edit-profile', $controller_path . '\dashboard\main@edit')
   ->name('auth-edit-main')
     ->middleware('auth');
 
@@ -63,10 +63,10 @@ Route::middleware(['reset_password'])->group(function () {
   // Change Password with token
   Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
 
-  // Change Password
-  Route::post('/changepassword', [SessionsController::class, 'changePassword'])
-    ->name('change-password')
-      ->middleware('auth');
+  // // Change Password
+  // Route::post('/changepassword', [SessionsController::class, 'changePassword'])
+  //   ->name('change-password')
+  //     ->middleware('auth');
 
 
   // auth POSTs

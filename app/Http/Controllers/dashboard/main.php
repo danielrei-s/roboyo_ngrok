@@ -5,8 +5,10 @@ namespace App\Http\Controllers\dashboard;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
+
 
 class Main extends Controller
 {
@@ -17,7 +19,7 @@ class Main extends Controller
 
   public function edit(Request $request)
   {
-    $user = User::findOrFail($request->input('user_id'));
+    $user = Auth::user();
 
       $validator = Validator::make($request->all(), [
           'firstname' => ['required', 'max:25'],

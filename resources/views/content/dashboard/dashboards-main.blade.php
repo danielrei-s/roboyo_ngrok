@@ -31,7 +31,7 @@
               <div class="d-flex align-items-start align-items-sm-center gap-4">
                   <img src="{{ asset(auth()->user()->picture) }}"
                       alt="{{ auth()->user()->firstName }} {{ auth()->user()->lastName }}" class="d-block rounded"
-                      height="120" width="120" id="uploadedAvatar" />
+                      height="120" width="120" id="userAvatar" />
                   <div class="button-wrapper">
                       <p class="far fa-users-class fa-lg fa-fw" style="margin-right: 120px;">
                           {{ auth()->user()->sigla }} | {{ auth()->user()->firstName }} {{ auth()->user()->lastName }}
@@ -40,11 +40,11 @@
                       <p>+351 {{ auth()->user()->contact }}</p>
                   </div>
                   <div style="border-left: 2px dashed #ccc; padding-left: 120px;">
-                      <!-- Doted line a seprar -->
+                      <!-- Doted line a separar -->
                       <div class="button-wrapper">
                           <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
                               <div class="d-flex flex-column align-items-start">
-                                  <p class="fal fa-envelope-open-text fa-sm fa-fw">System Role </p>
+                                  <p class="fal fa-envelope-open-text fa-sm fa-fw">System Permissions</p>
                                   <p class="text-muted">{{ $role = app('App\Role') }}</p>
                               </div>
                               <img src="{{ asset('assets/img/roles/' . $role . '.png') }}" alt="role-avatar"
@@ -74,30 +74,37 @@
                                  data-bs-parent="#accordionExample">
                                   <div class="accordion-body">
                                     <!-- Account -->
+                                      <!-- Form -->
                                     <h5 class="card-header">Profile Details</h5>
                                     <div class="card-body">
                                       <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-main') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
-                                      <div class="d-flex align-items-start align-items-sm-center gap-4">
+                                        @csrf
+                                        <div class="d-flex align-items-start align-items-sm-center gap-4">
                                         <img src="{{ asset('assets/img/avatars/5.png') }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
-                                        <div class="button-wrapper">
-                                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                                            <span class="d-none d-sm-block">Upload new photo</span>
-                                            <i class="bx bx-upload d-block d-sm-none"></i>
-                                            <input type="file" id="upload" class="account-file-input" hidden accept="image/png, image/jpeg" />
-                                          </label>
-                                          <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
-                                            <i class="bx bx-reset d-block d-sm-none"></i>
-                                            <span class="d-none d-sm-block">Reset</span>
-                                          </button>
 
-                                          <p class="text-muted mb-0">Allowed JPG or PNG. Max size of 10Mb</p>
+                                        <div class="button-wrapper">
+                                          <div class="input-group">
+                                              <label for="picture" class="btn btn-primary me-2 mb-4" tabindex="0">
+                                                  <span class="d-none d-sm-block">Upload new photo</span>
+                                                  <i class="bx bx-upload d-block d-sm-none"></i>
+                                                  <input type="file" id="picture" name="picture" class="account-file-input @error('picture') is-invalid @enderror mt-2" hidden accept="image/*" />
+                                              </label>
+
+                                              @error('picture')
+                                              <div class="invalid-feedback">{{ $message }}</div>
+                                              @enderror
+
+                                              <button type="button" class="btn btn-outline-secondary account-image-reset mb-4">
+                                                <i class="bx bx-reset d-block d-sm-none"></i>
+                                                <span class="d-none d-sm-block">Reset</span>
+                                              </button>
+
+                                            </div>
+                                            <p class="text-muted mb-0">Allowed JPG or PNG. Max size of 10Mb</p>
                                         </div>
                                       </div>
                                     </div>
                                     <hr class="my-0">
-                                      <!-- Form -->
-                                      <form id="formAccountSettings" method="POST" onsubmit="return false">
-                                        @csrf
                                         <div class="row">
                                           <div class="mb-3 col-md-6">
                                             <label for="firstname" class="form-label">First Name</label>
@@ -131,6 +138,13 @@
                                             <label for="contact" class="form-label">Phone number</label>
                                             <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="contact" value="{{auth()->user()->contact}}" autofocus>
                                             @error('contact')
+                                                <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
+                                                @enderror
+                                          </div>
+                                          <div class="mb-3 col-md-6">
+                                            <label for="contact" class="form-label">Email</label>
+                                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="email" value="{{auth()->user()->email}}" autofocus>
+                                            @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                                 @enderror
                                           </div>
