@@ -8,10 +8,14 @@
 
 <!-- Core CSS -->
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/css/core.css')) }}" />
-<link rel="stylesheet" href="{{ asset(mix('assets/vendor/css/theme-default.css')) }}" />
+<link rel="stylesheet" href="{{ asset(mix('assets/vendor/css/theme-default.css')) }}"/>
 <link rel="stylesheet" href="{{ asset(mix('assets/css/demo.css')) }}" />
 
 <link rel="stylesheet" href="{{ asset(mix('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css')) }}" />
+
+{{-- <!-- Dark Mode Styles -->
+<link rel="stylesheet" href="{{ asset('assets/vendor/css/core-dark.css') }}" id="dark-mode-style" disable>
+<link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default-dark.css') }}" id="dark-mode-style" disable> --}}
 
 <!-- Vendor Styles -->
 @yield('vendor-style')

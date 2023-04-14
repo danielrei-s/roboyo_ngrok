@@ -16,6 +16,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon2.ico') }}" />
 
+  <!-- load jQuery from a CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
   <!-- Include Styles -->
   @include('layouts/sections/styles')
@@ -26,7 +28,6 @@
 
 <body>
   <!-- Layout Content -->
-
   @yield('layoutContent')
   <!--/ Layout Content -->
   <!-- Include Scripts -->
