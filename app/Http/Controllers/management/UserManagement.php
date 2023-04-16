@@ -48,7 +48,7 @@ class UserManagement extends Controller
 
   // Check if there are less than 2 users with admin=2 AND the user being deleted is an admin=2
   if ($usersWithAdminTwo->count() < 2 && $user->admin == 2) {
-      return back()->with('failed', 'Cannot delete this Admin, at least two users must be active Admins.');
+      return back()->with('failed', 'Cannot delete this Admin, at least one Admin active proceed.');
   }
 
   // Delete the user
@@ -78,7 +78,7 @@ class UserManagement extends Controller
         $user->save();
         return redirect()->back()->with('success', 'User has been unblocked');
       }
-      return back()->with('failed', 'Cannot block this Admin, at least two users must be Admins to proceed.');
+      return back()->with('failed', 'Cannot block this Admin, at least one Admin must be active to proceed.');
     }
 
     $user->ativo = $user->ativo == 1 ? 0 : 1;
@@ -100,7 +100,7 @@ class UserManagement extends Controller
     $user = User::findOrFail($userId);
 
     if ($user->force_password_reset == 1) {
-      return redirect()->back()->with('failed', 'User has already been forced to change password');
+      return redirect()->back()->with('failed', 'Waiting for user to change password');
     }else{
       $user->force_password_reset = 1;
       $user->save();

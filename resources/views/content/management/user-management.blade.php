@@ -84,7 +84,7 @@
                           aria-describedby="tooltip674202"
                           onclick="return confirmpasswordReset()">
                       @if ($user->force_password_reset == 0)
-                          <i class="bx bx-lock me-1"></i> Password RST
+                          <i class="bx bx-lock me-1"></i> Password
                       @else
                           <i class="bx bx-lock-open-alt me-1"></i> Already Forced!
                       @endif

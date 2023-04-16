@@ -46,8 +46,8 @@ class EditBasic extends Controller
   if ($validator->fails()) {
     return redirect()->back()
       ->withInput()
-      ->withErrors($validator)
-      ->with('failed', 'Validation failed: ' . $validator->errors()->first());
+      ->withErrors($validator);
+      // ->with('failed', 'Validation failed: ' . $validator->errors()->first());
   }
 
     //handle picture
