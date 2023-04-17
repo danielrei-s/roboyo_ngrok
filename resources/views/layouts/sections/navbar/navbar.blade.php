@@ -34,9 +34,11 @@ $navbarDetached = ($navbarDetached ?? '');
       </div>
       @endif
 
-      <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+       <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-          <button id="dark-mode-toggle"><i class="bx bx-sm bx-moon"></i></button>
+          {{--<button id="dark-mode-toggle"><i class="bx bx-sm bx-moon"></i></button>
+
+          DARK MODE, TBC --}}
 
 
           <!-- User -->
