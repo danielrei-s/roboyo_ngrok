@@ -4,32 +4,32 @@ namespace App\Http\Controllers\management;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Client;
 
 
 class ClientManagement extends Controller
 {
   public function index()
   {
-    $users = User::all();
+    $clients = Client::paginate(6);
 
-    $userObjects = [];
+    $clientObjects = [];
 
-    foreach ($users as $user) {
-        $userObjects[] = (object)[
-            'id' => $user->id,
-            'picture' => $user->picture,
-            'firstName' => $user->firstName,
-            'lastName' => $user->lastName,
-            'email' => $user->email,
-            'sigla' => $user->sigla,
-            'admin' => $user->admin,
-            'role' => $user->role,
-            'ativo' => $user->ativo
+    foreach ($clients as $client) {
+        $clientObjects[] = (object)[
+            'id' => $client->id,
+            'logo' => $client->logo,
+            'name' => $client->name,
+            'tin' => $client->tin,
+            'code' => $client->code,
+            'address' => $client->address,
+            'phone' => $client->phone,
+            'created_at' => $client->created_at,
+            'updated_at' => $client->updated_at
         ];
     }
 
-    return view('content.management.client-management')->with('userObjects', $userObjects);  //new controler for new pages, check route in web.php
+    return view('content.management.client-management', ['clients' => $clients])->with('clientObjects', $clientObjects);
   }
 
 
