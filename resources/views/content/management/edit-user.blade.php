@@ -75,9 +75,9 @@
                                   </div>
 
                               <div class="col-md-9 mb-3">
-                                <label for="contact" class="form-label">Phone number</label>
-                                <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="contact" value="{{$user->contact}}" autofocus>
-                                @error('contact')
+                                <label for="phone" class="form-label">Phone number</label>
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="phone" value="{{$user->phone}}" autofocus>
+                                @error('phone')
                                     <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                     @enderror
                                   </div>

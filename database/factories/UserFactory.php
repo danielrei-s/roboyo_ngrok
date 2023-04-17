@@ -33,7 +33,7 @@ class UserFactory extends Factory
           'remember_token' => Str::random(10),
           'admin' => '0',
           'picture' => 'assets/img/avatars/' . $rand . '.png',
-          'contact' => '911222333',
+          'phone' => '911222333',
           'force_password_reset' => '0',
           'ativo' => '1',
           'role' => 'Pentester'

@@ -17,10 +17,10 @@ return new class extends Migration
           $table->id();
           $table->string('logo');
           $table->string('name');
-          $table->string('tin');
+          $table->string('tin')->unique();
           $table->string('code')->unique();
           $table->string('address');
-          $table->string('contact');
+          $table->string('phone');
           $table->timestamps();
         });
     }

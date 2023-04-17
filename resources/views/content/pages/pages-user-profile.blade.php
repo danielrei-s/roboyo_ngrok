@@ -179,7 +179,7 @@
                     <small class="text-muted text-uppercase">Contacts</small>
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3"><i class="bx bxs-phone"></i><span
-                                class="fw-semibold mx-2">Contact:</span> <span>{{$user->contact}}</span></li>
+                                class="fw-semibold mx-2">Contact:</span> <span>{{$user->phone}}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class='bx bxl-microsoft-teams' ></i><span
                                 class="fw-semibold mx-2">Teams:</span>
                             <span>{{ $user->firstName }}&commat;roboyo.pt</span></li>

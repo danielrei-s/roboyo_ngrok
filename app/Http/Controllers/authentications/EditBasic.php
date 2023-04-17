@@ -27,7 +27,7 @@ class EditBasic extends Controller
         'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
         'role' => ['required', 'max:25'],
         'admin' => ['required', 'in:0,1,2'],
-        'contact' => ['numeric', 'digits_between:9,10'],
+        'phone' => ['numeric', 'digits_between:9,10'],
         'picture' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
     ]);
 
@@ -67,7 +67,7 @@ class EditBasic extends Controller
     $user->email = $request->input('email');
     $user->role = $request->input('role');
     $user->admin = $request->input('admin');
-    $user->contact = $request->input('contact');
+    $user->phone = $request->input('phone');
     $user->save();
 
     return redirect()->back()->with('success', 'Account updated for ' . $user->email);

@@ -37,7 +37,7 @@
                           {{ auth()->user()->sigla }} | {{ auth()->user()->firstName }} {{ auth()->user()->lastName }}
                       </p>
                       <p>{{ auth()->user()->email }}</p>
-                      <p>+351 {{ auth()->user()->contact }}</p>
+                      <p>+351 {{ auth()->user()->phone }}</p>
                   </div>
                   <div style="border-left: 2px dashed #ccc; padding-left: 120px;">
                       <!-- Doted line a separar -->
@@ -135,14 +135,14 @@
                                             @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
-                                            <label for="contact" class="form-label">Phone number</label>
-                                            <input type="text" class="form-control @error('contact') is-invalid @enderror" id="contact" name="contact" placeholder="contact" value="{{auth()->user()->contact}}" autofocus>
-                                            @error('contact')
+                                            <label for="phone" class="form-label">Phone number</label>
+                                            <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="phone" value="{{auth()->user()->phone}}" autofocus>
+                                            @error('phone')
                                                 <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                                 @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
-                                            <label for="contact" class="form-label">Email</label>
+                                            <label for="phone" class="form-label">Email</label>
                                             <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="email" value="{{auth()->user()->email}}" autofocus>
                                             @error('email')
                                                 <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
