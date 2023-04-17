@@ -33,7 +33,7 @@ class UserFactory extends Factory
           'remember_token' => Str::random(10),
           'admin' => '0',
           'picture' => 'assets/img/avatars/' . $rand . '.png',
-          'phone' => '911222333',
+          'phone' => $this->faker->phoneNumber,
           'force_password_reset' => '0',
           'ativo' => '1',
           'role' => 'Pentester'
@@ -57,28 +57,26 @@ class UserFactory extends Factory
 
 
     public function admin()
-    {
-      do {
-        $rand = random_int(1, 12);
-     } while ($rand == 4 || $rand == 5);
-        return $this->state(function (array $attributes) use ($rand){
-            return [
-              'firstName' => 'Daniel',
-              'lastName' => 'Reis',
-              'sigla' => $this->faker->str_limit($this->faker->word(), 3, ''),
-              'email' => 'admin@admin.pt',
-              'email_verified_at' => now(),
-              'password' => bcrypt('admin'), // password
-              'remember_token' => Str::random(10),
-              'admin' => '2',
-              'picture' => 'assets/img/avatars/' . $rand . '.png',
-              'contact' => '911222333',
-              'force_password_reset' => '0',
-              'ativo' => '1',
-              'role' => 'Head of IT'
-            ];
-        });
-    }
+{
+  do {
+    $rand = random_int(1, 12);
+ } while ($rand == 4 || $rand == 5);
+    return $this->state([
+        'firstName' => 'Daniel',
+        'lastName' => 'ADM',
+        'sigla' => Str::limit($this->faker->word(), 3, ''),
+        'email' => 'admin@admin.pt',
+        'email_verified_at' => now(),
+        'password' => 'admin', // password
+        'remember_token' => Str::random(10),
+        'admin' => '2',
+        'picture' => 'assets/img/avatars/' . $rand . '.png',
+        'phone' => '911222333',
+        'force_password_reset' => '0',
+        'ativo' => '1',
+        'role' => 'Head of IT'
+    ]);
+}
 
     /*php artisan tinker -> app/models/user::factory()->admin()->create()*/
 
@@ -87,19 +85,45 @@ class UserFactory extends Factory
         return $this->state(function (array $attributes) {
             return [
               'firstName' => 'Daniel',
-              'lastName' => 'Reis',
-              'sigla' => fake()->word(),
+              'lastName' => 'MNGR',
+              'sigla' => Str::limit($this->faker->word(), 3, ''),
               'email' => 'manager@manager.pt',
               'email_verified_at' => now(),
-              'password' => bcrypt('manager'), // password
+              'password' => 'manager', // password
               'remember_token' => Str::random(10),
               'admin' => '1',
               'picture' => 'assets/img/avatars/5.png',
-              'contact' => '911222333',
+              'phone' => '911222333',
               'force_password_reset' => '0',
               'ativo' => '1',
               'role' => 'Team Lead'
             ];
         });
     }
+
+        /*php artisan tinker -> app/models/user::factory()->manager()->create()*/
+
+    public function pentester()
+    {
+      do {
+        $rand = random_int(1, 12);
+     } while ($rand == 4 || $rand == 5);
+        return $this->state([
+            'firstName' => 'Daniel',
+            'lastName' => 'PTSTR',
+            'sigla' => Str::limit($this->faker->word(), 3, ''),
+            'email' => 'pentester@pentester.pt',
+            'email_verified_at' => now(),
+            'password' => 'pentester', // password
+            'remember_token' => Str::random(10),
+            'admin' => '0',
+            'picture' => 'assets/img/avatars/' . $rand . '.png',
+            'phone' => '911222333',
+            'force_password_reset' => '0',
+            'ativo' => '1',
+            'role' => 'Pentester'
+        ]);
+    }
+
+        /*php artisan tinker -> app/models/user::factory()->pentester()->create()*/
 }
