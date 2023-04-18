@@ -146,7 +146,7 @@
                     <small class="text-muted text-uppercase">About</small>
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3"><i class="bx bxs-user"></i><span
-                                class="fw-semibold mx-2">Full Name:</span> <span>{{ $user->firstName }}
+                                class="fw-semibold mx-2">Name:</span> <span>{{ $user->firstName }}
                                 {{ $user->lastName }}</span></li>
                         <li class="d-flex align-items-center mb-3"><i class="bx bxs-ghost"></i><span
                                 class="fw-semibold mx-2">Sigla:</span> <span>{{ $user->sigla }}

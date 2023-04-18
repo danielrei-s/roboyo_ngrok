@@ -30,12 +30,12 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
-<!-- Chamada de notifications.js -->
+{{-- <!-- Chamada de notifications.js -->
 <script src="{{ asset('js/page-notifications.js') }}"></script>
 
 
 <!-- chamar DELETE -->
-<script src="{{ asset('js/delete-confirmation.js') }}"></script>
+<script src="{{ asset('js/delete-confirmation.js') }}"></script> --}}
 
 <script>
   const deleteButtons = document.querySelectorAll('.delete-user');
@@ -69,4 +69,27 @@
 }
 
 </script>
+
+<script>
+  function sortTable(table, column) {
+    let rows = Array.from(table.tBodies[0].rows);
+
+    rows.sort((a, b) => {
+      let aValue = a.cells[column].textContent.trim();
+      let bValue = b.cells[column].textContent.trim();
+      return aValue.localeCompare(bValue, undefined, { numeric: true, sensitivity: 'base' });
+    });
+
+    rows.forEach(row => table.tBodies[0].appendChild(row));
+  }
+
+  document.querySelectorAll('.sortable').forEach(header => {
+    header.addEventListener('click', () => {
+      let table = header.closest('table');
+      let columnIndex = Array.from(header.parentNode.cells).indexOf(header);
+      sortTable(table, columnIndex);
+    });
+  });
+</script>
+
 

@@ -53,8 +53,11 @@ Route::middleware(['reset_password'])->group(function () {
 
 
 
-  // page with user ID
+  // user profile with user ID
   Route::get('/users/{id}',  $controller_path . '\pages\PagesUserProfile@showUserProfile')->name('user.profile')->middleware('auth');
+
+  // client profile with client ID
+  Route::get('/client/{id}',  $controller_path . '\pages\PagesClientProfile@showClientProfile')->name('client.profile')->middleware('auth');
 
   // authentication by autheds
   Route::get('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@index')->name('auth-register-basic')->middleware('admin');
@@ -62,11 +65,6 @@ Route::middleware(['reset_password'])->group(function () {
 
   // Change Password with token
   Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
-
-  // // Change Password
-  // Route::post('/changepassword', [SessionsController::class, 'changePassword'])
-  //   ->name('change-password')
-  //     ->middleware('auth');
 
 
   // auth POSTs
@@ -89,10 +87,15 @@ Route::middleware(['reset_password'])->group(function () {
     ->middleware('admin');
 
 
-  //delete from database
+  //delete user from database
   Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')
     ->name('user-management.destroy')
       ->middleware('admin');
+
+  //delete client from database
+  Route::delete('/client-management/{id}', $controller_path . '\management\ClientManagement@destroy')
+  ->name('client-management.destroy')
+    ->middleware('admin');
 
   //block user
   Route::put('/users/{user}/block', $controller_path . '\management\UserManagement@blockUser')

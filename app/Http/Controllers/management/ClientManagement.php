@@ -5,31 +5,57 @@ namespace App\Http\Controllers\management;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
-
+use Illuminate\Support\Facades\Route;
 
 class ClientManagement extends Controller
 {
-  public function index()
+    public function index()
   {
-    $clients = Client::paginate(6);
+      $clients = Client::paginate(6);
+      $clientObjects = $this->getClientObjects($clients);  //call function below
 
-    $clientObjects = [];
+      return view('content.management.client-management', ['clients' => $clients])
+            ->with('clientObjects', $clientObjects);
+  }
 
-    foreach ($clients as $client) {
-        $clientObjects[] = (object)[
-            'id' => $client->id,
-            'logo' => $client->logo,
-            'name' => $client->name,
-            'tin' => $client->tin,
-            'code' => $client->code,
-            'address' => $client->address,
-            'phone' => $client->phone,
-            'created_at' => $client->created_at,
-            'updated_at' => $client->updated_at
-        ];
-    }
+  public function destroy($id)
+  {
+      $client = Client::findOrFail($id);
 
-    return view('content.management.client-management', ['clients' => $clients])->with('clientObjects', $clientObjects);
+      // Delete client
+      $client->delete();
+
+      if (Route::currentRouteName() === 'client-management') {
+          return back()->with('success', 'Client has been deleted successfully!');
+      } else {
+          $clients = Client::paginate(6);
+          $clientObjects = $this->getClientObjects($clients);
+
+          return redirect()->route('client-management')
+                ->with('clientObjects', $clientObjects)
+                ->with('success', 'Client has been deleted successfully!');
+      }
+  }
+
+  private function getClientObjects($clients)  //needed in order to return destroy both with data and flash message
+  {
+      $clientObjects = [];
+
+      foreach ($clients as $client) {
+          $clientObjects[] = (object)[
+              'id' => $client->id,
+              'logo' => $client->logo,
+              'name' => $client->name,
+              'tin' => $client->tin,
+              'code' => $client->code,
+              'address' => $client->address,
+              'phone' => $client->phone,
+              'created_at' => $client->created_at,
+              'updated_at' => $client->updated_at
+          ];
+      }
+
+      return $clientObjects;
   }
 
 

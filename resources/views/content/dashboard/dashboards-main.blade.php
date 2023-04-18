@@ -21,8 +21,9 @@
       <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i>
         Account</a>
       </li>
-      <li class="nav-item"><a class="nav-link" href="{{ url('pages/account-settings-account') }}"><i
-                    class="bx bx-bell me-1"></i>Others</a></li>
+      <li class="nav-item"><a class="nav-link" href="#"><i class="bx bx-bell me-1"></i>
+        Others</a>
+      </li>
     </ul>
       <div class="card mb-4">
           <h5 class="card-header">Profile Details</h5>

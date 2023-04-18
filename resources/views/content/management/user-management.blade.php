@@ -36,12 +36,12 @@
     <table class="table table-dark" style="min-height: 240px;">  <!-- min height prevent overlaps when there are < 2 entries -->
       <thead>
         <tr>
-          <th>Picture</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Initials</th>
-          <th>Privileges</th>
-          <th>Role</th>
+          <th> Picture </th>
+          <th class="sortable" data-sort-by="firstName">Name</th>
+          <th class="sortable" data-sort-by="email">Email</th>
+          <th class="sortable" data-sort-by="sigla">Initials</th>
+          <th class="sortable" data-sort-by="admin">Privileges</th>
+          <th class="sortable" data-sort-by="role">Role</th>
           <th>Actions</th>
         </tr>
       </thead>
@@ -70,7 +70,9 @@
               data-bs-toggle="dropdown"data-user-id="{{ $user->id }}">
                 <i class="bx bx-dots-vertical-rounded"></i></button>
               <div class="dropdown-menu">
-                <a class="dropdown-item" href="{{ route('user.profile', ['id' => $user->id]) }}" {{-- route to view selected user profile --}}
+
+                {{-- route to view selected user profile --}}
+                <a class="dropdown-item" href="{{ route('user.profile', ['id' => $user->id]) }}"
                 data-bs-toggle="tooltip" aria-label="View User Profile"
                 data-bs-original-title="View User Profile" aria-describedby="tooltip674202">
                 <i class="bx bx-show-alt me-1" title="View Profile"></i> View</a>
@@ -127,6 +129,7 @@
             </td>
           </tr>
         @endforeach
+        <script src="{{ asset('assets/js/table-sort.js') }}"></script>
       </tbody>
     </table>
     <div class="d-flex justify-content-center mt-3">

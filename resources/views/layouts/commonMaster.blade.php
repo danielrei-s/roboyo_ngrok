@@ -15,6 +15,9 @@
   <link rel="canonical" href="{{ config('variables.productPage') ? config('variables.productPage') : '' }}">
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon2.ico') }}" />
+  <!-- font awsome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-6aCgIc2M/vq+Zg6CCfYoiYsT6RkT+IKyf6UgT6Uz+ByvNLX9AsDoxhqwEmJpF1dqs4+4Lxvh4B2QGgJSJFZ1hQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
 
   <!-- load jQuery from a CDN -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

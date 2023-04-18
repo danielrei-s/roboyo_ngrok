@@ -1,66 +1,86 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'User Management - User Tables')
+@section('title', 'Client Management - Client Tables')
 
 @section('content')
-<h4 class="fw-bold py-3 mb-4">
-  <span class="text-muted fw-light"> Client Management /</span> Client Table
-</h4>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb breadcrumb-style2 mb-2">
+    <li class="breadcrumb-item">
+      <a href="{{ url('/') }}">Dashboard</a>
+    </li>
+    <li class="breadcrumb-item active">
+      <a href="{{ route('client-management') }}">Client Management</a>
+    </li>
+  </ol>
+</nav>
 
 {{-- Direct copy of tables page --}}
 
 <!-- Bootstrap Dark Table -->
 <div class="card">
-  <h5 class="card-header">All Clients</h5>
+  <div class="card">
+    <h5 class="card-header d-flex justify-content-between align-items-center">
+      <span>All Clients</span>
+      <div class="align-items-left">
+        @component('content.management.create-client')
+        @endcomponent
+      </div>
+    </h5>
   <div class="table-responsive text-nowrap">
     <table class="table table-dark">
       <thead>
-        <tr>
-          <th>Logo</th>
-          <th>Code</th>
-          <th>Name</th>
-          <th>Address</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
+  <tr>
+    <th>Logo</th>
+    <th class="sortable" data-sort-by="code">
+      Code
+      <span class="arrow-up"></span>
+      <span class="arrow-down visible"></span>
+    </th>
+    <th class="sortable" data-sort-by="name">
+      Name
+      <span class="arrow-up"></span>
+      <span class="arrow-down visible"></span>
+    </th>
+    <th class="sortable" data-sort-by="address">
+      Address
+      <span class="arrow-up"></span>
+      <span class="arrow-down visible"></span>
+    </th>
+    <th>Actions</th>
+  </tr>
+</thead>
       <tbody class="table-border-bottom-0">
         @foreach ($clientObjects as $client)
-          <tr>
-            <td><img src="{{ asset($client->logo) }}" alt="{{ $client->name }}"
-               class="rounded-circle" style="width: 50px; height: 50px;"></td>
-            <td>{{ $client->code }}</td>
-            <td>{{ $client->name }}</td>
-            <td>{{ $client->address }}</td>
-            <td><div class="dropdown">
-              <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
-              data-bs-toggle="dropdown"data-user-id="{{ $client->id }}">
-                <i class="bx bx-dots-vertical-rounded"></i></button>
-              <div class="dropdown-menu">
+        <tr>
+          <td><img src="{{ asset($client->logo) }}" alt="{{ $client->name }}" class="rounded-circle" style="width: 50px; height: 50px;"></td>
+          <td>{{ $client->code }}</td>
+          <td class="text-truncate" style="max-width: 200px;">{{ $client->name }}</td>
+          <td class="text-truncate" style="max-width: 200px;">{{ $client->address }}</td>
+          <td>
 
-                {{-- route to view selected user profile --}}
-                <a class="dropdown-item" href="{{ route('user.profile', ['id' => $client->id]) }}"
-                data-bs-toggle="tooltip" aria-label="View User Profile"
-                data-bs-original-title="View User Profile" aria-describedby="tooltip674202">
-                <i class="bx bx-show-alt me-1" title="View Profile"></i> View</a>
-
-                {{-- form to handle the DELETE --}}
-                <a class="dropdown-item" href="#"  data-bs-toggle="tooltip"
-                data-bs-original-title="Delete user"
+                {{-- delete button --}}
+            <a class="btn p-0" href="#"  data-bs-toggle="tooltip"
+                data-bs-original-title="Delete client"
                 aria-describedby="tooltip674202"
                 onclick="event.preventDefault();
-                  if (confirm('Are you sure you want to delete {{$client->name}} ?'  )) {
-                    document.getElementById('delete-user-{{ $client->id }}').submit();
+                  if (confirm('Are you sure you want to delete {{$client->name}}?'  )) {
+                    document.getElementById('delete-client-{{ $client->id }}').submit();
                   }">
-                  <i class="bx bx-trash me-1"title="Delete User"></i>Delete
+                  <i class="bx bx-trash me-1"title="Delete Client" style="font-size: 26px;"></i>
                 </a>
-                <form id="delete-user-{{ $client->id }}" action="{{ route('user-management.destroy', $client->id) }}" method="POST" style="display: none; ">
+                <form id="delete-client-{{ $client->id }}" action="{{ route('client-management.destroy', $client->id) }}" method="POST" style="display: none; ">
                   @csrf
                   @method('DELETE')
                 </form>
-              </div>
-            </td>
-          </tr>
+
+                {{-- view button  --}}
+            <a class="btn p-0" href="{{ route('client.profile', ['id' => $client->id]) }}" data-bs-toggle="tooltip" data-bs-original-title="View client" aria-describedby="tooltip674202">
+              <i class="bx bx-show-alt me-1 " title="View Client" style="font-size: 26px;"></i>
+            </a>
+          </td>
+        </tr>
         @endforeach
+        <script src="{{ asset('assets/js/table-sort.js') }}"></script>
       </tbody>
     </table>
   </div>
