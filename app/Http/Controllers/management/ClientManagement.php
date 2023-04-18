@@ -82,4 +82,34 @@ class ClientManagement extends Controller
   }
 
 
+  // public function getClientObjects($clients)
+  // {
+  //     $clientObjects = [];
+
+  //     foreach ($clients as $client) {
+  //         $clientObject = new stdClass();
+  //         $clientObject->id = $client->id;
+  //         $clientObject->name = $client->name;
+  //         $clientObject->contacts = $client->contacts()->paginate(4);
+  //         $clientObjects[] = $clientObject;
+  //     }
+
+  //     return $clientObjects;
+  // }
+
+  // public function index()
+  // {
+  //     $clients = Client::paginate(6);
+  //     $clientObjects = $this->getClientObjects($clients);
+
+  //     return view('content.management.client-management', [
+  //         'clients' => $clients,
+  //         'clientObjects' => $clientObjects
+  //     ]);
+  // }
+
+
+
 }
+
+

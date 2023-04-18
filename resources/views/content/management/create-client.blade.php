@@ -66,31 +66,43 @@
                                 @enderror
                               </div>
 
-                              <div class="card">
-                                <table>
-                                  <thead>
-                                    <tr>
-                                      <th>Name</th>
-                                      <th>Title</th>
-                                      <th>Email</th>
-                                      <th>Phone</th>
-                                    </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <td>John Doe</td>
-                                      <td>Manager</td>
-                                      <td>johndoe@example.com</td>
-                                      <td>(123) 456-7890</td>
-                                    </tr>
-                                    <tr>
-                                      <td>Jane Doe</td>
-                                      <td>Developer</td>
-                                      <td>janedoe@example.com</td>
-                                      <td>(555) 123-4567</td>
-                                    </tr>
-                                  </tbody>
-                                </table>
+
+
+
+                                <div class="table-responsive text-nowrap">
+                                  <table class="table table-dark">
+                                    <thead>
+                                <tr>
+                                  <th class="sortable" data-sort-by="name">
+                                    Name
+                                    <span class="arrow-up"></span>
+                                    <span class="arrow-down visible"></span>
+                                  </th>
+                                  <th class="sortable" data-sort-by="title">
+                                    Title
+                                    <span class="arrow-up"></span>
+                                    <span class="arrow-down visible"></span>
+                                  </th>
+                                  <th class="sortable" data-sort-by="email">
+                                    Email
+                                    <span class="arrow-up"></span>
+                                    <span class="arrow-down visible"></span>
+                                  </th>
+                                  <th class="sortable" data-sort-by="phone">
+                                    Phone
+                                    <span class="arrow-up"></span>
+                                    <span class="arrow-down visible"></span>
+                                  </th>
+                                </tr>
+                              </thead>
+                                    <tbody class="table-border-bottom-0">
+
+                                    </tbody>
+                                  </table>
+                                </div>
+                                <div class="d-flex justify-content-center mt-3">
+
+                                  </div>
                               </div>
 
 
