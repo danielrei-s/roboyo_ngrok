@@ -88,5 +88,12 @@
     {{ $clients->links('pagination::bootstrap-4') }}
     </div>
 </div>
+@if ($errors->any())
+    <script>
+        $(document).ready(function(){
+            $('#modalCenter').modal('show');
+        });
+    </script>
+  @endif
 <!--/ Bootstrap Dark Table -->
 @endsection

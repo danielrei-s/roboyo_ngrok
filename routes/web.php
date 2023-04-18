@@ -67,9 +67,14 @@ Route::middleware(['reset_password'])->group(function () {
   Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
 
 
-  // auth POSTs
+  // Register User
   Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')
     ->name('auth-register-basic')
+      ->middleware('admin');
+
+    // Register client
+    Route::post('/auth/register-client', $controller_path . '\authentications\RegisterClient@store')
+    ->name('auth-register-client')
       ->middleware('admin');
 
 
@@ -84,6 +89,11 @@ Route::middleware(['reset_password'])->group(function () {
   // edit user
   Route::post('/auth/edit-basic', $controller_path . '\authentications\EditBasic@edit')
   ->name('auth-edit-basic')
+    ->middleware('admin');
+
+  // edit client
+  Route::post('/auth/edit-client', $controller_path . '\authentications\EditClient@edit')
+  ->name('auth-edit-client')
     ->middleware('admin');
 
 

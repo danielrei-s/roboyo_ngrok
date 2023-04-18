@@ -13,7 +13,7 @@ class ContactFactory extends Factory
     public function definition()
     {
         return [
-            'client_id' => Client::factory(),
+            'client_id' => 34,
             'name' => $this->faker->name(),
             'title' => $this->faker->unique()->jobTitle(),
             'email' => $this->faker->unique()->safeEmail(),

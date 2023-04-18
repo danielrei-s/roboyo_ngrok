@@ -14,9 +14,9 @@
                         <h5 class="modal-title" id="modalCenterTitle">Edit {{$client->name}}'s client profile</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-basic') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
+                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-client') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
                       @csrf {{-- Evitar ataques csrf --}}
-                      <input type="hidden" name="user_id" value="{{ $client->id }}"> {{-- Send user ID --}}
+                      <input type="hidden" name="client_id" value="{{ $client->id }}"> {{-- Send user ID --}}
                       <div class="row justify-content-center">
                         <div class="col-md-12">
                           <div class="row justify-content-center">
@@ -42,16 +42,16 @@
                                 </div>
 
                               <div class="col-md-9 mb-3">
-                                <label for="TIN" class="form-label">TIN</label>
-                                <input type="text" class="form-control @error('TIN') is-invalid @enderror" id="TIN" name="TIN" placeholder="TIN (9 numbers)" value="{{ $client->tin }}" autofocus>
-                                @error('TIN')
+                                <label for="tin" class="form-label">TIN</label>
+                                <input type="text" class="form-control @error('tin') is-invalid @enderror" id="tin" name="tin" placeholder="tin (9 numbers)" value="{{ $client->tin }}" autofocus>
+                                @error('tin')
                                     <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                     @enderror
                                   </div>
 
                               <div class="col-md-9 mb-3">
                                 <label for="code" class="form-label">Code</label>
-                                <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" placeholder=" Code" value="{{ $client->code }}" autofocus>
+                                <input type="text" class="form-control @error('code') is-invalid @enderror" id="code" name="code" placeholder=" Code" value="{{ $client->code }}" autofocus readonly disabled>
                                 @error('code')
                                     <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                     @enderror

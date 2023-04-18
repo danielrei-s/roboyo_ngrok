@@ -4,26 +4,24 @@ namespace App\Http\Controllers\authentications;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Client;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterBasic extends Controller
+class RegisterClient extends Controller
 {
   public function index()
   {
     return view('content.authentications.auth-register-basic'); //Route for this in web.php ->auth->@index
   }
 
-  //função de criar user
+  //função de criar client
   public function store(Request $request)
   {
       $validator = Validator::make($request->all(), [
-          'firstname' => ['required', 'max:25'],
-          'lastname' => ['required', 'max:25'],
-          'sigla' => ['required', 'unique:users,sigla', 'max:3'],
-          'email' => ['required', 'email', 'unique:users,email'],
-          'role' => ['required', 'max:25'],
-          'admin' => ['required', 'in:0,1,2'],
+          'name' => ['required', 'string', 'max:50'],
+          'tin' => ['required', 'numeric', 'digits:9', 'unique:clients,tin'],
+          'address' => ['nullable', 'string', 'max: 50'],
+          'phone' => ['nullable', 'regex:/^[\d-]{0,25}$/'],
           'picture' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
       ]);
 
@@ -38,25 +36,28 @@ class RegisterBasic extends Controller
       if ($request->hasFile('picture')) {
           $picture = $request->file('picture');
           $filename = time() . '_' . $picture->getClientOriginalName();
-          $path = 'assets/img/avatars/';
+          $path = 'assets/img/clients/';
           $picture->move($path, $filename);
-          $attributes['picture'] = $path . $filename;
+          $attributes['logo'] = $path . $filename;
       } else {
-          $attributes['picture'] = 'assets/img/avatars/4.png';
+          $attributes['logo'] = 'assets/img/clients/sonae.jpg';
       }
 
       // create the user
-      $attributes['firstname'] = $request->input('firstname');
-      $attributes['lastname'] = $request->input('lastname');
-      $attributes['password'] = '12345';
-      $admin = $request->input('admin', 0);
-      $attributes['admin'] = in_array($admin, [0, 1, 2]) ? $admin : 0;
-      $attributes['sigla'] = $request->input('sigla');
-      $attributes['role'] = $request->input('role');
-      $attributes['email'] = $request->input('email');
-      $attributes['force_password_reset'] = 1;  // this makes the user change its password after first login
-      $user = User::create($attributes);
+    $attributes['name'] = $request->input('name');
+    $attributes['tin'] = $request->input('tin');
+    $attributes['address'] = $request->input('address');
+    $attributes['phone'] = $request->input('phone');
 
-      return redirect('user-management')->with('success', 'Account created for ' . $attributes['email']);
-  }
+      // generate the code attribute with an incrementing number
+    $lastClient = Client::orderBy('id', 'desc')->first(); // get the last client record
+    $lastNumber = $lastClient ? intval(substr($lastClient->code, 5)) : 0; // extract the number from its code attribute
+    $nextNumber = $lastNumber + 1; // increment the number
+    $codeNumber = str_pad($nextNumber, 4, '0', STR_PAD_LEFT); // format the number with leading zeros
+    $attributes['code'] = 'RSC: ' . $codeNumber; // concatenate the prefix and the formatted number
+
+    $client = Client::create($attributes);
+
+    return redirect('client-management')->with('success', 'Client ' . $attributes['name'] . ' added.');
+}
 }

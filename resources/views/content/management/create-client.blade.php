@@ -8,13 +8,13 @@
 
         <!-- Modal -->
         <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-dialog modal-dialog-centered" address="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalCenterTitle">Create new client</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-register-basic') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
+                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-register-client') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
                       @csrf {{-- Evitar ataques csrf --}}
 
                       <div class="row">
@@ -22,7 +22,7 @@
                           <div class="d-flex justify-content-center align-items-center">
                             <label for="picture" style="cursor: pointer;">
                               <div class="rounded-circle overflow-hidden" style="width: 150px; height: 150px;">
-                                <img src="assets/img/avatars/5.png" alt="Profile picture" id="picturePreview" class="w-100 h-100">
+                                <img src="assets/img/clients/default.png" alt="Profile picture" id="picturePreview" class="w-100 h-100">
                               </div>
                             </label>
                           </div>
@@ -34,46 +34,66 @@
 
                         <div class="col-md-8">
                           <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label for="firstname" class="form-label">First Name</label>
-                                <input type="text" class="form-control @error('firstname') is-invalid @enderror" id="firstname" name="firstname" placeholder=" First Name" value="{{ old('firstname') }}" autofocus>
-                                @error('firstname')
+                            <div class="col-md-6 mb-4 mt-3">
+                                <label for="name" class="form-label">Company Name</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}" autofocus>
+                                @error('name')
                                     <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                 @enderror
                                 </div>
 
-
-                              <div class="col-md-6 mb-3">
-                                <label for="lastname" class="form-label">Last Name</label>
-                                <input type="text" class="form-control @error('lastname') is-invalid @enderror" id="lastname" name="lastname" placeholder=" Last Name" value="{{ old('lastname') }}" autofocus>
-                                @error('lastname')
-                                    <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
-                                @enderror
-                              </div>
-
-                              <div class="col-md-6 mb-3">
-                                <label for="sigla" class="form-label">Sigla</label>
-                                <input type="text" class="form-control @error('sigla') is-invalid @enderror" id="sigla" name="sigla" placeholder="Sigla (3 letters)" value="{{ old('sigla') }}" autofocus>
-                                @error('sigla')
+                              <div class="col-md-6 mb-4 mt-3">
+                                <label for="tin" class="form-label">TIN</label>
+                                <input type="text" class="form-control @error('tin') is-invalid @enderror" id="tin" name="tin" placeholder="Code (9 numbers)" value="{{ old('tin') }}" autofocus>
+                                @error('tin')
                                     <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                     @enderror
                                   </div>
 
-                              <div class="col-md-6 mb-3">
-                                <label for="role" class="form-label">Role</label>
-                                <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder=" Role" value="{{ old('role') }}" autofocus>
-                                @error('role')
+                              <div class="col-md-6 mb-4">
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder=" Address" value="{{ old('address') }}" autofocus>
+                                @error('address')
                                     <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                     @enderror
                                   </div>
 
-                              <div class="col-md-12 mb-3">
-                                <label for="email" class="form-label">Email</label>
-                                <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder=" Email" value="{{ old('email') }}">
-                                @error('email')
+                              <div class="col-md-6 mb-4">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder=" Phone" value="{{ old('phone') }}">
+                                @error('phone')
                                 <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                 @enderror
                               </div>
+
+                              <div class="card">
+                                <table>
+                                  <thead>
+                                    <tr>
+                                      <th>Name</th>
+                                      <th>Title</th>
+                                      <th>Email</th>
+                                      <th>Phone</th>
+                                    </tr>
+                                  </thead>
+                                  <tbody>
+                                    <tr>
+                                      <td>John Doe</td>
+                                      <td>Manager</td>
+                                      <td>johndoe@example.com</td>
+                                      <td>(123) 456-7890</td>
+                                    </tr>
+                                    <tr>
+                                      <td>Jane Doe</td>
+                                      <td>Developer</td>
+                                      <td>janedoe@example.com</td>
+                                      <td>(555) 123-4567</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+
+
                               <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-outline-secondary btn-md me-3" data-bs-dismiss="modal">Close</button>
                                 <button class="btn btn-primary">Sign up</button>

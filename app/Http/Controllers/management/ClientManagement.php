@@ -5,6 +5,7 @@ namespace App\Http\Controllers\management;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Route;
 
 class ClientManagement extends Controller
@@ -13,9 +14,12 @@ class ClientManagement extends Controller
   {
       $clients = Client::paginate(6);
       $clientObjects = $this->getClientObjects($clients);  //call function below
+      $contacts = Contact::paginate(4);
+      $contactObjects = $this->getContactsObjects($contacts);
 
       return view('content.management.client-management', ['clients' => $clients])
-            ->with('clientObjects', $clientObjects);
+            ->with('clientObjects', $clientObjects)
+            ->with('contactsObjects', $contactObjects);
   }
 
   public function destroy($id)
@@ -56,6 +60,25 @@ class ClientManagement extends Controller
       }
 
       return $clientObjects;
+  }
+
+  private function getContactsObjects($contacts)  //needed in order to return destroy both with data and flash message
+  {
+      $contactObjects = [];
+
+      foreach ($contacts as $contact) {
+          $contactObjects[] = (object)[
+              'id' => $contact->id,
+              'name' => $contact->name,
+              'title' => $contact->title,
+              'email' => $contact->email,
+              'phone' => $contact->phone,
+              'created_at' => $contact->created_at,
+              'updated_at' => $contact->updated_at
+          ];
+      }
+
+      return $contactObjects;
   }
 
 

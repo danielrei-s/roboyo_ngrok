@@ -133,6 +133,15 @@
           </div>
           <!-- /Account -->
       </div>
+
+      @if ($errors->any())
+      <script>
+          $(document).ready(function(){
+              $('#modalCenter').modal('show');
+          });
+      </script>
+    @endif
+
 <script>  //show a preview of the photo about to be uploaded
   const inputPicture = document.querySelector('#picture');
   const picturePreview = document.querySelector('#picturePreview');
