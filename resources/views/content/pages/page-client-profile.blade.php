@@ -75,6 +75,7 @@
                       {{-- view button --}}
                       @component('content.management.edit-client')
                         @slot('client', $client)
+                        @slot('contacts', $contacts)
                       @endcomponent
                       </div>
                     </div>

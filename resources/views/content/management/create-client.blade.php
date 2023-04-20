@@ -75,28 +75,27 @@
                                 <tr>
                                   <th class="sortable" data-sort-by="name">
                                     Name
-                                    <span class="arrow-up"></span>
-                                    <span class="arrow-down visible"></span>
                                   </th>
                                   <th class="sortable" data-sort-by="title">
                                     Title
-                                    <span class="arrow-up"></span>
-                                    <span class="arrow-down visible"></span>
                                   </th>
                                   <th class="sortable" data-sort-by="email">
                                     Email
-                                    <span class="arrow-up"></span>
-                                    <span class="arrow-down visible"></span>
                                   </th>
                                   <th class="sortable" data-sort-by="phone">
                                     Phone
-                                    <span class="arrow-up"></span>
-                                    <span class="arrow-down visible"></span>
                                   </th>
                                 </tr>
                               </thead>
                                     <tbody class="table-border-bottom-0">
-
+                                      @foreach ($contactObjects as $contact )
+                                      <tr>
+                                        <td>{{$contact->name}}</td>
+                                        <td>{{$contact->email}}</td>
+                                        <td>{{$contact->title}}</td>
+                                        <td>{{$contact->phone}}</td>
+                                      </tr>
+                                      @endforeach
                                     </tbody>
                                   </table>
                                 </div>

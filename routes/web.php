@@ -96,6 +96,10 @@ Route::middleware(['reset_password'])->group(function () {
   ->name('auth-edit-client')
     ->middleware('admin');
 
+    //Route for contact pagination on edit client
+  Route::get('/client/{id}/contacts', $controller_path . '\pages\PagesClientProfile@getContacts');
+
+
 
   //delete user from database
   Route::delete('/user-management/{id}', $controller_path . '\management\UserManagement@destroy')

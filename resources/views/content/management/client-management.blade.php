@@ -22,7 +22,7 @@
     <h5 class="card-header d-flex justify-content-between align-items-center">
       <span>All Clients</span>
       <div class="align-items-left">
-        @component('content.management.create-client')
+        @component('content.management.create-client', ['contactObjects' => $contactObjects])
         @endcomponent
       </div>
     </h5>

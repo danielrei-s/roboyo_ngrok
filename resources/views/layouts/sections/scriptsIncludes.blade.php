@@ -70,6 +70,7 @@
 
 </script>
 
+<!-- Script to order table alpha-->
 <script>
   function sortTable(table, column) {
     let rows = Array.from(table.tBodies[0].rows);
@@ -91,5 +92,6 @@
     });
   });
 </script>
+
 
 

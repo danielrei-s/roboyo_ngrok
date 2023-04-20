@@ -9,12 +9,12 @@
         <!-- Modal -->
         <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
+                <div class="modal-content" style="width: 35rem;">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalCenterTitle">Edit {{$user->firstName}} {{$user->lastName}}'s profile</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-basic') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
+                    <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-basic') }}" method="POST" style="padding: 15px;" enctype="multipart/form-data">
                       @csrf {{-- Evitar ataques csrf --}}
                       <input type="hidden" name="user_id" value="{{ $user->id }}"> {{-- Send user ID --}}
                       <div class="row justify-content-center">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\pages;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Client;
+use App\Models\Contact;
 
 class PagesClientProfile extends Controller
 {
@@ -13,13 +14,15 @@ class PagesClientProfile extends Controller
     return view('content.pages.page-client-profile');
   }
 
-  public function showClientProfile($id)
-{
-    $client = Client::findOrFail($id);
+      public function showClientProfile($id)
+    {
+      $client = Client::findOrFail($id);
+      $contacts = Contact::where('client_id', $id)->paginate(3); // use paginate() instead of get()
 
-    return view('content.pages.page-client-profile', [
-        'client' => $client
-    ]);
-}
+      return view('content.pages.page-client-profile', [
+          'client' => $client,
+          'contacts' => $contacts
+      ]);
+    }
 
 }

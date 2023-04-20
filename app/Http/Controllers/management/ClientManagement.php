@@ -12,14 +12,21 @@ class ClientManagement extends Controller
 {
     public function index()
   {
+      // CLIENT & CLIENT OBJECTS
       $clients = Client::paginate(6);
-      $clientObjects = $this->getClientObjects($clients);  //call function below
+      $clientObjects = $this->getClientObjects($clients);
+
+      // CONTACT & CONTACT OBJECTS
       $contacts = Contact::paginate(4);
       $contactObjects = $this->getContactsObjects($contacts);
 
+    // Teste output
+    //  dd($contactObjects);
+    //  dd($contacts);
+
       return view('content.management.client-management', ['clients' => $clients])
             ->with('clientObjects', $clientObjects)
-            ->with('contactsObjects', $contactObjects);
+            ->with('contactObjects', $contactObjects);
   }
 
   public function destroy($id)
@@ -29,13 +36,13 @@ class ClientManagement extends Controller
       // Delete client
       $client->delete();
 
-      if (Route::currentRouteName() === 'client-management') {
+      if (Route::currentRouteName() === 'client-management') {   //delete inside client management
           return back()->with('success', 'Client has been deleted successfully!');
       } else {
           $clients = Client::paginate(6);
           $clientObjects = $this->getClientObjects($clients);
 
-          return redirect()->route('client-management')
+          return redirect()->route('client-management')  //delete inside client profile, redirecting to client management
                 ->with('clientObjects', $clientObjects)
                 ->with('success', 'Client has been deleted successfully!');
       }
@@ -80,35 +87,6 @@ class ClientManagement extends Controller
 
       return $contactObjects;
   }
-
-
-  // public function getClientObjects($clients)
-  // {
-  //     $clientObjects = [];
-
-  //     foreach ($clients as $client) {
-  //         $clientObject = new stdClass();
-  //         $clientObject->id = $client->id;
-  //         $clientObject->name = $client->name;
-  //         $clientObject->contacts = $client->contacts()->paginate(4);
-  //         $clientObjects[] = $clientObject;
-  //     }
-
-  //     return $clientObjects;
-  // }
-
-  // public function index()
-  // {
-  //     $clients = Client::paginate(6);
-  //     $clientObjects = $this->getClientObjects($clients);
-
-  //     return view('content.management.client-management', [
-  //         'clients' => $clients,
-  //         'clientObjects' => $clientObjects
-  //     ]);
-  // }
-
-
 
 }
 
