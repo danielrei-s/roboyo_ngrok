@@ -64,31 +64,75 @@
                               @enderror
                             </div>
 
-                            <div class="col-md-12 mb-3">
+                            <div class="col-md-7 mb-3">
                               <label for="address" class="form-label">Address</label>
                               <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" placeholder=" Email" value="{{ $client->address }}">
                               @error('address')
                                 <div class="invalid-feedback">{{ $message }}</div>
                               @enderror
                             </div>
-                          </div>
-                        </div>
 
-                        <div class="d-flex justify-content-end">
-                          <button type="button" class="btn btn-outline-secondary btn-md me-3" data-bs-dismiss="modal">Close</button>
-                          <button class="btn btn-primary">Update</button>
-                        </div>
+                            <div class="justify-content-end col-md-5 mb-2">
+                              <button type="button" class="btn btn-outline-secondary btn-sm me-3" data-bs-dismiss="modal">Close</button>
+                              <button class="btn btn-primary btn-sm">Update</button>
+                            </div>
+                          </div>
+                         </div>
                   </div>
                  {{-- </div> --}}
                 </form>
                 <hr class="my-1">
-                            <!-- Contact table -->
-                            <div class="card-body">
-                              <div class="col-md mb-3 mb-md-0">
-                                <div class="table-responsive text-nowrap">
-                                  <h5 class="text-center mb-4">{{$client->name}}'s contacts list</h5>
-                                  <table class="table table-bordered table-sm" data-page="1" data-page-size="3" data-current-page="1">
-                                    <thead>
+                <div class="card-body">
+                  <div class="row">
+                                <div class="col-md-2">
+                                  <form id="formAuthentication" action="{{ route('auth-edit-client') }}" method="POST">
+                                    @csrf {{-- Evitar ataques csrf --}}
+                                    <input type="hidden" name="client_id" value="{{ $client->id }}">
+                                        <h6 class="text-center mb-4"> Add Contact</h6>
+                                      <div class="mb-2 mt-2">
+                                          <label for="name" class="form-label" style="font-size: 10px;" hidden>Name</label>
+                                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{old('name')}}">
+                                          @error('name')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                          @enderror
+                                        </div>
+
+                                        <div class="mb-2">
+                                          <label for="email" class="form-label" style="font-size: 10px;" hidden>Email</label>
+                                          <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{old('email')}}">
+                                          @error('email')
+                                          <div class="invalid-feedback">{{ $message }}</div>
+                                          @enderror
+                                        </div>
+
+                                      <div class="mb-2">
+                                        <label for="title" class="form-label" style="font-size: 10px;" hidden>Title</label>
+                                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Job title" value="{{old('title')}}">
+                                        @error('title')
+                                          <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                      </div>
+
+                                      <div class="mb-2">
+                                        <label for="phone" class="form-label" style="font-size: 10px;" hidden>Phone number</label>
+                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Phone" value="{{old('phone')}}">
+                                        @error('phone')
+                                          <div class="invalid-feedback">{{ $message }}</div>
+                                          @enderror
+                                        </div>
+                                        <div class="text-center">
+                                          <button type="submit" class="btn btn-primary btn-sm">Add</button>
+                                        </div>
+                                        </form>
+                                      </div>
+                                    <!-- / ADD CONTACT FORM -->
+
+                                    <!-- Contact table -->
+                                <div class="col-md-10">
+                                  <div class="table-responsive text-nowrap">
+                                    <h5 class="text-center mb-4">{{$client->name}}'s contacts list</h5>
+                                    <table class="table table-bordered table-sm" data-page="1" data-page-size="3" data-current-page="1">
+                                      <thead>
                                         <tr>
                                             <th class="sortable" data-sort-by="name">Name</th>
                                             <th class="sortable" data-sort-by="email">Email</th>
@@ -106,22 +150,18 @@
                                         </tr>
                                         @endforeach
                                     </tbody>
-                                </table>
-                                <div class="d-flex justify-content-center align-items-center mt-3">
-                                  <div id="pagination">
-                                    <button class="btn btn-primary prev-btn" data-client-id="{{$client->id}}" data-page="1">Previous</button>
-                                    <button class="btn btn-primary next-btn" data-client-id="{{$client->id}}" data-page="2">Next</button>
-
-                                  </div>
-                                </div>
-                              </div>
-                          </div>
+                                    </table>
+                                    <div class="d-flex justify-content-center align-items-center mt-3">
+                                    </div>
                           <!-- /Contact table -->
-
-                      </div>
+                                  </div>
+                                  <!-- /BODY DIV-->
+                            </div>
+                        </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
+              </div>
 
         <script>  //show a preview of the photo about to be uploaded
           const inputPicture = document.querySelector('#picture');

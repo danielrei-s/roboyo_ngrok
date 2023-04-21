@@ -17,7 +17,7 @@ class PagesClientProfile extends Controller
       public function showClientProfile($id)
     {
       $client = Client::findOrFail($id);
-      $contacts = Contact::where('client_id', $id)->paginate(3); // use paginate() instead of get()
+      $contacts = Contact::where('client_id', $id)->paginate(8); // use paginate() instead of get()
 
       return view('content.pages.page-client-profile', [
           'client' => $client,
