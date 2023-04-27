@@ -44,19 +44,25 @@ Route::middleware(['reset_password'])->group(function () {
   $controller_path = 'App\Http\Controllers';
 
   // Main Page Route
-  Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
-  Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
-  Route::post('/change-password', $controller_path . '\SessionsController@changePassword')->name('change-password')->middleware('auth');
-  Route::post('/edit-profile', $controller_path . '\dashboard\main@edit')
-  ->name('auth-edit-main')
-    ->middleware('auth');
+    Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
+    Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
+    Route::post('/change-password', $controller_path . '\SessionsController@changePassword')->name('change-password')->middleware('auth');
+    Route::post('/edit-profile', $controller_path . '\dashboard\main@edit')
+    ->name('auth-edit-main')
+      ->middleware('auth');
+      // management
+    Route::get('/user-management', $controller_path . '\management\UserManagement@index')
+      ->name('user-management')
+        ->middleware('admin');
+    Route::get('/client-management', $controller_path . '\management\ClientManagement@index')
+      ->name('client-management')
+        ->middleware('manager');
 
 
-
-  // user profile with user ID
+  // show user profile with user ID
   Route::get('/users/{id}',  $controller_path . '\pages\PagesUserProfile@showUserProfile')->name('user.profile')->middleware('auth');
 
-  // client profile with client ID
+  // show client profile with client ID
   Route::get('/client/{id}',  $controller_path . '\pages\PagesClientProfile@showClientProfile')->name('client.profile')->middleware('auth');
 
   // authentication by autheds
@@ -66,25 +72,20 @@ Route::middleware(['reset_password'])->group(function () {
   // Change Password with token
   Route::get('/auth/change-password-basic', $controller_path . '\authentications\ChangePasswordBasic@index')->name('auth-change-password-basic')->middleware('guest');
 
-
   // Register User
   Route::post('/auth/register-basic', $controller_path . '\authentications\RegisterBasic@store')
     ->name('auth-register-basic')
       ->middleware('admin');
 
-    // Register client
-    Route::post('/auth/register-client', $controller_path . '\authentications\RegisterClient@store')
-    ->name('auth-register-client')
-      ->middleware('admin');
+  // Register client
+  Route::post('/auth/register-client', $controller_path . '\authentications\RegisterClient@store')
+  ->name('auth-register-client')
+    ->middleware('admin');
 
-
-  // management
-  Route::get('/user-management', $controller_path . '\management\UserManagement@index')
-    ->name('user-management')
-      ->middleware('admin');
-  Route::get('/client-management', $controller_path . '\management\ClientManagement@index')
-    ->name('client-management')
-      ->middleware('manager');
+  // Register Contact
+  Route::post('/auth/register-contact', $controller_path . '\authentications\RegisterContact@store')
+  ->name('auth-register-contact')
+    ->middleware('admin');
 
   // edit user
   Route::post('/auth/edit-basic', $controller_path . '\authentications\EditBasic@edit')

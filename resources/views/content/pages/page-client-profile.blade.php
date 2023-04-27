@@ -47,21 +47,34 @@
                       <p class="fs-9"><i class="bx bxs-phone"></i><span class="fw-semibold"> Phone: </span>{{ $client->phone }}</p>
                     </div>
                   </div>
-                  <div style="border-left: 2px dashed #ccc; padding-left: 120px;">
-                      <!-- Doted line a separar -->
-                      <div class="button-wrapper">
-                          <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
-                              <div class="d-flex flex-column align-items-start">
-                                  <p>Contact List</p>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div style="border-left: 2px dashed #ccc; padding-left: 20px;">
-                    <div class="button-wrapper">
-                      <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
+                    <div style="border-left: 2px dashed #ccc; padding-left: 120px;">
+                        <!-- Doted line a separar -->
+                        <div class="button-wrapper">
+                            <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
+                                <div class="d-flex flex-column align-items-start">
+                                  <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="View Contacts" data-bs-target="#modalContact" title="View client contacts" aria-describedby="tooltip674202">
+                                    <i class='bx bx-sitemap' style="font-size: 30px"></i>
+                                  </a>
 
-                     {{-- anchor to link the DELETE --}}
+
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="modalContact" tabindex="-1" aria-hidden="true">
+                                      <div class="modal-dialog modal-dialog-centered" role="document" >
+                                          <div class="modal-content" style="width: 400rem;">
+                                              <div class="modal-header">
+                                                  <h5 class="modal-title" id="modalContactTitle"></h5>
+                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                @component('content.management.create-contact', ['client' => $client, 'contacts' => $contacts])
+
+                                                  @endcomponent
+                                          </div>
+                                      </div>
+                                  </div>
+                                </div>
+                              </div>
+
+                                {{-- anchor to link the DELETE --}}
                      <a class="btn p-0" href="#" data-bs-toggle="tooltip" aria-label="Delete client" data-bs-original-title="Delete client" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$client->name}}?')) { document.getElementById('delete-client-{{ $client->id }}').submit(); }">
                       <i class="bx bx-trash me-1" title="Delete Client" style="font-size: 32px;"></i>
                     </a>
@@ -72,16 +85,15 @@
                       @method('DELETE')
                     </form>
 
-                      {{-- view button --}}
-                      @component('content.management.edit-client')
-                        @slot('client', $client)
+                    {{-- view button --}}
+                    @component('content.management.edit-client')
+                    @slot('client', $client)
                         @slot('contacts', $contacts)
                       @endcomponent
                       </div>
                     </div>
                   </div>
-              </div>
-
+                </div>
 
               <hr class="my-1">
               <div class="card-body">

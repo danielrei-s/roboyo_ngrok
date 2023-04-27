@@ -25,6 +25,7 @@ class EditClient extends Controller
         'tin' => ['required', 'numeric', 'digits:9', Rule::unique('clients')->ignore($client)],
         'phone' => ['nullable', 'regex:/^[\d-]{0,25}$/'],
         'address' => ['nullable', 'string', 'max: 50'],
+        'code' => ['nullable', 'string', 'max: 9', 'unique:clients,code'],
         'picture' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
     ]);
 
@@ -47,10 +48,27 @@ class EditClient extends Controller
       $client->logo = $pic;
     }
 
+    // handle code
+  $code = $request->input('code');
+  if ($code) {
+    $is_valid_code = false;
+    if (strpos($code, 'RSC: ') === 0 && preg_match('/^RSC: \d{4}$/', $code)) {
+      $is_valid_code = true;
+    } elseif (preg_match('/^\d{1,4}$/', $code)) {
+      $code = str_pad($code, 4, '0', STR_PAD_LEFT);
+      $code = 'RSC: ' . $code;
+      $is_valid_code = true;
+    }
+    if (!$is_valid_code) {
+      return redirect()->back()->withInput()->withErrors(['code' => 'The code is invalid.']);
+    }
+  }
+
     // Update the user's information
     $client->name = $request->input('name');
     $client->tin = $request->input('tin');
     $client->phone = $request->input('phone');
+    $client->code = $code;
     $client->address = $request->input('address');
     $client->save();
 

@@ -65,46 +65,6 @@
                                 <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                 @enderror
                               </div>
-
-
-
-
-                                <div class="table-responsive text-nowrap">
-                                  <table class="table table-dark">
-                                    <thead>
-                                <tr>
-                                  <th class="sortable" data-sort-by="name">
-                                    Name
-                                  </th>
-                                  <th class="sortable" data-sort-by="title">
-                                    Title
-                                  </th>
-                                  <th class="sortable" data-sort-by="email">
-                                    Email
-                                  </th>
-                                  <th class="sortable" data-sort-by="phone">
-                                    Phone
-                                  </th>
-                                </tr>
-                              </thead>
-                                    <tbody class="table-border-bottom-0">
-                                      @foreach ($contactObjects as $contact )
-                                      <tr>
-                                        <td>{{$contact->name}}</td>
-                                        <td>{{$contact->email}}</td>
-                                        <td>{{$contact->title}}</td>
-                                        <td>{{$contact->phone}}</td>
-                                      </tr>
-                                      @endforeach
-                                    </tbody>
-                                  </table>
-                                </div>
-                                <div class="d-flex justify-content-center mt-3">
-
-                                  </div>
-                              </div>
-
-
                               <div class="d-flex justify-content-end">
                                 <button type="button" class="btn btn-outline-secondary btn-md me-3" data-bs-dismiss="modal">Close</button>
                                 <button class="btn btn-primary">Sign up</button>
