@@ -14,10 +14,28 @@ namespace App\Models{
 /**
  * App\Models\Client
  *
+ * @property int $id
+ * @property string $logo
+ * @property string $name
+ * @property string $tin
+ * @property string $code
+ * @property string $address
+ * @property string $phone
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
  * @method static \Database\Factories\ClientFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Client newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Client newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Client query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereCode($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereLogo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereTin($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Client whereUpdatedAt($value)
  */
 	class Client extends \Eloquent {}
 }
@@ -26,11 +44,27 @@ namespace App\Models{
 /**
  * App\Models\Contact
  *
- * @property-read \App\Models\Client|null $client
+ * @property int $id
+ * @property int $client_id
+ * @property string $name
+ * @property string $title
+ * @property string $email
+ * @property string $phone
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Client $client
  * @method static \Database\Factories\ContactFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Contact newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Contact newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Contact query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact wherePhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereUpdatedAt($value)
  */
 	class Contact extends \Eloquent {}
 }
@@ -46,9 +80,6 @@ namespace App\Models{
  * @property string $email
  * @property \Illuminate\Support\Carbon|null $email_verified_at
  * @property string $password
- * @property string|null $two_factor_secret
- * @property string|null $two_factor_recovery_codes
- * @property string|null $two_factor_confirmed_at
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -56,8 +87,8 @@ namespace App\Models{
  * @property string $picture
  * @property string $phone
  * @property int $ativo
+ * @property int $force_password_reset
  * @property string $role
- * @property int|null $force_password_reset
  * @property-read mixed $firstname
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
@@ -82,9 +113,6 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRole($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereSigla($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorConfirmedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorRecoveryCodes($value)
- * @method static \Illuminate\Database\Eloquent\Builder|User whereTwoFactorSecret($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}

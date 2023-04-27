@@ -18,10 +18,10 @@
                     <tbody class="table-border-bottom-0" id="contacts-table">
                         @foreach ($contacts as $contact )
                         <tr>
-                            <td>{{$contact->name}}</td>
-                            <td>{{$contact->email}}</td>
-                            <td>{{$contact->title}}</td>
-                            <td>{{$contact->phone}}</td>
+                            <td>{{$contact->contact_name}}</td>
+                            <td>{{$contact->contact_email}}</td>
+                            <td>{{$contact->contact_title}}</td>
+                            <td>{{$contact->contact_phone}}</td>
                         </tr>
                         @endforeach
                     </tbody>

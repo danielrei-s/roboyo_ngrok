@@ -83,59 +83,17 @@
                 <hr class="my-1">
                 <div class="card-body">
                   <div class="row">
-                                <div class="col-md-2">
-                                  <form id="formAuthentication" action="{{ route('auth-register-contact') }}" method="POST">
-                                    @csrf {{-- Evitar ataques csrf --}}
-                                    <input type="hidden" name="client_id" value="{{ $client->id }}">
-                                        <h6 class="text-center mb-4"> Add Contact</h6>
-                                      <div class="mb-2 mt-2">
-                                          <label for="name" class="form-label" style="font-size: 10px;" hidden>Name</label>
-                                          <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{old('name')}}">
-                                          @error('name')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                          @enderror
-                                        </div>
+                                <div class="col-md-2 mt-4">
+                                  @component('content.management.add-contact-form', ['client' => $client])
 
-                                        <div class="mb-2">
-                                          <label for="email" class="form-label" style="font-size: 10px;" hidden>Email</label>
-                                          <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Email" value="{{old('email')}}">
-                                          @error('email')
-                                          <div class="invalid-feedback">{{ $message }}</div>
-                                          @enderror
-                                        </div>
+                                  @endcomponent
 
-                                      <div class="mb-2">
-                                        <label for="title" class="form-label" style="font-size: 10px;" hidden>Title</label>
-                                        <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Job title" value="{{old('title')}}">
-                                        @error('title')
-                                          <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                      </div>
+                                  @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
 
-                                      <div class="mb-2">
-                                        <label for="phone" class="form-label" style="font-size: 10px;" hidden>Phone number</label>
-                                        <input type="text" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Phone" value="{{old('phone')}}">
-                                        @error('phone')
-                                          <div class="invalid-feedback">{{ $message }}</div>
-                                          @enderror
-                                      </div>
-
-                                        <input type="hidden" name="client_id" value="{{ $client->id }}"> {{-- hidden client id value for submition --}}
-
-                                        <div class="text-center">
-                                          <button type="submit" class="btn btn-primary btn-sm">Add</button>
-                                        </div>
-                                        </form>
-                                      </div>
-                                    <!-- / ADD CONTACT FORM -->
-
-                @component('content.management.create-contact', ['client' => $client, 'contacts' => $contacts])
-
-                @endcomponent
-                {{-- --}}
+                                  @endcomponent
+                                </div>
                   </div>
                 </div>
-              </div>
 
         <script>  //show a preview of the photo about to be uploaded
           const inputPicture = document.querySelector('#picture');

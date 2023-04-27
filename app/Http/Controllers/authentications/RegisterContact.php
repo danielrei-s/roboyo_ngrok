@@ -18,10 +18,10 @@ class RegisterContact extends Controller
   {
       $validator = Validator::make($request->all(), [
           'client_id' => ['required', 'string'],
-          'name' => ['required', 'string', 'max:50'],
-          'title' => ['nullable', 'string', 'max:25'],
-          'email' => ['required', 'email'],
-          'phone' => ['nullable', 'numeric']
+          'contact_name' => ['required', 'string', 'max:50'],
+          'contact_title' => ['nullable', 'string', 'max:25'],
+          'contact_email' => ['required', 'email'],
+          'contact_phone' => ['nullable', 'numeric']
       ]);
 
       if ($validator->fails()) {
@@ -34,10 +34,10 @@ class RegisterContact extends Controller
 
       // create the contact
     $attributes['client_id'] = $request->input('client_id');
-    $attributes['name'] = $request->input('name');
-    $attributes['title'] = $request->input('title') ?? 'Not provided';
-    $attributes['email'] = $request->input('email');
-    $attributes['phone'] = $request->input('phone') ?? 'Not provided';
+    $attributes['contact_name'] = $request->input('contact_name');
+    $attributes['contact_title'] = $request->input('contact_title') ?? 'Not provided';
+    $attributes['contact_email'] = $request->input('contact_email');
+    $attributes['contact_phone'] = $request->input('contact_phone') ?? 'Not provided';
 
     $contact = Contact::create($attributes);
 

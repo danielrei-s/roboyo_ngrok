@@ -65,7 +65,7 @@
                                                   <h5 class="modal-title" id="modalContactTitle"></h5>
                                                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                @component('content.management.create-contact', ['client' => $client, 'contacts' => $contacts])
+                                                @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
 
                                                   @endcomponent
                                           </div>

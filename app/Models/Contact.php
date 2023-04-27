@@ -11,10 +11,10 @@ class Contact extends Model
 
     protected $fillable = [
         'client_id',
-        'name',
-        'title',
-        'email',
-        'phone',
+        'contact_name',
+        'contact_title',
+        'contact_email',
+        'contact_phone',
     ];
 
     public function client()
