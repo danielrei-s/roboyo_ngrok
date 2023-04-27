@@ -87,10 +87,11 @@
                                   @component('content.management.add-contact-form', ['client' => $client])
 
                                   @endcomponent
+                                  <div class="col-md-10">
+                                    @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
 
-                                  @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
-
-                                  @endcomponent
+                                    @endcomponent
+                                  </div>
                                 </div>
                   </div>
                 </div>

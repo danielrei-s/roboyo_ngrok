@@ -59,17 +59,17 @@
 
                                   <!-- Modal -->
                                   <div class="modal fade" id="modalContact" tabindex="-1" aria-hidden="true">
-                                      <div class="modal-dialog modal-dialog-centered" role="document" >
-                                          <div class="modal-content" style="width: 400rem;">
-                                              <div class="modal-header">
-                                                  <h5 class="modal-title" id="modalContactTitle"></h5>
-                                                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
+                                    <div class="modal-dialog modal-dialog-centered" role="document" >
+                                      <div class="modal-content" style="width: 400rem;">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="modalContactTitle"></h5>
+                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                          @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
 
-                                                  @endcomponent
-                                          </div>
+                                          @endcomponent
                                       </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>

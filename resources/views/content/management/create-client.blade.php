@@ -3,7 +3,7 @@
 <div class="col-lg-4 col-md-6">
   <div class="mt-3">
     <button type="button" class="btn btn-primary rounded-pill" data-bs-toggle="modal" data-bs-target="#modalToggle" title="Add Client">
-      + <i class='bx bxs-briefcase-alt-2' style='font-size: 35px'></i>
+      <i class='bx bxs-folder-plus' style='font-size: 30px'></i>
     </button>
 
     <!-- Modal 1-->
