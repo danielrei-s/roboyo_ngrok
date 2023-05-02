@@ -22,6 +22,9 @@
 <!-- Place this tag in your head or just before your close body tag. -->
 <script async defer src="https://buttons.github.io/buttons.js"></script>
 
+<!-- Table Edit -->
+<script src="https://markcell.github.io/jquery-tabledit/assets/js/tabledit.min.js"></script>
+
 <!-- Chamada de Alphine.js -->
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.11.1/dist/cdn.min.js"></script>
 

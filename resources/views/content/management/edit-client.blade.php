@@ -83,7 +83,7 @@
                 <hr class="my-1">
                 <div class="card-body">
                   <div class="row">
-                                <div class="col-md-2 mt-4">
+                                <div class="col-md-2 mt-5">
                                   @component('content.management.add-contact-form', ['client' => $client])
 
                                   @endcomponent

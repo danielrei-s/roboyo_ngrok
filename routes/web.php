@@ -97,7 +97,13 @@ Route::middleware(['reset_password'])->group(function () {
   ->name('auth-edit-client')
     ->middleware('admin');
 
-    //Route for contact pagination on edit client
+  // edit contact
+  Route::post('/auth/edit-contact', $controller_path . '\authentications\EditContact@edit')
+  ->name('auth-edit-contact')
+    ->middleware('admin');
+
+
+  //Route for contact pagination on edit client
   Route::get('/client/{id}/contacts', $controller_path . '\pages\PagesClientProfile@getContacts');
 
 
@@ -112,18 +118,30 @@ Route::middleware(['reset_password'])->group(function () {
   ->name('client-management.destroy')
     ->middleware('admin');
 
+  //delete contact from database
+  Route::delete('/client-contact/{id}', $controller_path . '\management\ContactManagement@destroy')
+  ->name('contact-management.destroy')
+    ->middleware('admin');
+
+
   //block user
   Route::put('/users/{user}/block', $controller_path . '\management\UserManagement@blockUser')
     ->name('users.block')
       ->middleware('admin');
+
 
   //force user to reset password
   Route::put('/users/{user}/forcePasswordReset', $controller_path . '\management\UserManagement@forcePasswordReset')
   ->name('users.forcePasswordReset')
     ->middleware('admin');
 
-
 });
+
+
+Route::get('tabledit', $controller_path . '\TableditController@index');
+
+Route::post('tabledit/action',$controller_path . '\TableditController@action')->name('tabledit.action');
+
 
 //---------------------------- forgot password handler ------------------------------------//
 //1
