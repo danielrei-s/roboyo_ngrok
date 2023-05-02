@@ -138,9 +138,6 @@ Route::middleware(['reset_password'])->group(function () {
 });
 
 
-Route::get('tabledit', $controller_path . '\TableditController@index');
-
-Route::post('tabledit/action',$controller_path . '\TableditController@action')->name('tabledit.action');
 
 
 //---------------------------- forgot password handler ------------------------------------//

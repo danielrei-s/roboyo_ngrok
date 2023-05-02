@@ -39,6 +39,7 @@
                                 <i class="bx bx-edit me-1" title="Edit Contact"></i> Edit
                               </button>
 
+
                               {{-- form to handle the DELETE --}}
                               <a class="dropdown-item" href="#"  data-bs-toggle="tooltip"
                                 data-bs-original-title="Delete contact"
@@ -63,6 +64,6 @@
                     @endif
                   </div>
                 </div>
-                </div>
-              </div>
+
+
             <!-- /Contact table -->

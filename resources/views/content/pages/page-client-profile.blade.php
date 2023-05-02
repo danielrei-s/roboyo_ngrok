@@ -68,6 +68,8 @@
                                           @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
 
                                           @endcomponent
+                                        </div>
+                                      </div>
                                       </div>
                                     </div>
                                   </div>
