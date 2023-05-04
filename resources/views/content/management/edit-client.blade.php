@@ -83,16 +83,23 @@
                 <hr class="my-1">
                 <div class="card-body">
                   <div class="row">
-                                <div class="col-md-2 mt-5">
-                                  @component('content.management.add-contact-form', ['client' => $client])
+                    <div id="add-contact-form" class="mb-3">
+                      @component('content.management.add-contact-form', ['client' => $client])
+                      @endcomponent
+                    </div>
+                    <div id="edit-contact-form" class="mb-3" @if(!isset($contacts->id)) style="display:none;" @endif>
+                      @if(isset($contacts->id))
+                        @component('content.management.edit-contact-form', ['client' => $client, 'contacts' => $contacts ])
+                        @endcomponent
+                      @endif
+                    </div>
 
-                                  @endcomponent
-                                  <div class="col-md-10">
-                                    @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
+                      <div class="col-md-10">
+                        @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
 
-                                    @endcomponent
-                                  </div>
-                                </div>
+                        @endcomponent
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -114,6 +121,25 @@
           });
       </script>
 
+      <script>
+       var editVisible = false;
+
+        function toggleEdit(contactId) {
+          if (editVisible) {
+            // hide edit-contact-form
+            document.getElementById('edit-contact-form').style.display = 'none';
+            // show add-contact-form
+            document.getElementById('add-contact-form').style.display = 'block';
+            editVisible = false;
+          } else {
+            // hide add-contact-form
+            document.getElementById('add-contact-form').style.display = 'none';
+            // show edit-contact-form
+            document.getElementById('edit-contact-form').style.display = 'block';
+            editVisible = true;
+          }
+        }
+        </script>
 
 
 
