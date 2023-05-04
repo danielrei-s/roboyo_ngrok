@@ -7,9 +7,9 @@
 
 
         <!-- Modal -->
-        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document" >
-                <div class="modal-content" style="width: 300rem;">
+        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true" style="--bs-modal-width: 65rem;">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modalCenterTitle">Edit {{$client->name}}'s client profile</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -18,7 +18,7 @@
                       @csrf {{-- Evitar ataques csrf --}}
                       <input type="hidden" name="client_id" value="{{ $client->id }}"> {{-- Send user ID --}}
                       <div class="row">
-                        <div class="col-md-5 mb-3">
+                        <div class="col-md-4 mb-3">
                           <div class="d-flex justify-content-center align-items-center">
                             <label for="picture" style="cursor: pointer;">
                               <div class="rounded-circle overflow-hidden" style="width: 175px; height: 175px;">
@@ -81,27 +81,33 @@
                   </div>
                 </form>
                 <hr class="my-1">
+
                 <div class="card-body">
                   <div class="row">
-                    <div id="add-contact-form" class="mb-3">
-                      @component('content.management.add-contact-form', ['client' => $client])
-                      @endcomponent
-                    </div>
-                    <div id="edit-contact-form" class="mb-3" @if(!isset($contacts->id)) style="display:none;" @endif>
-                      @if(isset($contacts->id))
-                        @component('content.management.edit-contact-form', ['client' => $client, 'contacts' => $contacts ])
-                        @endcomponent
-                      @endif
-                    </div>
-
-                      <div class="col-md-10">
+                    <div class="col-md-10">
+                      <div id="show-contact-table">
                         @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
-
                         @endcomponent
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div id="add-contact-form" class="d-flex justify-content-end">
+                        @if ($contacts)
+                            <!-- Show the "Add Contact" component if $contact is not set -->
+                            @component('content.management.add-contact-form', ['client' => $client])
+                            @endcomponent
+                          @else
+                            {{-- <!-- Show the "Edit Contact" component if $contact is set -->
+                            @component('content.management.edit-contact-form', ['contacts' => $contacts])
+                            @endcomponent --}}
+                        @endif
                       </div>
                     </div>
                   </div>
                 </div>
+              </div>
+
+
 
         <script>  //show a preview of the photo about to be uploaded
           const inputPicture = document.querySelector('#picture');
@@ -121,25 +127,29 @@
           });
       </script>
 
-      <script>
-       var editVisible = false;
+<script>
+  var editVisible = false;
 
-        function toggleEdit(contactId) {
-          if (editVisible) {
-            // hide edit-contact-form
-            document.getElementById('edit-contact-form').style.display = 'none';
-            // show add-contact-form
-            document.getElementById('add-contact-form').style.display = 'block';
-            editVisible = false;
-          } else {
-            // hide add-contact-form
-            document.getElementById('add-contact-form').style.display = 'none';
-            // show edit-contact-form
-            document.getElementById('edit-contact-form').style.display = 'block';
-            editVisible = true;
-          }
-        }
-        </script>
+  function toggleEdit(contactId) {
+    if (editVisible) {
+      // hide edit-contact-form
+      document.getElementById('edit-contact-form').style.display = 'none';
+      // show add-contact-form
+      document.getElementById('add-contact-form').style.display = 'block';
+      editVisible = false;
+    } else {
+      // hide add-contact-form
+      document.getElementById('add-contact-form').style.display = 'none';
+      // show edit-contact-form
+      document.getElementById('edit-contact-form').style.display = 'block';
+      editVisible = true;
+    }
+
+
+  }
+</script>
+
+
 
 
 

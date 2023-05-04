@@ -4,7 +4,7 @@
   <form id="formAuthentication" action="{{ route('auth-register-contact') }}" method="POST">
     @csrf {{-- Evitar ataques csrf --}}
     <input type="hidden" name="client_id" value="{{ $client->id }}">
-        <h6 class="text-center mb-4"> Add Contact</h6>
+        <h6 class="text-center mb-4" style="font-size: .75rem; letter-spacing: 1px; color: #566a7f; margin-top: 4.3rem "> ADD CONTACT</h6>
       <div class="mb-2 mt-2">
           <label for="contact_name" class="form-label" style="font-size: 10px;" hidden>Name</label>
           <input type="text" class="form-control @error('contact_name') is-invalid @enderror" id="contact_name" name="contact_name" placeholder="Name" value="{{old('contact_name')}}">
@@ -23,7 +23,7 @@
 
       <div class="mb-2">
         <label for="contact_title" class="form-label" style="font-size: 10px;" hidden>Job Title</label>
-        <input type="text" class="form-control @error('contact_title') is-invalid @enderror" id="contact_title" name="contact_title" placeholder="Job contact_title" value="{{old('contact_title')}}">
+        <input type="text" class="form-control @error('contact_title') is-invalid @enderror" id="contact_title" name="contact_title" placeholder="Job " value="{{old('contact_title')}}">
         @error('contact_title')
           <div class="invalid-feedback">{{ $message }}</div>
         @enderror

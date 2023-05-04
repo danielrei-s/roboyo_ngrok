@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Password;
 
 // Used on password reset
 use App\Models\User;
+use App\Models\Contact;
+use App\Models\Client;
 use Illuminate\Auth\Events\PasswordReset;
 
 use Illuminate\Support\Facades\Hash;

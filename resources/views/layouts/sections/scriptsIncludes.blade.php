@@ -4,6 +4,9 @@
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="{{ asset('assets/js/config.js') }}"></script>
 
+<!-- JSON 2 -->
+<script src="{{ asset('assets/js/json2.js') }}"></script>
+
 <!-- beautify ignore:end -->
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
