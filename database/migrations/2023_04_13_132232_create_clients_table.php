@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
           $table->id();
           $table->string('logo')->default('assets/img/clients/sonae.jpg');
-          $table->string('name', 25);
+          $table->string('name', 45);
           $table->string('tin')->unique();
           $table->string('code')->unique();
           $table->string('address');
