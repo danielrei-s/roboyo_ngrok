@@ -9,6 +9,8 @@
 
 <!-- beautify ignore:end -->
 
+<script src="{{ asset('assets/vendor/js/jquery.tabledit.js') }}" async></script>
+
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="async" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
 <script>

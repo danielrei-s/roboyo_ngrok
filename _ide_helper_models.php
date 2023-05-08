@@ -46,10 +46,10 @@ namespace App\Models{
  *
  * @property int $id
  * @property int $client_id
- * @property string $name
- * @property string $title
- * @property string $email
- * @property string $phone
+ * @property string $contact_name
+ * @property string $contact_title
+ * @property string $contact_email
+ * @property string $contact_phone
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Client $client
@@ -58,12 +58,12 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Contact newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Contact query()
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereClientId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereContactEmail($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereContactName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereContactPhone($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Contact whereContactTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contact whereEmail($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contact whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contact wherePhone($value)
- * @method static \Illuminate\Database\Eloquent\Builder|Contact whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Contact whereUpdatedAt($value)
  */
 	class Contact extends \Eloquent {}

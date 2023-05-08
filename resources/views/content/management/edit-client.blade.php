@@ -1,13 +1,13 @@
 <!-- Vertically Centered Modal -->
 
         <!-- Button trigger modal -->
-        <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="Edit client" data-bs-target="#modalCenter" title="Edit client profile" aria-describedby="tooltip674202">
+        <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="Edit client" data-bs-target="#modalClientEdit" title="Edit client profile" aria-describedby="tooltip674202">
           <i class='bx bx-edit' style="font-size: 30px"></i>
         </a>
 
 
         <!-- Modal -->
-        <div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true" style="--bs-modal-width: 65rem;">
+        <div class="modal fade" id="modalClientEdit" aria-labelledby="modalClientEditLabel"tabindex="-1" aria-hidden="true" style="--bs-modal-width: 65rem;">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -86,7 +86,8 @@
                   <div class="row">
                     <div class="col-md-10">
                       <div id="show-contact-table">
-                        @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
+                        @component('content.live-table', ['data' => $contacts])
+
                         @endcomponent
                       </div>
                     </div>
@@ -97,35 +98,45 @@
                             @component('content.management.add-contact-form', ['client' => $client])
                             @endcomponent
                           @else
-                            {{-- <!-- Show the "Edit Contact" component if $contact is set -->
+                            <!-- Show the "Edit Contact" component if $contact is set -->
                             @component('content.management.edit-contact-form', ['contacts' => $contacts])
-                            @endcomponent --}}
+                            @endcomponent
                         @endif
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+@if ($errors->any())
+  <script>
+      $(document).ready(function(){
+          $('#modalClientEdit').modal('show');
+      });
+  </script>
+@endif
 
 
 
-        <script>  //show a preview of the photo about to be uploaded
-          const inputPicture = document.querySelector('#picture');
-          const picturePreview = document.querySelector('#picturePreview');
+<script>  //show a preview of the photo about to be uploaded
+  const inputPicture = document.querySelector('#picture');
+  const picturePreview = document.querySelector('#picturePreview');
 
-          inputPicture.addEventListener('change', () => {
-              const file = inputPicture.files[0];
-              const reader = new FileReader();
+  inputPicture.addEventListener('change', () => {
+      const file = inputPicture.files[0];
+      const reader = new FileReader();
 
-              reader.addEventListener('load', () => {
-                  picturePreview.setAttribute('src', reader.result);
-              });
+      reader.addEventListener('load', () => {
+          picturePreview.setAttribute('src', reader.result);
+      });
 
-              if (file) {
-                  reader.readAsDataURL(file);
-              }
-          });
-      </script>
+      if (file) {
+          reader.readAsDataURL(file);
+      }
+  });
+</script>
 
 <script>
   var editVisible = false;
@@ -148,6 +159,7 @@
 
   }
 </script>
+
 
 
 

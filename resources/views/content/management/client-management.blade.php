@@ -91,7 +91,7 @@
 @if ($errors->any())
     <script>
         $(document).ready(function(){
-            $('#modalCenter').modal('show');
+            $('#modalToggle').modal('show');
         });
     </script>
   @endif

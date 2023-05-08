@@ -34,9 +34,26 @@
                   <div class="dropdown-menu">
 
                     {{-- display contact information or form with editable fields --}}
-                    <button class="dropdown-item" onclick="toggleEdit({{$contact->id}})">
+                    <a href="#" class="dropdown-item" data-bs-toggle="modal" data-bs-original-title="View Contacts" data-bs-target="#modalEditContact" title="View client contacts" aria-describedby="tooltip674202">
                       <i class="bx bx-edit me-1" title="Edit Contact"></i> Edit
-                    </button>
+                    </a>
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalEditContact" tabindex="-1" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered" role="document" >
+                        <div class="modal-content" style="width: 400rem;">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalContactTitle"></h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                            @component('content.management.edit-contact-form', ['contact' => $contact])
+
+                            @endcomponent
+                          </div>
+                        </div>
+                        </div>
 
 
                     {{-- form to handle the DELETE --}}

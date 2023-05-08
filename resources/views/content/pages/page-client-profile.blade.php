@@ -65,8 +65,10 @@
                                           <h5 class="modal-title" id="modalContactTitle"></h5>
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
-                                          @component('content.management.show-contact-table', ['client' => $client, 'contacts' => $contacts])
 
+                                          @component('content.live-table')
+                                            {{-- @slot('clients', $clients) --}}
+                                            @slot('data', $contacts)
                                           @endcomponent
                                         </div>
                                       </div>
@@ -87,9 +89,9 @@
                       @method('DELETE')
                     </form>
 
-                    {{-- view button --}}
-                    @component('content.management.edit-client')
-                    @slot('client', $client)
+                    {{-- EDIT button --}}
+                      @component('content.management.edit-client')
+                        @slot('client', $client)
                         @slot('contacts', $contacts)
                       @endcomponent
                       </div>
@@ -149,13 +151,13 @@
           <!-- /Account -->
       </div>
 
-      @if ($errors->any())
-      <script>
-          $(document).ready(function(){
-              $('#modalCenter').modal('show');
-          });
-      </script>
-    @endif
+@if ($errors->any())
+    <script>
+      $(document).ready(function(){
+          $('#modalCenter').modal('show');
+      });
+    </script>
+@endif
 
 <script>  //show a preview of the photo about to be uploaded
   const inputPicture = document.querySelector('#picture');
