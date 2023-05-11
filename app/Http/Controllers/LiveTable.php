@@ -75,7 +75,7 @@ class LiveTable extends Controller
   $id = $request->input('id');
 
   // Check if the email address already exists in the database, excluding the current contact being edited.
-  $contact = Contact::where('email', $contact_email)->where('id', '!=', $id)->first();
+  $contact = Contact::where('contact_email', $contact_email)->where('id', '!=', $id)->first();
 
   if ($contact) {
     return 'exists';
