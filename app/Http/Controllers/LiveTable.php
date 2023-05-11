@@ -59,13 +59,13 @@ class LiveTable extends Controller
 
     function delete_data(Request $request)
     {
-        if($request->ajax())
-        {
-            DB::table('contacts')
-                ->where('id', $request->id)
-                ->delete();
-            echo '<div class="alert alert-success">Contact Deleted</div>';
-        }
+      if($request->ajax())
+      {
+          DB::table('contacts')
+              ->where('id', $request->id)
+              ->delete();
+          echo '<div class="alert alert-success">Contact Deleted</div>';
+      }
     }
 
     public function checkEmail(Request $request)
