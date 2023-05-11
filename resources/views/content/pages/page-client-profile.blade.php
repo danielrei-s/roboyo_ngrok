@@ -66,9 +66,8 @@
                                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
 
-                                          @component('content.live-table')
-                                            {{-- @slot('clients', $clients) --}}
-                                            @slot('data', $contacts)
+                                          @component('livetable', ['contacts' => $contacts, 'client' => $client])
+
                                           @endcomponent
                                         </div>
                                       </div>
@@ -78,25 +77,41 @@
                                 </div>
                               </div>
 
-                                {{-- anchor to link the DELETE --}}
-                     <a class="btn p-0" href="#" data-bs-toggle="tooltip" aria-label="Delete client" data-bs-original-title="Delete client" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$client->name}}?')) { document.getElementById('delete-client-{{ $client->id }}').submit(); }">
-                      <i class="bx bx-trash me-1" title="Delete Client" style="font-size: 32px;"></i>
-                    </a>
 
-                    {{-- form to handle the DELETE --}}
-                    <form id="delete-client-{{ $client->id }}" action="{{ route('client-management.destroy', $client->id) }}" method="POST" style="display: none;">
-                      @csrf
-                      @method('DELETE')
-                    </form>
+
+                    {{-- anchor to link the DELETE --}}
+                      <a class="btn p-0" href="#" data-bs-toggle="tooltip" aria-label="Delete client" data-bs-original-title="Delete client" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$client->name}}?')) { document.getElementById('delete-client-{{ $client->id }}').submit(); }">
+                        <i class="bx bx-trash me-1" title="Delete Client" style="font-size: 32px;"></i>
+                      </a>
+
+                        {{-- form to handle the DELETE --}}
+                      <form id="delete-client-{{ $client->id }}" action="{{ route('client-management.destroy', $client->id) }}" method="POST" style="display: none;">
+                        @csrf
+                        @method('DELETE')
+                      </form>
+                    {{-- /DELETE FORM --}}
 
                     {{-- EDIT button --}}
-                      @component('content.management.edit-client')
-                        @slot('client', $client)
-                        @slot('contacts', $contacts)
-                      @endcomponent
+                    <!-- Button trigger modal -->
+                    <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="Edit client" data-bs-target="#modalClientEdit" title="Edit client profile" aria-describedby="tooltip674202">
+                      <i class='bx bx-edit' style="font-size: 30px"></i>
+                    </a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="modalClientEdit" aria-labelledby="modalClientEditLabel" tabindex="-1" aria-hidden="true" style="--bs-modal-width: 65rem;">
+                      <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="modalCenterTitle">Edit {{$client->name}}'s client profile</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          @component('content.management.edit-client')
+                            @slot('client', $client)
+                            @slot('contacts', $contacts)
+                          @endcomponent
+                        </div>
                       </div>
                     </div>
-                  </div>
                 </div>
 
               <hr class="my-1">
@@ -151,13 +166,30 @@
           <!-- /Account -->
       </div>
 
-@if ($errors->any())
+  @if ($errors->any())
     <script>
-      $(document).ready(function(){
-          $('#modalCenter').modal('show');
-      });
+      $(document).ready(function() {
+        setTimeout(function() {   //necessary for modal to fully load and attach to DOM before being called again.
+            $('#modalClientEdit').modal('show');
+              }, 1);
+        });
     </script>
-@endif
+  @endif
+
+  {{-- <script>
+    $(document).ready(function() {
+      console.log("chegou 2");
+      $('a[data-bs-target="#modalEditContact"]').click(function() {
+        setTimeout(function() {
+          console.log("chegou 3");
+          $('#modalClientEdit').modal('hide');
+          console.log("chegou 4");
+          $('#modalCenterEditContact').modal('show');
+        }, 50);
+         // Delay the modal change by 1 second (1000 milliseconds)
+      });
+    });
+  </script> --}}
 
 <script>  //show a preview of the photo about to be uploaded
   const inputPicture = document.querySelector('#picture');

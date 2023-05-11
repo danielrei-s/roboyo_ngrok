@@ -18,7 +18,7 @@ class RegisterContact extends Controller
   {
       $validator = Validator::make($request->all(), [
           'client_id' => ['required', 'string'],
-          'contact_name' => ['required', 'string', 'max:50'],
+          'contact_name' => ['nullable', 'string', 'max:50'],
           'contact_title' => ['nullable', 'string', 'max:25'],
           'contact_email' => ['required', 'email'],
           'contact_phone' => ['nullable', 'numeric']

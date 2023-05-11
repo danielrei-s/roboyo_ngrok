@@ -25,7 +25,7 @@ class EditClient extends Controller
         'tin' => ['required', 'numeric', 'digits:9', Rule::unique('clients')->ignore($client)],
         'phone' => ['nullable', 'regex:/^[\d-]{0,25}$/'],
         'address' => ['nullable', 'string', 'max: 50'],
-        'code' => ['nullable', 'string', 'max: 9', 'unique:clients,code'],
+        'code' => ['nullable', 'string', 'max: 9', Rule::unique('clients')->ignore($client)],
         'picture' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
     ]);
 

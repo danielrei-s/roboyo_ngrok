@@ -4,12 +4,12 @@
 <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
 <script src="{{ asset('assets/js/config.js') }}"></script>
 
-<!-- JSON 2 -->
-<script src="{{ asset('assets/js/json2.js') }}"></script>
+{{-- <!-- JSON 2 -->
+<script src="{{ asset('assets/js/json2.js') }}"></script> --}}
 
 <!-- beautify ignore:end -->
 
-<script src="{{ asset('assets/vendor/js/jquery.tabledit.js') }}" async></script>
+{{-- <script src="{{ asset('assets/vendor/js/jquery.tabledit.js') }}" async></script> --}}
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async="async" src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>

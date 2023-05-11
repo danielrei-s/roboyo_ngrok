@@ -147,6 +147,15 @@ Route::get('tabledit', $controller_path . '\TableditController@index');
 
 Route::post('tabledit/action', $controller_path . '\TableditController@action')->name('tabledit.action');
 
+// teste2
+
+Route::get('/livetable', $controller_path .'\LiveTable@index'); //not used
+Route::get('/livetable/fetch_data/{id}', $controller_path .'\LiveTable@fetch_data');
+Route::post('/livetable/add_data', $controller_path .'\LiveTable@add_data')->name('livetable.add_data'); //not used
+Route::post('/livetable/update_data', $controller_path .'\LiveTable@update_data')->name('livetable.update_data');
+Route::post('/livetable/delete_data', $controller_path .'\LiveTable@delete_data')->name('livetable.delete_data');
+Route::post('/livetable/check-email', $controller_path .'\LiveTable@checkEmail')->name('livetable.check_email');
+
 
 
 //---------------------------- forgot password handler ------------------------------------//
