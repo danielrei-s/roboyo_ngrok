@@ -38,10 +38,10 @@
               <div class="d-flex align-items-start align-items-sm-center gap-4">
                   <img src="{{ asset($client->logo) }}"
                       alt="{{ $client->name }}" class="d-block rounded"
-                      height="120" width="120" id="userAvatar" />
+                      height="150" width="150" id="userAvatar" />
                   <div class="button-wrapper">
                     <div class="container">
-                      <p class="fw-bold fs-4">{{ $client->code }} |<span class="fw-semibold"> {{ $client->name }}</span></p>
+                      <p class="fw-bold fs-4">{{ $client->code }} |<span class="fw-semibold small"> {{ $client->name }}</span></p>
                       <p class="fs-9"><i class="bx bxs-buildings"></i><span class="fw-semibold"> Address: </span>{{ $client->address }}</p>
                       <p class="fs-9"><i class="bx bxs-id-card"></i><span class="fw-semibold"> TIN: </span>{{ $client->tin }}</p>
                       <p class="fs-9"><i class="bx bxs-phone"></i><span class="fw-semibold"> Phone: </span>{{ $client->phone }}</p>
@@ -52,13 +52,13 @@
                         <div class="button-wrapper">
                             <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
                                 <div class="d-flex flex-column align-items-start">
-                                  <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="View Contacts" data-bs-target="#modalContact" title="View client contacts" aria-describedby="tooltip674202">
+                                  {{-- <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="View Contacts" data-bs-target="#modalContact" title="View client contacts" aria-describedby="tooltip674202">
                                     <i class='bx bx-sitemap' style="font-size: 30px"></i>
-                                  </a>
+                                  </a> --}}
 
 
                                   <!-- Modal -->
-                                  <div class="modal fade" id="modalContact" tabindex="-1" aria-hidden="true">
+                                  {{-- <div class="modal fade" id="modalContact" tabindex="-1" aria-hidden="true">
                                     <div class="modal-dialog modal-dialog-centered" role="document" >
                                       <div class="modal-content" style="width: 400rem;">
                                         <div class="modal-header">
@@ -71,20 +71,17 @@
                                           @endcomponent
                                         </div>
                                       </div>
-                                      </div>
+                                      </div> --}}
                                     </div>
                                   </div>
                                 </div>
                               </div>
-
-
-
                     {{-- anchor to link the DELETE --}}
                       <a class="btn p-0" href="#" data-bs-toggle="tooltip" aria-label="Delete client" data-bs-original-title="Delete client" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$client->name}}?')) { document.getElementById('delete-client-{{ $client->id }}').submit(); }">
                         <i class="bx bx-trash me-1" title="Delete Client" style="font-size: 32px;"></i>
                       </a>
 
-                        {{-- form to handle the DELETE --}}
+                    {{-- form to handle the DELETE --}}
                       <form id="delete-client-{{ $client->id }}" action="{{ route('client-management.destroy', $client->id) }}" method="POST" style="display: none;">
                         @csrf
                         @method('DELETE')
@@ -93,12 +90,12 @@
 
                     {{-- EDIT button --}}
                     <!-- Button trigger modal -->
-                    <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="Edit client" data-bs-target="#modalClientEdit" title="Edit client profile" aria-describedby="tooltip674202">
+                    {{-- <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="Edit client" data-bs-target="#modalClientEdit" title="Edit client profile" aria-describedby="tooltip674202">
                       <i class='bx bx-edit' style="font-size: 30px"></i>
-                    </a>
+                    </a> --}}
 
                     <!-- Modal -->
-                    <div class="modal fade" id="modalClientEdit" aria-labelledby="modalClientEditLabel" tabindex="-1" aria-hidden="true" style="--bs-modal-width: 65rem;">
+                    {{-- <div class="modal fade" id="modalClientEdit" aria-labelledby="modalClientEditLabel" tabindex="-1" aria-hidden="true" style="--bs-modal-width: 65rem;">
                       <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
                           <div class="modal-header">
@@ -111,56 +108,97 @@
                           @endcomponent
                         </div>
                       </div>
-                    </div>
+                    </div> --}}
                 </div>
 
               <hr class="my-1">
               <div class="card-body">
                 <!-- Accordion -->
                 <div class="row">
-                    <div class="col-md mb-4 mb-md-0">
-                        <div class="accordion mt-3" id="accordionExample">
-                          <!-- Accordion Item 1 -->
-                          <div class="card accordion-item active">
-                              <h2 class="accordion-header" id="headingOne">
-                                  <button type="button" class="accordion-button"
-                                      data-bs-toggle="collapse" data-bs-target="#accordionOne"
-                                      aria-expanded="true" aria-controls="accordionOne">
-                                      {{$client->name}} Stats
-                                  </button>
-                              </h2>
-
-                              <div id="accordionOne" class="accordion-collapse collapse show"
-                                 data-bs-parent="#accordionExample">
-                                  <div class="accordion-body">
-                                    <!-- Account -->
-                                      <!-- Form -->
-                                    <h5 class="card-header">TBC....</h5>
-                                    <div class="card-body">
-
-                                  </div>
-                              </div>
-                          </div>
-                            <!-- Accordion Item 2 -->
-                            <div class="card accordion-item">
-                              <h2 class="accordion-header" id="headingTwo">
-                                <button type="button" class="accordion-button collapsed"
-                                  data-bs-toggle="collapse" data-bs-target="#accordionTwo"
-                                  aria-expanded="false" aria-controls="accordionTwo">
-                                  {{$client->name}} Assessements
+                  <div class="col-md mb-4 mb-md-0">
+                      <div class="accordion mt-3" id="accordionExample">
+                        <!-- Accordion VIEW EDIT CONTACTS -->
+                        <div class="card accordion-item active">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button type="button" class="accordion-button"
+                                    data-bs-toggle="collapse" data-bs-target="#accordionOne"
+                                    aria-expanded="true" aria-controls="accordionOne">
+                                     View {{$client->name}}'s Contacts
                                 </button>
-                              </h2>
-                              <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
-                                <div class="accordion-body">
-                                    <div class="card-body">
+                            </h2>
 
+                            <div id="accordionOne" class="accordion-collapse collapse show"
+                               data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <!-- BODY FOR VIEW/EDIT CONTACTS -->
+                                  <div class="card-body">
+                                    <div class="align-items-center gap-2">
+                                      @component('content.management.show-contact-table')
+                                      @slot('client', $client)
+                                      @slot('contacts', $contacts)
+                                      @endcomponent
                                     </div>
+                                  </div>
                                 </div>
-                              </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+                          <!-- Accordion EDIT CLIENT -->
+                          <div class="card accordion-item">
+                            <h2 class="accordion-header" id="headingTwo">
+                              <button type="button" class="accordion-button collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#accordionTwo"
+                                aria-expanded="false" aria-controls="accordionTwo">
+                                Edit Client
+                              </button>
+                            </h2>
+                            <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                  <div class="card-body">
+                                      <!-- accordion body -->
+                                      @component('content.management.edit-client')
+                                      @slot('client', $client)
+                                      @slot('contacts', $contacts)
+                                      @endcomponent
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Accordion Status -->
+                          <div class="card accordion-item">
+                            <h2 class="accordion-header" id="headingThree">
+                              <button type="button" class="accordion-button collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#accordionThree"
+                                aria-expanded="false" aria-controls="accordionThree">
+                                Status
+                              </button>
+                            </h2>
+                            <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                  <div class="card-body">
+                                      <!-- body -->
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Accordion Assessements -->
+                          <div class="card accordion-item">
+                            <h2 class="accordion-header" id="headingFour">
+                              <button type="button" class="accordion-button collapsed"
+                                data-bs-toggle="collapse" data-bs-target="#accordionFour"
+                                aria-expanded="false" aria-controls="accordionFour">
+                                Assessments
+                              </button>
+                            </h2>
+                            <div id="accordionFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                              <div class="accordion-body">
+                                  <div class="card-body">
+                                      <!-- body -->
+                                  </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
               </div>
           </div>
           <!-- /Account -->
@@ -176,22 +214,7 @@
     </script>
   @endif
 
-  {{-- <script>
-    $(document).ready(function() {
-      console.log("chegou 2");
-      $('a[data-bs-target="#modalEditContact"]').click(function() {
-        setTimeout(function() {
-          console.log("chegou 3");
-          $('#modalClientEdit').modal('hide');
-          console.log("chegou 4");
-          $('#modalCenterEditContact').modal('show');
-        }, 50);
-         // Delay the modal change by 1 second (1000 milliseconds)
-      });
-    });
-  </script> --}}
-
-<script>  //show a preview of the photo about to be uploaded
+ <script>  //show a preview of the photo about to be uploaded
   const inputPicture = document.querySelector('#picture');
   const picturePreview = document.querySelector('#picturePreview');
 

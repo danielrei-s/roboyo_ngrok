@@ -1,15 +1,12 @@
 
  {{-- SHOW CONTACT COMPONENT --}}
 
-          <!-- Contact table -->
-
     <div class="table-responsive text-nowrap p-3">
-      <h5 class="text-center mb-4">{{$client->name}}'s contact list</h5>
         @if($contacts->isEmpty())
           <p class="text-center">This client has no contacts associated.</p>
         @else
         <div id="message"></div>
-      <table class="table table-hover table-sm p-3"  data-page="1" data-page-size="3" data-current-page="1">
+      <table class="table table-hover table-md p-4"  data-page="1" data-page-size="3" data-current-page="1">
           <thead>
             <tr>
               <th class="sortable" data-sort-by="name">Name</th>
@@ -26,8 +23,9 @@
       @endif
     </div>
             <!-- /Contact table -->
-  <script>
 
+            <!-- AJAX for Live Table Edition -->
+  <script>
     var client_id = {{ $client->id }};
     $(document).ready(function(){
 
