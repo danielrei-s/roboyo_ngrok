@@ -111,5 +111,17 @@
           if (file) {
               reader.readAsDataURL(file);
           }
+          $('#modalCenter').on('hidden.bs.modal', function() {
+            picturePreview.setAttribute('src', 'assets/img/avatars/5.png'); // Clear the image preview by setting the 'src' attribute to our "insert avatar"
+          });
       });
   </script>
+
+<script>
+  $(document).ready(function() {
+    // Reset form fields on modal close
+    $('#modalCenter').on('hidden.bs.modal', function() {
+      $('#formAuthentication')[0].reset(); // Reset the form using the form's DOM element
+    });
+  });
+</script>

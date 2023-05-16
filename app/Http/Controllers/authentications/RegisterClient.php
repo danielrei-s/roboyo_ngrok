@@ -72,6 +72,9 @@ class RegisterClient extends Controller
         $contact_attributes['client_id'] = $client->id;
         $contact = Contact::create($contact_attributes);
       }
-    return redirect('client-management')->with('success', 'Client ' . $attributes['name'] . ' added.');
+
+      //Generate client URL to display after creation
+      $profileUrl = 'client/' . $client->id;
+    return redirect($profileUrl)->with('success', 'Client ' . $attributes['name'] . ' added.');
 }
 }

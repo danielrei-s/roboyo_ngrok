@@ -68,10 +68,10 @@
                           </div>
                         </div>
                       </div>
-                    <div class="justify-content-start">
+                    {{-- <div class="justify-content-start">
                       <button class="btn btn-success float-end" id="open-modal-btn" data-bs-target="#modalToggle2"
                        data-bs-toggle="modal" data-bs-dismiss="modal">Add contact</button>
-                    </div>
+                    </div> --}}
                   </div>
                   <div class="modal-footer">
 
@@ -150,6 +150,9 @@
           if (file) {
               reader.readAsDataURL(file);
           }
+          $('#modalToggle').on('hidden.bs.modal', function() {
+            picturePreview.setAttribute('src', 'assets/img/clients/default.png'); // Clear the image preview by setting the 'src' attribute to our "insert logo"
+          });
       });
   </script>
 
@@ -166,3 +169,13 @@
     });
 
   </script>
+
+<script>
+  $(document).ready(function() {
+    // Reset form fields on modal close
+    $('#modalToggle').on('hidden.bs.modal', function() {
+      $('#formAuthentication')[0].reset(); // Reset the form using the form's DOM element
+    });
+  });
+</script>
+

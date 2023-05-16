@@ -9,7 +9,7 @@
               <div class="col-md-4 mb-3">
                   <div class="d-flex justify-content-center align-items-center">
                       <label for="picture" style="cursor: pointer;">
-                          <div class="rounded-circle overflow-hidden" style="width: 175px; height: 175px;">
+                          <div class="rounded-circle overflow-hidden" style="width: 190px; height: 190px;">
                               <img src="{{ asset($client->logo) }}" alt="Profile picture" id="picturePreview"
                                   class="w-100 h-100">
                           </div>
@@ -67,10 +67,8 @@
                           @enderror
                       </div>
 
-                      <div class="justify-content-end col-md-5 mb-2">
-                          <button type="button" class="btn btn-outline-secondary btn-sm me-3"
-                              data-bs-dismiss="modal">Close</button>
-                          <button class="btn btn-primary btn-sm">Update</button>
+                      <div class="col-md-5 mt-4 d-flex justify-content-center align-items-start">
+                          <button class="btn btn-primary btn-md">Update</button>
                       </div>
                   </div>
               </div>

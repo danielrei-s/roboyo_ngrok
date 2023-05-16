@@ -6,7 +6,7 @@
           <p class="text-center">This client has no contacts associated.</p>
         @else
         <div id="message"></div>
-      <table class="table table-hover table-md p-4"  data-page="1" data-page-size="3" data-current-page="1">
+      <table class="table table-hover table-sm p-4"  data-page="1" data-page-size="3" data-current-page="1">
           <thead>
             <tr>
               <th class="sortable" data-sort-by="name">Name</th>
@@ -28,36 +28,45 @@
   <script>
     var client_id = {{ $client->id }};
     $(document).ready(function(){
-
       fetch_data(client_id);
 
       function fetch_data(client_id)
       {
-      $.ajax({
-        url:"/livetable/fetch_data/" + client_id,
-        dataType:"json",
-        success:function(data)
-        {
-        var html = '';
+        $.ajax({
+          url:"/livetable/fetch_data/" + client_id,
+          dataType:"json",
+          success:function(data)
+          {
+            var html = '';
 
-        for(var count=0; count < data.length; count++)
-        {
-          html +='<tr>';
-          html +='<td contenteditable spellcheck="false" class="column_name" data-column_name="contact_name" data-id="'+data[count].id+'">'+data[count].contact_name+'</td>';
-          html += '<td contenteditable spellcheck="false" class="column_name" data-column_name="contact_title" data-id="'+data[count].id+'">'+data[count].contact_title+'</td>';
-          html += '<td contenteditable spellcheck="false" class="column_name" data-column_name="contact_email" data-id="'+data[count].id+'">'+data[count].contact_email+'</td>';
-          html += '<td contenteditable spellcheck="false" class="column_name" data-column_name="contact_phone" data-id="'+data[count].id+'">'+data[count].contact_phone+'</td>';
-          html += '<td><button type="button" class="btn btn-danger btn-xs delete" id="'+data[count].id+'">Delete</button></td></tr>';
-        }
-        $('tbody').html(html);
-        }
-      });
+            for(var count=0; count < data.length; count++)
+            {
+              html +='<tr>';
+              html +='<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_name" data-id="'+data[count].id+'">'+data[count].contact_name+'</td>';
+              html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_title" data-id="'+data[count].id+'">'+data[count].contact_title+'</td>';
+              html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_email" data-id="'+data[count].id+'">'+data[count].contact_email+'</td>';
+              html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_phone" data-id="'+data[count].id+'">'+data[count].contact_phone+'</td>';
+              html += '<td><button type="button" class="btn btn-success btn-xs edit" id="'+data[count].id+'">Edit</button></td>';
+              html += '<td><button type="button" class="btn btn-danger btn-xs delete" id="'+data[count].id+'">Delete</button></td></tr>';
+            }
+            $('tbody').html(html);
+          }
+        });
       }
 
       var _token = $('input[name="_token"]').val();
 
+      $(document).on('click', '.edit', function(){
+        var row = $(this).closest('tr');
+        row.find('.column_name').attr('contenteditable', 'true').addClass('editable');
+        row.find('.edit').attr('disabled', true);
+      });
 
-      $(document).on('blur', '.column_name', function(){
+      $(document).on('blur', '.column_name.editable', function(){
+        var row = $(this).closest('tr');
+        row.find('.column_name').attr('contenteditable', 'false').removeClass('editable');
+        row.find('.edit').attr('disabled', false);
+
         var column_name = $(this).data("column_name");
         var column_value = $(this).text();
         var id = $(this).data("id");

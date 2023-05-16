@@ -27,9 +27,6 @@
       <li class="nav-item"><a class="nav-link active" href="javascript:void(0);"><i class="bx bx-user me-1"></i>
         Account</a>
       </li>
-      <li class="nav-item"><a class="nav-link" href="#"><i class="bx bx-bell me-1"></i>
-        Others</a>
-      </li>
     </ul>
       <div class="card mb-4">
           <h5 class="card-header">Client Details</h5>
@@ -72,21 +69,21 @@
                                         </div>
                                       </div>
                                       </div> --}}
+                                      {{-- anchor to link the DELETE --}}
+                                        <a class="btn p-0" href="#" data-bs-toggle="tooltip" aria-label="Delete client" data-bs-original-title="Delete client" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$client->name}}?')) { document.getElementById('delete-client-{{ $client->id }}').submit(); }">
+                                          <i class="bx bx-trash me-1" title="Delete Client" style="font-size: 32px;"></i>
+                                        </a>
+
+                                      {{-- form to handle the DELETE --}}
+                                        <form id="delete-client-{{ $client->id }}" action="{{ route('client-management.destroy', $client->id) }}" method="POST" style="display: none;">
+                                          @csrf
+                                          @method('DELETE')
+                                        </form>
+                                      {{-- /DELETE FORM --}}
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                    {{-- anchor to link the DELETE --}}
-                      <a class="btn p-0" href="#" data-bs-toggle="tooltip" aria-label="Delete client" data-bs-original-title="Delete client" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$client->name}}?')) { document.getElementById('delete-client-{{ $client->id }}').submit(); }">
-                        <i class="bx bx-trash me-1" title="Delete Client" style="font-size: 32px;"></i>
-                      </a>
-
-                    {{-- form to handle the DELETE --}}
-                      <form id="delete-client-{{ $client->id }}" action="{{ route('client-management.destroy', $client->id) }}" method="POST" style="display: none;">
-                        @csrf
-                        @method('DELETE')
-                      </form>
-                    {{-- /DELETE FORM --}}
 
                     {{-- EDIT button --}}
                     <!-- Button trigger modal -->
