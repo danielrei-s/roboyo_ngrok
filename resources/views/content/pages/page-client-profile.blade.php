@@ -1,9 +1,21 @@
 @extends('layouts/contentNavbarLayout')
 
-@section('title', 'Dashboard')
+@section('title', 'Client Page')
 
 @section('page-script')
     <script src="{{ asset('assets/js/pages-account-settings-account.js') }}"></script>
+@endsection
+
+@section('vendor-style')
+<link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}">
+@endsection
+
+@section('vendor-script')
+<script src="{{asset('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
+@endsection
+
+@section('page-script')
+<script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
 @endsection
 
 @section('content')
@@ -45,67 +57,25 @@
                     </div>
                   </div>
                     <div style="border-left: 2px dashed #ccc; padding-left: 120px;">
-                        <!-- Doted line a separar -->
-                        <div class="button-wrapper">
-                            <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
-                                <div class="d-flex flex-column align-items-start">
-                                  {{-- <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="View Contacts" data-bs-target="#modalContact" title="View client contacts" aria-describedby="tooltip674202">
-                                    <i class='bx bx-sitemap' style="font-size: 30px"></i>
-                                  </a> --}}
+                      <!-- Doted line a separar -->
+                      <div class="button-wrapper">
+                        <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
+                            <div class="d-flex flex-column align-items-start">
+                            {{-- anchor to link the DELETE --}}
+                              <a class="btn p-0" href="#" data-bs-toggle="tooltip" aria-label="Delete client" data-bs-original-title="Delete client" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$client->name}}?')) { document.getElementById('delete-client-{{ $client->id }}').submit(); }">
+                                <i class="bx bx-trash me-1" title="Delete Client" style="font-size: 32px;"></i>
+                              </a>
 
-
-                                  <!-- Modal -->
-                                  {{-- <div class="modal fade" id="modalContact" tabindex="-1" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document" >
-                                      <div class="modal-content" style="width: 400rem;">
-                                        <div class="modal-header">
-                                          <h5 class="modal-title" id="modalContactTitle"></h5>
-                                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                        </div>
-
-                                          @component('livetable', ['contacts' => $contacts, 'client' => $client])
-
-                                          @endcomponent
-                                        </div>
-                                      </div>
-                                      </div> --}}
-                                      {{-- anchor to link the DELETE --}}
-                                        <a class="btn p-0" href="#" data-bs-toggle="tooltip" aria-label="Delete client" data-bs-original-title="Delete client" aria-describedby="tooltip674202" onclick="event.preventDefault(); if (confirm('Are you sure you want to delete {{$client->name}}?')) { document.getElementById('delete-client-{{ $client->id }}').submit(); }">
-                                          <i class="bx bx-trash me-1" title="Delete Client" style="font-size: 32px;"></i>
-                                        </a>
-
-                                      {{-- form to handle the DELETE --}}
-                                        <form id="delete-client-{{ $client->id }}" action="{{ route('client-management.destroy', $client->id) }}" method="POST" style="display: none;">
-                                          @csrf
-                                          @method('DELETE')
-                                        </form>
-                                      {{-- /DELETE FORM --}}
-                                    </div>
-                                  </div>
-                                </div>
+                            {{-- form to handle the DELETE --}}
+                              <form id="delete-client-{{ $client->id }}" action="{{ route('client-management.destroy', $client->id) }}" method="POST" style="display: none;">
+                                @csrf
+                                @method('DELETE')
+                              </form>
+                            {{-- /DELETE FORM --}}
                               </div>
-
-                    {{-- EDIT button --}}
-                    <!-- Button trigger modal -->
-                    {{-- <a href="#" class="btn p-0" data-bs-toggle="modal" data-bs-original-title="Edit client" data-bs-target="#modalClientEdit" title="Edit client profile" aria-describedby="tooltip674202">
-                      <i class='bx bx-edit' style="font-size: 30px"></i>
-                    </a> --}}
-
-                    <!-- Modal -->
-                    {{-- <div class="modal fade" id="modalClientEdit" aria-labelledby="modalClientEditLabel" tabindex="-1" aria-hidden="true" style="--bs-modal-width: 65rem;">
-                      <div class="modal-dialog modal-dialog-centered" role="document">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="modalCenterTitle">Edit {{$client->name}}'s client profile</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
                           </div>
-                          @component('content.management.edit-client')
-                            @slot('client', $client)
-                            @slot('contacts', $contacts)
-                          @endcomponent
                         </div>
-                      </div>
-                    </div> --}}
                 </div>
 
               <hr class="my-1">
@@ -172,7 +142,9 @@
                             <div id="accordionThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                   <div class="card-body">
-                                      <!-- body -->
+
+                                        <!-- BODY -->
+
                                   </div>
                               </div>
                             </div>
@@ -189,7 +161,9 @@
                             <div id="accordionFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
                               <div class="accordion-body">
                                   <div class="card-body">
+
                                       <!-- body -->
+
                                   </div>
                               </div>
                             </div>
@@ -201,8 +175,8 @@
           <!-- /Account -->
       </div>
 
-  @if ($errors->any())
-    <script>
+      @if ($errors->any())
+      <script>
       $(document).ready(function() {
         setTimeout(function() {   //necessary for modal to fully load and attach to DOM before being called again.
             $('#modalClientEdit').modal('show');
@@ -220,12 +194,13 @@
       const reader = new FileReader();
 
       reader.addEventListener('load', () => {
-          picturePreview.setAttribute('src', reader.result);
+        picturePreview.setAttribute('src', reader.result);
       });
 
       if (file) {
-          reader.readAsDataURL(file);
+        reader.readAsDataURL(file);
       }
-  });
-</script>
-@endsection
+    });
+  </script>
+
+    @endsection
