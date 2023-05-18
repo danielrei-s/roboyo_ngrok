@@ -21,7 +21,7 @@
                         <div class="col-md-4 mb-3">
                           <div class="d-flex justify-content-center align-items-center">
                             <label for="picture" style="cursor: pointer;">
-                              <div class="rounded-circle overflow-hidden" style="width: 150px; height: 150px;">
+                              <div class="rounded-circle overflow-hidden" style="width: 157px; height: 157px;">
                                 <img src="assets/img/clients/default.png" alt="Profile picture" id="picturePreview" class="w-100 h-100">
                               </div>
                             </label>
@@ -34,7 +34,7 @@
 
                         <div class="col-md-8">
                           <div class="row">
-                            <div class="col-md-6 mb-4 mt-3">
+                            <div class="col-md-6 mb-4 mt-5">
                                 <label for="name" class="form-label">Company Name</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}" autofocus>
                                   @error('name')
@@ -42,7 +42,7 @@
                                   @enderror
                             </div>
 
-                            <div class="col-md-6 mb-4 mt-3">
+                            <div class="col-md-6 mb-4 mt-5">
                               <label for="tin" class="form-label">TIN</label>
                               <input type="text" class="form-control @error('tin') is-invalid @enderror" id="tin" name="tin" placeholder="Code (9 numbers)" value="{{ old('tin') }}" autofocus>
                                 @error('tin')
@@ -84,7 +84,7 @@
               </div>
             </div>
             <!-- Modal 2-->
-              <div class="modal fade" id="modalToggle2" aria-hidden="true" aria-labelledby="modalToggleLabel2" tabindex="-1">
+              {{-- <div class="modal fade" id="modalToggle2" aria-hidden="true" aria-labelledby="modalToggleLabel2" tabindex="-1">
                 <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -131,51 +131,51 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
 </div>
 
-    <script>  //show a preview of the photo about to be uploaded
-      const inputPicture = document.querySelector('#picture');
-      const picturePreview = document.querySelector('#picturePreview');
 
-      inputPicture.addEventListener('change', () => {
-          const file = inputPicture.files[0];
-          const reader = new FileReader();
+<script>  //show a preview of the photo about to be uploaded
+  const inputPicture = document.querySelector('#picture');
+  const picturePreview = document.querySelector('#picturePreview');
 
-          reader.addEventListener('load', () => {
-              picturePreview.setAttribute('src', reader.result);
-          });
+  inputPicture.addEventListener('change', () => {
+    const file = inputPicture.files[0];
+    const reader = new FileReader();
 
-          if (file) {
-              reader.readAsDataURL(file);
-          }
-          $('#modalToggle').on('hidden.bs.modal', function() {
-            picturePreview.setAttribute('src', 'assets/img/clients/default.png'); // Clear the image preview by setting the 'src' attribute to our "insert logo"
-          });
-      });
-  </script>
-
-  <!-- Script to prevent form submission when split into modals-->
-  <script>
-    const openModalBtn = document.getElementById('open-modal-btn');
-    const secondModal = document.getElementById('modalToggle2');
-
-    openModalBtn.addEventListener('click', function(event) {
-      event.preventDefault(); // prevent form submission
-
-      // Open the second modal
-      secondModal.style.display = 'block';
+    reader.addEventListener('load', () => {
+        picturePreview.setAttribute('src', reader.result);
     });
 
-  </script>
-
-<script>
-  $(document).ready(function() {
-    // Reset form fields on modal close
+    if (file) {
+      reader.readAsDataURL(file);
+    }
     $('#modalToggle').on('hidden.bs.modal', function() {
-      $('#formAuthentication')[0].reset(); // Reset the form using the form's DOM element
+      picturePreview.setAttribute('src', 'assets/img/avatars/5.png'); // Clear the image preview by setting the 'src' attribute to our "insert avatar"
     });
   });
+
+  $(document).ready(function() {
+  // Reset form fields on modal close
+    $('#modalToggle').on('hidden.bs.modal', function() {
+      setTimeout(function() {
+          $('#formAuthentication .is-invalid').removeClass('is-invalid'); // Remove 'is-invalid' class from form fields
+          $('#formAuthentication .invalid-feedback').remove(); // Remove all elements with the class 'invalid-feedback'
+          $('#formAuthentication input[type="text"]').val('');// Clear the value of all input fields within forms that are NOT hidden (token and client id are preserved)
+      }, 100);
+    });
+  });
+
+  $(document).ready(function() {
+    $('#clearButton').on('click', function() {
+        setTimeout(function() {
+          $('#formAuthentication :input:not(:hidden)').val('');
+          $('#formAuthentication .is-invalid').removeClass('is-invalid'); // Remove 'is-invalid' class from form fields
+          $('#formAuthentication .invalid-feedback').remove(); // Remove all elements with the class 'invalid-feedback'
+        }, 100);
+    });
+  });
+
 </script>
 

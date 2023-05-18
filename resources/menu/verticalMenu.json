@@ -7,7 +7,7 @@
       "slug": "dashboard-main",
       "auth_required": true
     },
-   
+
     {
       "url": "/user-management",
       "name": "User Management",
@@ -25,7 +25,7 @@
     {
       "url": "/",
       "name": "Assessments",
-      "icon": "menu-icon tf-icons bx bxs-bookmark-alt", 
+      "icon": "menu-icon tf-icons bx bxs-bookmark-alt",
       "slug": "assessments"
     },
 
@@ -34,7 +34,7 @@
     },
 
     {
-      "url": "/",
+      "url": "/analytics",
       "name": "Dashboard Analytics",
       "icon": "menu-icon tf-icons bx bx-home-circle",
       "slug": "dashboard-analytics"

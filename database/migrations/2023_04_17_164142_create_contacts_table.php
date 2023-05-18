@@ -16,10 +16,10 @@ return new class extends Migration
       Schema::create('contacts', function (Blueprint $table) {
         $table->id();
         $table->foreignId('client_id')->constrained()->onDelete('cascade');
-        $table->string('contact_name', 64);
-        $table->string('contact_title')->unique();
-        $table->string('contact_email')->unique();
-        $table->string('contact_phone');
+        $table->string('contact_name', 64)->nullable();
+        $table->string('contact_title', 25)->nullable()->unique(false);
+        $table->string('contact_email')->nullable(false);
+        $table->string('contact_phone')->nullable()->validate('between:9,15');
         $table->timestamps();
     });
 

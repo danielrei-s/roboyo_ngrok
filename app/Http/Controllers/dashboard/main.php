@@ -27,7 +27,7 @@ class Main extends Controller
           'sigla' => ['required', 'max:3', Rule::unique('users')->ignore($user)],
           'email' => ['required', 'email', Rule::unique('users')->ignore($user)],
           'role' => ['required', 'max:25'],
-          'contact' => ['numeric', 'digits_between:9,10'],
+          'phone' => ['numeric', 'digits_between:9,15'],
           'picture' => ['nullable','image','mimes:jpeg,png,jpg,gif,svg','max:2048']
       ]);
 
@@ -66,7 +66,7 @@ class Main extends Controller
       $user->sigla = $request->input('sigla');
       $user->email = $request->input('email');
       $user->role = $request->input('role');
-      $user->contact = $request->input('contact');
+      $user->phone = $request->input('phone');
       $user->save();
 
       return redirect()->back()->with('success', 'Your account have been updated, ' . $user->firstName);

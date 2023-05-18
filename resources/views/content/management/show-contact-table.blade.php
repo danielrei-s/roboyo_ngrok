@@ -20,6 +20,29 @@
             </tbody>
         </table>
     @endif
+    {{-- EDIT button --}}
+        <!-- Button trigger modal -->
+        <div class="col-sm-12 d-flex justify-content-end">
+          <a href="#" class="btn p-0 d-flex justify-content-end mt-2" data-bs-toggle="modal" data-bs-original-title="Add Contact" data-bs-target="#modalClientEdit" title="Add Contact" aria-describedby="tooltip674202">
+            <i class='bx bxs-plus-circle' style="font-size: 30px"></i>
+          </a>
+        </div>
+
+      <!-- Modal -->
+      <div class="modal fade" id="modalClientEdit" aria-labelledby="modalClientEditLabel" tabindex="-1" aria-hidden="true" style="--bs-modal-width: 30rem;">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalCenterTitle">Add a new contact to {{$client->name}}'s contact list</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            @component('content.management.add-contact-form')
+              @slot('client', $client)
+              @slot('contacts', $contacts)
+            @endcomponent
+          </div>
+        </div>
+      </div>
 </div>
 <!-- /Contact table -->
 
@@ -29,20 +52,35 @@
     $(document).ready(function() {
         fetch_data(client_id);
 
+        function getLimitedText(text, addTooltip) {
+          if (text.length > 25) {
+            var limitedText = text.substring(0, 22) + '...';
+            if (addTooltip) {
+              return '<span class="limited-text" data-original-text="' + text + '" data-bs-toggle="tooltip" title="' + text + '">' + limitedText + '</span>';
+            } else {
+              return '<span class="limited-text" data-original-text="' + text + '">' + limitedText + '</span>';
+            }
+          }
+          return text;
+        }
+
+
         function fetch_data(client_id) {
             $.ajax({
                 url: "/livetable/fetch_data/" + client_id,
                 dataType: "json",
                 success: function(data) {
                     var html = '';
+                    var alertflag = false;
 
                     for (var count = 0; count < data.length; count++) {
                       html +='<tr>';
-                      html +='<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_name" data-id="'+data[count].id+'">'+data[count].contact_name+'</td>';
-                      html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_title" data-id="'+data[count].id+'">'+data[count].contact_title+'</td>';
-                      html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_email" data-id="'+data[count].id+'">'+data[count].contact_email+'</td>';
-                      html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_phone" data-id="'+data[count].id+'">'+data[count].contact_phone+'</td>';
+                      html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_name" data-id="' + data[count].id + '">' + getLimitedText(data[count].contact_name) + '</td>';
+                      html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_title" data-id="' + data[count].id + '">' + getLimitedText(data[count].contact_title) + '</td>';
+                      html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_email" data-id="' + data[count].id + '">' + getLimitedText(data[count].contact_email, true) + '</td>';
+                      html += '<td contenteditable="false" spellcheck="false" class="column_name" data-column_name="contact_phone" data-id="' + data[count].id + '">' + getLimitedText(data[count].contact_phone) + '</td>';
                       html += '<td><button type="button" class="btn btn-primary btn-xs me-1 edit" id="' + data[count].id + '">Edit</button><button type="button" class="btn btn-danger btn-xs delete" id="' + data[count].id + '">Delete</button></td>';
+
                     }
                     $('tbody').html(html);
                 }
@@ -51,18 +89,28 @@
           //BACKEND jQUERY HANDKING
         var _token = $('input[name="_token"]').val();
 
-        $(document).on('click', '.edit', function() {  //Starter - edit button that on click makes row editable
-            var row = $(this).closest('tr');
-            row.find('.column_name').attr('contenteditable', 'true').addClass('editable');
-            row.find('.edit') // find edit
-              .removeClass('btn-primary') //remove the blue background
-              .addClass('btn-success')    // add green background
-              .text('Save')               // change text to save
-              .addClass('save')           // add save class
-              .removeClass('edit');       // cleanup
+        $(document).on('click', '.edit', function() {
+          alertflag = false;
+
+          var row = $(this).closest('tr');
+          row.find('.column_name').each(function() {
+            var cell = $(this);
+            var originalText = cell.find('.limited-text').data('original-text');
+            cell.text(originalText).attr('contenteditable', 'true').addClass('editable');
+          });
+
+          row.find('.edit')
+            .removeClass('btn-primary')
+            .addClass('btn-success')
+            .text('Save')
+            .addClass('save')
+            .removeClass('edit');
         });
 
+
         $(document).on('click', '.save', function() { //End - Save button that on click makes row uneditable
+            alertflag = true;
+
             var row = $(this).closest('tr');
             row.find('.column_name').attr('contenteditable', 'false').removeClass('editable');
             row.find('.save')
@@ -71,6 +119,7 @@
               .text('Edit')
               .addClass('edit')
               .removeClass('save');
+            fetch_data(client_id);
         });
 
         $(document).on('blur', '.column_name.editable', function() {
@@ -84,18 +133,20 @@
 
             if (column_value != '') {
                 if (column_name == 'contact_phone') {
-                    console.log(column_value); //debug
-                    if (column_value.toLowerCase() !== 'not provided' && (isNaN(column_value) ||
-                            column_value.length < 9
-                            )) { //not a number, <9 digits, or not provided ->fails
+                    if (column_value.toLowerCase() !== 'not provided' &&
+                        (isNaN(column_value) ||         // Checks if Not a Number
+                          column_value.length < 9 ||    // Checks if < 9 digits
+                          column_value.length > 15 ||    // Checks if > 15 digits
+                          /\s/.test(column_value) ||    // Checks for white spaces
+                          /\r|\n/.test(column_value)    // Checks for line breaks
+                        )
+                      ) {
                         $('#message').html(
                             "<div class='alert alert-danger text-centered'>Phone number is invalid</div>"
                             );
-                        $(this).addClass('bg-danger');
                         return;
                     }
                 } else if (column_name == 'contact_name') {
-                    console.log(column_value); //debug
                     if (!/^[\p{L}\p{M}\s.'-]+$/u.test(column_value)) {
                         $('#message').html(
                             "<div class='alert alert-danger'>Contact name must contain only letters, white spaces and dots</div>"
@@ -104,7 +155,6 @@
                         return;
                     }
                 } else if (column_name == 'contact_email') {
-                    console.log(column_value); //debug
                     var original_value = column_value;
                     $.ajax({
                         url: "{{ route('livetable.check_email') }}",
@@ -140,14 +190,15 @@
                         _token: _token
                     },
                     success: function(data) {
-                        $('#message').html(data);
-                        // remove red background if it was added before
-                        $(this).removeClass('bg-danger');
-                    }.bind(this)
+                        if (alertflag) {
+                          $('#message').html(data);  // add the echo from livetable -> update_data
+                        } else {
+                          $(this).removeClass('alert alert-success');
+                        }
+                      }.bind(this)
                 });
             } else {
-                $('#message').html("<div class='alert alert-danger'>Enter some value</div>");
-                $(this).addClass('bg-danger');
+                $('#message').html("<div class='alert alert-danger'>Enter some svalue</div>");
             }
         });
 

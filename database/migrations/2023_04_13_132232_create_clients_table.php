@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('clients', function (Blueprint $table) {
           $table->id();
           $table->string('logo')->default('assets/img/clients/sonae.jpg');
-          $table->string('name', 45);
-          $table->string('tin')->unique();
-          $table->string('code')->unique();
-          $table->string('address');
-          $table->string('phone');
+          $table->string('name', 45)->nullable(false);
+          $table->string('tin')->unique()->nullable(false);
+          $table->string('code')->unique()->nullable(false);
+          $table->string('address')->nullable();
+          $table->string('phone')->nullable()->validate('between:9,15');
           $table->timestamps();
         });
     }

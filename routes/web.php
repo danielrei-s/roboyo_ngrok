@@ -46,7 +46,8 @@ Route::middleware(['reset_password'])->group(function () {
   $controller_path = 'App\Http\Controllers';
 
   // Main Page Route
-    Route::get('/', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
+    Route::get('/analytics', $controller_path . '\dashboard\Analytics@index')->name('dashboard-analytics')->middleware('auth');
+    Route::get('/', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
     Route::get('/dashboard', $controller_path . '\dashboard\Main@index')->name('dashboard-main')->middleware('auth');
     Route::post('/change-password', $controller_path . '\SessionsController@changePassword')->name('change-password')->middleware('auth');
     Route::post('/edit-profile', $controller_path . '\dashboard\main@edit')

@@ -53,7 +53,7 @@
         @foreach ($clientObjects as $client)
         <tr>
           <td><img src="{{ asset($client->logo) }}" alt="{{ $client->name }}" class="rounded-circle" style="width: 50px; height: 50px;"></td>
-          <td>{{ $client->code }}</td>
+          <td><b>{{ $client->code }}</b></td>
           <td class="text-truncate" style="max-width: 200px;">{{ $client->name }}</td>
           <td class="text-truncate" style="max-width: 200px;">{{ $client->address }}</td>
           <td>

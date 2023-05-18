@@ -34,7 +34,7 @@ class RegisterContact extends Controller
 
       // create the contact
     $attributes['client_id'] = $request->input('client_id');
-    $attributes['contact_name'] = $request->input('contact_name');
+    $attributes['contact_name'] = $request->input('contact_name') ?? 'Not provided';
     $attributes['contact_title'] = $request->input('contact_title') ?? 'Not provided';
     $attributes['contact_email'] = $request->input('contact_email');
     $attributes['contact_phone'] = $request->input('contact_phone') ?? 'Not provided';

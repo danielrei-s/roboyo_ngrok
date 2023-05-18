@@ -83,8 +83,8 @@
                                 @enderror
                               </div>
                               <div class="d-flex justify-content-end">
-                                <button type="button" class="btn btn-outline-secondary btn-md me-3" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary">Sign up</button>
+                                <button type="button" class="btn btn-outline-secondary btn-md me-3 mt-2" data-bs-dismiss="modal">Close</button>
+                                <button class="btn btn-primary mt-2">Sign up</button>
                               </div>
                           </div>
                         </div>
@@ -96,32 +96,45 @@
       </div>
     </div>
 
-    <script>  //show a preview of the photo about to be uploaded
-      const inputPicture = document.querySelector('#picture');
-      const picturePreview = document.querySelector('#picturePreview');
+<script>  //show a preview of the photo about to be uploaded
+  const inputPicture = document.querySelector('#picture');
+  const picturePreview = document.querySelector('#picturePreview');
 
-      inputPicture.addEventListener('change', () => {
-          const file = inputPicture.files[0];
-          const reader = new FileReader();
+  inputPicture.addEventListener('change', () => {
+    const file = inputPicture.files[0];
+    const reader = new FileReader();
 
-          reader.addEventListener('load', () => {
-              picturePreview.setAttribute('src', reader.result);
-          });
+    reader.addEventListener('load', () => {
+        picturePreview.setAttribute('src', reader.result);
+    });
 
-          if (file) {
-              reader.readAsDataURL(file);
-          }
-          $('#modalCenter').on('hidden.bs.modal', function() {
-            picturePreview.setAttribute('src', 'assets/img/avatars/5.png'); // Clear the image preview by setting the 'src' attribute to our "insert avatar"
-          });
-      });
-  </script>
-
-<script>
-  $(document).ready(function() {
-    // Reset form fields on modal close
+    if (file) {
+      reader.readAsDataURL(file);
+    }
     $('#modalCenter').on('hidden.bs.modal', function() {
-      $('#formAuthentication')[0].reset(); // Reset the form using the form's DOM element
+      picturePreview.setAttribute('src', 'assets/img/avatars/5.png'); // Clear the image preview by setting the 'src' attribute to our "insert avatar"
     });
   });
+
+  $(document).ready(function() {
+  // Reset form fields on modal close
+    $('#modalCenter').on('hidden.bs.modal', function() {
+      setTimeout(function() {
+          $('#formAuthentication .is-invalid').removeClass('is-invalid'); // Remove 'is-invalid' class from form fields
+          $('#formAuthentication .invalid-feedback').remove(); // Remove all elements with the class 'invalid-feedback'
+          $('#formAuthentication input[type="text"]').val('');// Clear the value of all input fields within forms that are NOT hidden (token and client id are preserved)
+      }, 100);
+    });
+  });
+
+  $(document).ready(function() {
+    $('#clearButton').on('click', function() {
+        setTimeout(function() {
+          $('#formAuthentication :input:not(:hidden)').val('');
+          $('#formAuthentication .is-invalid').removeClass('is-invalid'); // Remove 'is-invalid' class from form fields
+          $('#formAuthentication .invalid-feedback').remove(); // Remove all elements with the class 'invalid-feedback'
+        }, 100);
+    });
+  });
+
 </script>
