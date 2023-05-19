@@ -26,7 +26,7 @@
           <h5 class="card-header">Profile Details</h5>
           <!-- Account -->
           <div class="card-body">
-              <div class="d-flex align-items-start align-items-sm-center gap-4">
+              <div class="d-flex align-items-md-center px-5 gap-4" >
                   <img src="{{ asset(auth()->user()->picture) }}"
                       alt="{{ auth()->user()->firstName }} {{ auth()->user()->lastName }}" class="d-block rounded"
                       height="120" width="120" id="userAvatar" />
@@ -37,16 +37,16 @@
                       <p>{{ auth()->user()->email }}</p>
                       <p>+351 {{ auth()->user()->phone }}</p>
                   </div>
-                  <div style="border-left: 2px dashed #ccc; padding-left: 120px;">
+                  <div style="border-left: 2px dashed #ccc; padding-left: 100px; padding-right: 20px;">
                       <!-- Doted line a separar -->
                       <div class="button-wrapper">
-                          <div class="d-flex align-items-start align-items-sm-center justify-content-end gap-4">
-                              <div class="d-flex flex-column align-items-start">
+                          <div class="d-flex justify-content-end gap-4">
+                              <div class="d-flex flex-column ">
                                   <p class="fal fa-envelope-open-text fa-sm fa-fw">System Permissions</p>
                                   <p class="text-muted">{{ $role = app('App\Role') }}</p>
                               </div>
                               <img src="{{ asset('assets/img/roles/' . $role . '.png') }}" alt="role-avatar"
-                                  class="d-block rounded" height="100" width="100" id="roleAvatar"
+                                  class="d-block rounded" height="120" width="120" id="roleAvatar"
                                   style="margin-right: 75px;" />
                           </div>
                       </div>
@@ -102,7 +102,7 @@
                                         </div>
                                       </div>
                                     </div>
-                                    <hr class="my-0">
+                                    <hr class="my-0 mb-2">
                                         <div class="row">
                                           <div class="mb-3 col-md-6">
                                             <label for="firstname" class="form-label">First Name</label>

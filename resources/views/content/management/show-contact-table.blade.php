@@ -123,84 +123,94 @@
         });
 
         $(document).on('blur', '.column_name.editable', function() {
-            var row = $(this).closest('tr');
-            row.find('.column_name').attr('contenteditable', 'true').addClass('editable');
-            //row.find('.edit').attr('disabled', false);
+    var row = $(this).closest('tr');
+    row.find('.column_name').attr('contenteditable', 'true').addClass('editable');
 
-            var column_name = $(this).data("column_name");
-            var column_value = $(this).text();
-            var id = $(this).data("id");
+    var column_name = $(this).data("column_name");
+    var column_value = $(this).text();
+    var id = $(this).data("id");
 
-            if (column_value != '') {
-                if (column_name == 'contact_phone') {
-                    if (column_value.toLowerCase() !== 'not provided' &&
-                        (isNaN(column_value) ||         // Checks if Not a Number
-                          column_value.length < 9 ||    // Checks if < 9 digits
-                          column_value.length > 15 ||    // Checks if > 15 digits
-                          /\s/.test(column_value) ||    // Checks for white spaces
-                          /\r|\n/.test(column_value)    // Checks for line breaks
-                        )
-                      ) {
-                        $('#message').html(
-                            "<div class='alert alert-danger text-centered'>Phone number is invalid</div>"
-                            );
-                        return;
-                    }
-                } else if (column_name == 'contact_name') {
-                    if (!/^[\p{L}\p{M}\s.'-]+$/u.test(column_value)) {
-                        $('#message').html(
-                            "<div class='alert alert-danger'>Contact name must contain only letters, white spaces and dots</div>"
-                            );
-                        $(this).addClass('bg-danger');
-                        return;
-                    }
-                } else if (column_name == 'contact_email') {
-                    var original_value = column_value;
-                    $.ajax({
-                        url: "{{ route('livetable.check_email') }}",
-                        method: "POST",
-                        data: {
-                            contact_email: column_value,
-                            id: id,
-                            _token: _token
-                        },
-                        success: function(result) {
-                            console.log("check_email success:", result);
-                            if (result === 'exists') {
-                                $('#message').html(
-                                    "<div class='alert alert-danger'>Contact email <i>" +
-                                    column_value + "</i> already exists</div>");
-                                $(this).addClass('bg-danger');
-                                $(this).text(original_value);
-                            } else {
-                                $(this).removeClass('bg-danger');
-                            }
-                        }.bind(this)
-                    });
-                    // return;
-                }
+    var conditionsMet = true; // Flag to track if conditions are met
 
-                $.ajax({
-                    url: "{{ route('livetable.update_data') }}",
-                    method: "POST",
-                    data: {
-                        column_name: column_name,
-                        column_value: column_value,
-                        id: id,
-                        _token: _token
-                    },
-                    success: function(data) {
-                        if (alertflag) {
-                          $('#message').html(data);  // add the echo from livetable -> update_data
-                        } else {
-                          $(this).removeClass('alert alert-success');
-                        }
-                      }.bind(this)
-                });
-            } else {
-                $('#message').html("<div class='alert alert-danger'>Enter some svalue</div>");
+    if (column_value != '') {
+        if (column_name == 'contact_phone') {
+            if (column_value.toLowerCase() !== 'not provided' &&
+                (isNaN(column_value) ||
+                    column_value.length < 9 ||
+                    column_value.length > 15 ||
+                    /\s/.test(column_value) ||
+                    /\r|\n/.test(column_value)
+                )
+            ) {
+                $('#message').html(
+                    "<div class='alert alert-danger text-centered'>Phone number is invalid</div>"
+                );
+                conditionsMet = false; // Conditions are not met
             }
-        });
+        } else if (column_name == 'contact_name') {
+            if (!/^[\p{L}\p{M}\s.'-]+$/u.test(column_value)) {
+                $('#message').html(
+                    "<div class='alert alert-danger'>Contact name must contain only letters, white spaces, and dots</div>"
+                );
+                $(this).addClass('bg-danger');
+                conditionsMet = false; // Conditions are not met
+            }
+        } else if (column_name == 'contact_email') {
+            var original_value = column_value;
+            $.ajax({
+                url: "{{ route('livetable.check_email') }}",
+                method: "POST",
+                data: {
+                    contact_email: column_value,
+                    id: id,
+                    _token: _token
+                },
+                success: function(result) {
+                    console.log("check_email success:", result);
+                    if (result === 'exists') {
+                        $('#message').html(
+                            "<div class='alert alert-danger'>Contact email <i>" +
+                            column_value + "</i> already exists</div>"
+                        );
+                        conditionsMet = false; // Conditions are not met
+                    } else if (result === 'invalid_email') {
+                        $('#message').html(
+                            "<div class='alert alert-danger'>Email <i>" +
+                            column_value + "</i> is invalid</div>"
+                        );
+                        conditionsMet = false; // Conditions are not met
+                    } else {
+                        // Continue with the update
+                    }
+                }.bind(this),
+                async: false // Make the request synchronous
+            });
+        }
+
+        if (conditionsMet) {
+            $.ajax({
+                url: "{{ route('livetable.update_data') }}",
+                method: "POST",
+                data: {
+                    column_name: column_name,
+                    column_value: column_value,
+                    id: id,
+                    _token: _token
+                },
+                success: function(data) {
+                    if (alertflag) {
+                        $('#message').html(data);
+                    } else {
+                        $(this).removeClass('alert alert-success');
+                    }
+                }.bind(this)
+            });
+        }
+    } else {
+        $('#message').html("<div class='alert alert-danger'>Enter some value</div>");
+    }
+});
+
 
         $(document).on('click', '.delete', function() {
             var id = $(this).attr("id");

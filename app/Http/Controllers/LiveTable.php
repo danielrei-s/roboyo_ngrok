@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Validator;
 
 class LiveTable extends Controller
 {
@@ -88,6 +89,15 @@ class LiveTable extends Controller
     {
       $contact_email = $request->input('contact_email');
       $id = $request->input('id');
+
+      $validator = Validator::make(
+        ['contact_email' => $contact_email],
+        ['contact_email' => 'email:rfc']
+    );
+
+    if ($validator->fails()) {
+        return 'invalid_email';
+    }
 
       // Check if the email address already exists in the database, excluding the current contact being edited.
       $contact = Contact::where('contact_email', $contact_email)->where('id', '!=', $id)->first();
