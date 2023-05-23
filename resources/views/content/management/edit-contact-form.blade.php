@@ -23,7 +23,7 @@
 
     <div class="mb-2">
       <label for="contact_title" class="form-label" style="font-size: 10px;" hidden>Job Title</label>
-      <input type="text" class="form-control @error('contact_title') is-invalid @enderror" id="contact_title" name="contact_title" placeholder="Job contact_title" value="{{$contact_title}}">
+      <input type="text" class="form-control @error('contact_title') is-invalid @enderror" id="contact_title" name="contact_title" placeholder="Job Title" value="{{$contact_title}}">
       @error('contact_title')
         <div class="invalid-feedback">{{ $message }}</div>
       @enderror

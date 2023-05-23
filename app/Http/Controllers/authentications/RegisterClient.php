@@ -12,7 +12,7 @@ class RegisterClient extends Controller
 {
   public function index()
   {
-    return view('content.authentications.auth-register-basic'); //Route for this in web.php ->auth->@index
+    return view('content.authentications.auth-register-client'); //Route for this in web.php ->auth->@index
   }
 
   //função de criar client

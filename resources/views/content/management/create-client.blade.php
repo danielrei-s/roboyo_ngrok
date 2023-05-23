@@ -15,32 +15,41 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="formAuthentication" class="mb-3" action="{{ route('auth-register-client') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
+            <form id="formAuthentication" class="mb-3" action="{{ route('auth-register-client') }}" method="POST" style="padding: 10px;" enctype="multipart/form-data">
               @csrf {{-- Evitar ataques csrf --}}
-                      <div class="row">
-                        <div class="col-md-4 mb-3">
-                          <div class="d-flex justify-content-center align-items-center">
-                            <label for="picture" style="cursor: pointer;">
-                              <div class="rounded-circle overflow-hidden" style="width: 157px; height: 157px;">
-                                <img src="assets/img/clients/default.png" alt="Profile picture" id="picturePreview" class="w-100 h-100">
-                              </div>
-                            </label>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="d-flex justify-content-center align-items-center mb-3">
+                      <label for="picture" style="cursor: pointer;">
+                          <div class="overflow-hidden rounded" style="width: 157px; height: 157px;">
+                              <img src="assets/img/clients/default.png" alt="Profile picture" id="picturePreview" class="w-100 h-100">
                           </div>
-                          <input type="file" class="form-control @error('picture') is-invalid @enderror mt-2" id="picture" name="picture" accept="image/*">
-                            @error('picture')
-                          <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                          </div>
+                      </label>
+                  </div>
+                  <input type="file" class="form-control @error('picture') is-invalid @enderror mt-2" id="picture" name="picture" accept="image/*" style="display: none;">
+                  @error('picture')
+                  <div class="invalid-feedback">{{ $message }}</div>
+                  @enderror
 
-                        <div class="col-md-8">
-                          <div class="row">
-                            <div class="col-md-6 mb-4 mt-5">
-                                <label for="name" class="form-label">Company Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}" autofocus>
-                                  @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
-                                  @enderror
-                            </div>
+                  <div class="button-wrapper d-flex justify-content-center">
+                    <label for="picture" class="btn btn-primary mb-2" tabindex="0">
+                        <i class="bx bx-upload d-block d-sm-none"></i>
+                        <span class="d-none d-sm-block  px-1">Upload logo&nbsp;│<i class="bx bxs-folder-open" style="font-size: 1.2em;"></i></span>
+                    </label>
+                    <input type="file" id="picture" name="picture" accept="image/*" onchange="updateFileName(this)" style="display: none;">
+                  </div>
+
+                  <p class="text-muted mb-0 text-center mt-2 small">Allowed JPG or PNG. Max size of 10Mb</p>
+              </div>
+                  <div class="col-md-8">
+                      <div class="row">
+                          <div class="col-md-6 mb-4 mt-5">
+                              <label for="name" class="form-label">Company Name</label>
+                              <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}" autofocus>
+                              @error('name')
+                              <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
+                              @enderror
+                          </div>
 
                             <div class="col-md-6 mb-4 mt-5">
                               <label for="tin" class="form-label">TIN</label>
@@ -72,6 +81,7 @@
                       <button class="btn btn-success float-end" id="open-modal-btn" data-bs-target="#modalToggle2"
                        data-bs-toggle="modal" data-bs-dismiss="modal">Add contact</button>
                     </div> --}}
+                </form>
                   </div>
                   <div class="modal-footer">
 
@@ -124,7 +134,7 @@
                       <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                   </div>
-            </form>
+
           </div>
           <div class="modal-footer">
             <button class="btn btn-primary" data-bs-target="#modalToggle" data-bs-toggle="modal" data-bs-dismiss="modal">Save & back</button>
@@ -132,6 +142,7 @@
         </div>
       </div>
     </div> --}}
+
   </div>
 </div>
 
@@ -177,5 +188,12 @@
     });
   });
 
+
+
+  function updateFileName(input) {
+        var selectedFile = input.files[0];
+        var selectedFileName = selectedFile ? selectedFile.name : "N/A";
+        document.getElementById("selectedFile").value = selectedFileName;
+    }
 </script>
 

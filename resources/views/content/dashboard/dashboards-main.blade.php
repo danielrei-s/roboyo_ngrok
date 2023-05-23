@@ -31,11 +31,11 @@
                       alt="{{ auth()->user()->firstName }} {{ auth()->user()->lastName }}" class="d-block rounded"
                       height="120" width="120" id="userAvatar" />
                   <div class="button-wrapper">
-                      <p class="far fa-users-class fa-lg fa-fw" style="margin-right: 120px;">
-                          {{ auth()->user()->sigla }} | {{ auth()->user()->firstName }} {{ auth()->user()->lastName }}
+                      <p class="far fa-users-class fa-lg fa-fw" style="margin-right: 110px;">
+                        <i class='bx bxs-user-pin'></i><b> {{ auth()->user()->sigla }} |</b> {{ auth()->user()->firstName }} {{ auth()->user()->lastName }}
                       </p>
-                      <p>{{ auth()->user()->email }}</p>
-                      <p>+351 {{ auth()->user()->phone }}</p>
+                      <p><i class='bx bxs-envelope' ></i> {{ auth()->user()->email }}</p>
+                      <p><i class='bx bxs-phone' ></i> +351 {{ auth()->user()->phone }}</p>
                   </div>
                   <div style="border-left: 2px dashed #ccc; padding-left: 100px; padding-right: 20px;">
                       <!-- Doted line a separar -->
@@ -59,26 +59,27 @@
                     <div class="col-md mb-4 mb-md-0">
                         <div class="accordion mt-3" id="accordionExample">
                           <!-- Accordion Item 1 -->
-                          <div class="card accordion-item active">
+                          <div class="card accordion-item">
                               <h2 class="accordion-header" id="headingOne">
-                                  <button type="button" class="accordion-button"
+                                  <button type="button" class="accordion-button collapsed"
                                       data-bs-toggle="collapse" data-bs-target="#accordionOne"
-                                      aria-expanded="true" aria-controls="accordionOne">
+                                      aria-expanded="false" aria-controls="accordionOne">
                                       Edit Profile
                                   </button>
                               </h2>
 
-                              <div id="accordionOne" class="accordion-collapse collapse show"
+                              <div id="accordionOne" class="accordion-collapse collapse"
                                  data-bs-parent="#accordionExample">
                                   <div class="accordion-body">
                                     <!-- Account -->
+
                                       <!-- Form -->
                                     <h5 class="card-header">Profile Details</h5>
                                     <div class="card-body">
                                       <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-main') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
                                         @csrf
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        <img src="{{ asset('assets/img/avatars/5.png') }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                                        <img src="{{  asset(auth()->user()->picture) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
 
                                         <div class="button-wrapper">
                                           <div class="input-group">
@@ -126,8 +127,8 @@
                                             @enderror
                                           </div>
                                           <div class="mb-3 col-md-6">
-                                            <label for="role" class="form-label">Role</label>
-                                            <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder=" Role" value="{{ auth()->user()->role }}" autofocus>
+                                            <label for="role" class="form-label">Job Title</label>
+                                            <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder=" Job Title" value="{{ auth()->user()->role }}" autofocus>
                                             @error('role')
                                               <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                             @enderror

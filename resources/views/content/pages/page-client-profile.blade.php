@@ -44,7 +44,7 @@
           <h5 class="card-header">Client Details</h5>
           <!-- Account -->
           <div class="card-body">
-              <div class="d-flex align-items-start align-items-sm-center gap-4">
+              <div class="d-flex align-items-md-center px-5 gap-4">
                   <img src="{{ asset($client->logo) }}"
                       alt="{{ $client->name }}" class="d-block rounded"
                       height="150" width="150" id="userAvatar" />
@@ -162,7 +162,7 @@
                               <div class="accordion-body">
                                   <div class="card-body">
 
-                                      <!-- body -->
+                                    <!-- Body -->
 
                                   </div>
                               </div>

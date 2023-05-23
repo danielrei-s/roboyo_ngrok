@@ -68,8 +68,8 @@
                                   </div>
 
                               <div class="col-md-6 mb-3">
-                                <label for="role" class="form-label">Role</label>
-                                <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder=" Role" value="{{ old('role') }}" autofocus>
+                                <label for="role" class="form-label">Job Title</label>
+                                <input type="text" class="form-control @error('role') is-invalid @enderror" id="role" name="role" placeholder="Job Title" value="{{ old('role') }}" autofocus>
                                 @error('role')
                                     <div class="invalid-feedback">{{ $message }}</div> {{-- feedback ao user sobre erros de input --}}
                                     @enderror

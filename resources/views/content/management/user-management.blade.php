@@ -41,7 +41,7 @@
           <th class="sortable" data-sort-by="email">Email</th>
           <th class="sortable" data-sort-by="sigla">Initials</th>
           <th class="sortable" data-sort-by="admin">Privileges</th>
-          <th class="sortable" data-sort-by="role">Role</th>
+          <th class="sortable" data-sort-by="role">Job Title</th>
           <th>Actions</th>
         </tr>
       </thead>
