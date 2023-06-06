@@ -1,0 +1,36 @@
+runtime: php
+env: flex
+
+runtime_config:
+  document_root: public
+
+skip_files:
+  -.env
+
+env_variables:
+  #APP_LOG: errorlog
+  #APP_DEBUG: true
+  APP_KEY: base64:npCD/evQ5flrOhCx9raub9TdVuSUOKVh9z65OAy/8KE=
+  #STORAGE_DIR: /tmp
+  #CACHE_DRIVER: database
+  #SESSION_DRIVER: database
+  DB_CONNECTION: mysql
+  DB_HOST: localhost
+  DB_PORT: 3306
+  DB_DATABASE: roboyo
+  DB_USERNAME: admin
+  DB_PASSWORD: admin12!
+  DB_SOCKET: "/cloudsql/dev-order-388221:us-central1:roboyo"
+
+automatic_scaling:
+  target_cpu_utilization: 0.65
+  min_instances: 1
+  max_instances: 5
+
+network:
+  instance_tag: default
+
+beta_settings:
+    cloud_sql_instances: "dev-order-388221:us-central1:roboyo"
+
+    # dev-order-388221:us-central1:roboyo
