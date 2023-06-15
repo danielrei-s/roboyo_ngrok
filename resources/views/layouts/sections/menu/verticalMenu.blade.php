@@ -2,7 +2,7 @@
 
   <!-- ! Hide app brand if navbar-full -->
   <div class="app-brand demo">
-    <a href="{{url('/')}}" class="app-brand-link">
+    <a href="{{secure_url('/')}}" class="app-brand-link">
       <span class="app-brand-logo demo">
         <img src="{{asset('assets/img/icons/brands/roboyo_R_12.jpg')}}">
       </span>

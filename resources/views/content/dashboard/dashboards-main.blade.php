@@ -3,14 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('page-script')
-    <script src="{{ asset('assets/js/pages-account-settings-account.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/pages-account-settings-account.js') }}"></script>
 @endsection
 
 @section('content')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb breadcrumb-style2 mb-2">
     <li class="breadcrumb-item active">
-      <a href="{{ url('/') }}">Dashboard</a>
+      <a href="{{ secure_url('/') }}">Dashboard</a>
     </li>
   </ol>
 </nav>
@@ -27,7 +27,7 @@
           <!-- Account -->
           <div class="card-body">
               <div class="d-flex align-items-md-center px-5 gap-4" >
-                  <img src="{{ asset(auth()->user()->picture) }}"
+                  <img src="{{ secure_asset(auth()->user()->picture) }}"
                       alt="{{ auth()->user()->firstName }} {{ auth()->user()->lastName }}" class="d-block rounded"
                       height="120" width="120" id="userAvatar" />
                   <div class="button-wrapper">
@@ -45,7 +45,7 @@
                                   <p class="fal fa-envelope-open-text fa-sm fa-fw">System Permissions</p>
                                   <p class="text-muted">{{ $role = app('App\Role') }}</p>
                               </div>
-                              <img src="{{ asset('assets/img/roles/' . $role . '.png') }}" alt="role-avatar"
+                              <img src="{{ secure_asset('assets/img/roles/' . $role . '.png') }}" alt="role-avatar"
                                   class="d-block rounded" height="120" width="120" id="roleAvatar"
                                   style="margin-right: 75px;" />
                           </div>
@@ -76,10 +76,10 @@
                                       <!-- Form -->
                                     <h5 class="card-header">Profile Details</h5>
                                     <div class="card-body">
-                                      <form id="formAuthentication" class="mb-3" action="{{ route('auth-edit-main') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
+                                      <form id="formAuthentication" class="mb-3" action="{{route('auth-edit-main') }}" method="POST" style="padding: 20px;" enctype="multipart/form-data">
                                         @csrf
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        <img src="{{  asset(auth()->user()->picture) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
+                                        <img src="{{  secure_asset(auth()->user()->picture) }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar" />
 
                                         <div class="button-wrapper">
                                           <div class="input-group">
@@ -169,7 +169,7 @@
                               <div id="accordionTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
                                     <div class="card-body">
-                                      <form id="formAccountSettings" method="POST" action="{{ route('change-password') }}">
+                                      <form id="formAccountSettings" method="POST" action="{{route('change-password') }}">
                                         @csrf
                                           <div class="row">
                                               <div class="mb-3 col-8 mx-auto">
@@ -261,7 +261,7 @@
       });
 
       if (file) {
-          reader.readAsDataURL(file);
+          reader.readAsDatasecure_URL(file);
       }
   });
 </script>

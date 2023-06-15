@@ -24,7 +24,7 @@
                               <div class="d-flex justify-content-center align-items-center">
                                 <label for="picture" style="cursor: pointer;">
                                   <div class="rounded-circle overflow-hidden" style="width: 150px; height: 150px;">
-                                    <img src="{{ asset($user->picture) }}" alt="Profile picture" id="picturePreview" class="w-100 h-100">
+                                    <img src="{{ secure_asset($user->picture) }}" alt="Profile picture" id="picturePreview" class="w-100 h-100">
                                   </div>
                                 </label>
                               </div>

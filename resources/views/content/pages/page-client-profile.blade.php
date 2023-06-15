@@ -3,26 +3,26 @@
 @section('title', 'Client Page')
 
 @section('page-script')
-    <script src="{{ asset('assets/js/pages-account-settings-account.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/pages-account-settings-account.js') }}"></script>
 @endsection
 
 @section('vendor-style')
-<link rel="stylesheet" href="{{asset('assets/vendor/libs/apex-charts/apex-charts.css')}}">
+<link rel="stylesheet" href="{{secure_asset('assets/vendor/libs/apex-charts/apex-charts.css')}}">
 @endsection
 
 @section('vendor-script')
-<script src="{{asset('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
+<script src="{{secure_asset('assets/vendor/libs/apex-charts/apexcharts.js')}}"></script>
 @endsection
 
 @section('page-script')
-<script src="{{asset('assets/js/dashboards-analytics.js')}}"></script>
+<script src="{{secure_asset('assets/js/dashboards-analytics.js')}}"></script>
 @endsection
 
 @section('content')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb breadcrumb-style2 mb-2">
     <li class="breadcrumb-item">
-      <a href="{{ url('/') }}">Dashboard</a>
+      <a href="{{ secure_url('/') }}">Dashboard</a>
     </li>
     <li class="breadcrumb-item">
       <a href="{{ route('client-management') }}">Client Management</a>
@@ -45,7 +45,7 @@
           <!-- Account -->
           <div class="card-body">
               <div class="d-flex align-items-md-center px-5 gap-4">
-                  <img src="{{ asset($client->logo) }}"
+                  <img src="{{ secure_asset($client->logo) }}"
                       alt="{{ $client->name }}" class="d-block rounded"
                       height="150" width="150" id="userAvatar" />
                   <div class="button-wrapper">

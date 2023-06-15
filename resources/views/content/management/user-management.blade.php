@@ -3,14 +3,14 @@
 @section('title', 'User Profile')
 
 @section('page-script')
-    <script src="{{ asset('assets/js/pages-account-settings-account.js') }}"></script>
+    <script src="{{ secure_asset('assets/js/pages-account-settings-account.js') }}"></script>
 @endsection
 
 @section('content')
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb breadcrumb-style2 mb-2">
     <li class="breadcrumb-item">
-      <a href="{{ url('/') }}">Dashboard</a>
+      <a href="{{ secure_url('/') }}">Dashboard</a>
     </li>
     <li class="breadcrumb-item active">
       <a href="{{ route('user-management') }}">User Management</a>
@@ -48,7 +48,7 @@
       <tbody class="table-border-bottom-0">
         @foreach ($userObjects as $user)
           <tr>
-            <td><img src="{{ asset($user->picture) }}" alt="{{ $user->firstName }} {{ $user->lastName }}"
+            <td><img src="{{ secure_asset($user->picture) }}" alt="{{ $user->firstName }} {{ $user->lastName }}"
                class="rounded-circle" style="width: 50px; height: 50px;"></td>
             <td>{{ $user->firstName }} {{ $user->lastName }}</td>
             <td>{{ $user->email }}</td>
@@ -129,7 +129,7 @@
             </td>
           </tr>
         @endforeach
-        <script src="{{ asset('assets/js/table-sort.js') }}"></script>
+        <script src="{{ secure_asset('assets/js/table-sort.js') }}"></script>
       </tbody>
     </table>
     <div class="d-flex justify-content-center mt-3">

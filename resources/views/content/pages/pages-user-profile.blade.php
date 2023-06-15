@@ -3,7 +3,7 @@
 @section('title', 'Dashboard')
 
 @section('page-script')
-    <script src="{{ asset('assets/js/pages-account-settings-account.js') }}">
+    <script src="{{ secure_asset('assets/js/pages-account-settings-account.js') }}">
     </script>
 @endsection
 
@@ -12,7 +12,7 @@
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb breadcrumb-style2 mb-2">
         <li class="breadcrumb-item">
-          <a href="{{ url('/') }}">Dashboard</a>
+          <a href="{{ secure_url('/') }}">Dashboard</a>
         </li>
         <li class="breadcrumb-item">
           <a href="{{ route('user-management') }}">User Management</a>
@@ -31,7 +31,7 @@
                 </div>
                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
-                        <img src="{{ asset($user->picture) }}" alt="{{ $user->firstName }} {{ $user->lastName }}"
+                        <img src="{{ secure_asset($user->picture) }}" alt="{{ $user->firstName }} {{ $user->lastName }}"
                             class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
                     </div>
                     <div class="flex-grow-1 mt-3 mt-sm-5">

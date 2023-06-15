@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html class="light-style layout-menu-fixed" data-theme="theme-default" data-assets-path="{{ asset('/assets') . '/' }}" data-base-url="{{url('/')}}" data-framework="laravel" data-template="vertical-menu-laravel-template-free">
+<html class="light-style layout-menu-fixed" data-theme="theme-default" data-assets-path="{{ secure_asset('/assets') . '/' }}" data-base-url="{{secure_url('/')}}" data-framework="laravel" data-template="vertical-menu-laravel-template-free">
 
 <head>
   <meta charset="utf-8" />
@@ -14,7 +14,7 @@
   <!-- Canonical SEO -->
   <link rel="canonical" href="{{ config('variables.productPage') ? config('variables.productPage') : '' }}">
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon2.ico') }}" />
+  <link rel="icon" type="image/x-icon" href="{{ secure_asset('assets/img/favicon/favicon2.ico') }}" />
   <!-- font awsome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-6aCgIc2M/vq+Zg6CCfYoiYsT6RkT+IKyf6UgT6Uz+ByvNLX9AsDoxhqwEmJpF1dqs4+4Lxvh4B2QGgJSJFZ1hQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 

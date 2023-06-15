@@ -4,7 +4,7 @@
 
 @section('page-style')
 <!-- Page -->
-<link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-auth.css')}}">
+<link rel="stylesheet" href="{{secure_asset('assets/vendor/css/pages/page-auth.css')}}">
 @endsection
 
 
@@ -18,9 +18,9 @@
         <div class="card-body">
           <!-- Logo -->
           <div class="app-brand justify-content-center">
-            <a href="{{url('/')}}" class="app-brand-link gap-2">
+            <a href="{{secure_url('/')}}" class="app-brand-link gap-2">
               <span class="app-brand-logo demo">
-                <img src="{{asset('assets/img/icons/brands/roboyo_R_12.jpg')}}">
+                <img src="{{secure_asset('assets/img/icons/brands/roboyo_R_12.jpg')}}">
               </span>
               <span class="app-brand-text demo text-body fw-bolder ">Roboyo</span>
             </a>
@@ -31,7 +31,7 @@
           <h4 class="mb-2">Register here!</h4>
           <p class="mb-4">Exclusive use of cybersecurity team at Roboyo</p>
 
-          <form id="formAuthentication" class="mb-3" action="{{url('/auth/register-basic')}}" method="POST">
+          <form id="formAuthentication" class="mb-3" action="{{secure_url('/auth/register-basic')}}" method="POST">
             @csrf {{--  Evitar ataques csrf --}}
 
             <div class="mb-3">
@@ -88,7 +88,7 @@
 
           <p class="text-center">
             <span>Already have an account?</span>
-            <a href="{{url('auth/login-basic')}}">
+            <a href="{{secure_url('auth/login-basic')}}">
               <span>Sign in instead</span>
             </a>
           </p>
