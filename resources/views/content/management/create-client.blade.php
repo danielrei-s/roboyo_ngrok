@@ -22,7 +22,7 @@
                   <div class="d-flex justify-content-center align-items-center mb-3">
                       <label for="picture" style="cursor: pointer;">
                           <div class="overflow-hidden rounded" style="width: 157px; height: 157px;">
-                              <img src="assets/img/clients/default.png" alt="Profile picture" id="picturePreview" class="w-100 h-100">
+                              <img src="{{secure_asset('assets/img/clients/default.png')}}" alt="Profile picture" id="picturePreview" class="w-100 h-100">
                           </div>
                       </label>
                   </div>
@@ -81,7 +81,6 @@
                       <button class="btn btn-success float-end" id="open-modal-btn" data-bs-target="#modalToggle2"
                        data-bs-toggle="modal" data-bs-dismiss="modal">Add contact</button>
                     </div> --}}
-                </form>
                   </div>
                   <div class="modal-footer">
 
@@ -89,6 +88,11 @@
                       <button type="button" class="btn btn-outline-secondary btn-md me-2" data-bs-dismiss="modal">Close</button>
                       <button class="btn btn-primary">Sign up</button>
                     </div>
+<<<<<<< HEAD
+                </form>
+=======
+                  </form>
+>>>>>>> f8e505fd2463497cf676d83eabc2a670d6fb1ea8
                   </div>
                 </div>
               </div>
@@ -163,7 +167,7 @@
       reader.readAsDataURL(file);
     }
     $('#modalToggle').on('hidden.bs.modal', function() {
-      picturePreview.setAttribute('src', 'assets/img/avatars/5.png'); // Clear the image preview by setting the 'src' attribute to our "insert avatar"
+      picturePreview.setAttribute('src', 'assets/img/clients/default.png'); // Clear the image preview by setting the 'src' attribute to our "insert avatar"
     });
   });
 

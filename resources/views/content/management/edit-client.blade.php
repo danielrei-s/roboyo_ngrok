@@ -10,7 +10,7 @@
                   <div class="d-flex justify-content-center align-items-center">
                       <label for="picture" style="cursor: pointer;">
                           <div class="rounded-circle overflow-hidden" style="width: 190px; height: 190px;">
-                              <img src="{{ asset($client->logo) }}" alt="Profile picture" id="picturePreview"
+                              <img src="{{ secure_asset($client->logo) }}" alt="Profile picture" id="picturePreview"
                                   class="w-100 h-100">
                           </div>
                       </label>
