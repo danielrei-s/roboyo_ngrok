@@ -4,7 +4,7 @@
 
 @section('page-style')
 <!-- Page -->
-<link rel="stylesheet" href="{{asset('assets/vendor/css/pages/page-auth.css')}}">
+<link rel="stylesheet" href="{{secure_asset('assets/vendor/css/pages/page-auth.css')}}">
 @endsection
 
 @section('content')
@@ -17,9 +17,9 @@
         <div class="card-body">
           <!-- Logo -->
           <div class="app-brand justify-content-center">
-            <a href="{{url('/')}}" class="app-brand-link gap-2">
+            <a href="{{secure_url('/')}}" class="app-brand-link gap-2">
               <span class="app-brand-logo demo">
-                <img src="{{asset('assets/img/icons/brands/roboyo_R_12.jpg')}}">
+                <img src="{{secure_asset('assets/img/icons/brands/roboyo_R_12.jpg')}}">
               </span>
               <span class="app-brand-text demo text-body fw-bolder ">Roboyo</span>
             </a>
@@ -61,7 +61,7 @@
             <button class="btn btn-primary d-grid w-100">Confirm New Password</button>
           </form>
           <div class="text-center">
-            <a href="{{url('auth/login-basic')}}" class="d-flex align-items-center justify-content-center">
+            <a href="{{secure_url('auth/login-basic')}}" class="d-flex align-items-center justify-content-center">
               <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
               Back to login
             </a>
